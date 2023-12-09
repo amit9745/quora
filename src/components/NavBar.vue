@@ -30,7 +30,7 @@
         <button class="dropbtn">=</button>
         <div class="dropdown-content">
           <div class="sub-menu">
-            <p @click="takeMeOrder" class="flex">
+            <p @click="goToProfile" class="flex">
               <img class="icon" :src="ordericon" />Profile
             </p>
           </div>
@@ -47,13 +47,17 @@
   <script>
   import search from "@/assets/search.svg"
 import { defineComponent } from "vue"
-
+import { useRouter } from "vue-router"
   export default defineComponent({
    
     setup() {
-       
+      const route = useRouter()
+      const goToProfile = () => {
+        route.push("/profile")
+      } 
         return {
-            search
+            search,
+            goToProfile
         }
     },
 })
