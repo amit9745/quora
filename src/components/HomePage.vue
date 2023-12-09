@@ -3,7 +3,7 @@
 
  <!-- {{ home }} -->
  <div class="">
-    <CardPage v-for = "item,index in home" :key="index" :cardItem = "item" class="left-div"/>
+    <CardPage v-for = "(item,index) in home" @upvoteClicked ="updateUpvote"  :key="index" :cardItem = "item" :index="index"  class="left-div"/>
     <div class="right-div"></div>
  </div>
  
@@ -28,9 +28,13 @@ export default defineComponent({
         const homeStore = useHomeStore();
         homeStore.FETCH_HOME();
         const home = computed(() => homeStore.home);
+        const updateUpvote = (index)=>{
+            home.value[index].upvoteCount++;
+        }
         // console.log(home.value)
         return{
-            home
+            home,
+            updateUpvote
         }
     }
     

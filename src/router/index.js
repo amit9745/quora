@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../components/HomePage'
+
 import UserProfile from '../components/UserProfile';
-import FollowersComp from '../components/FollowersComp'
-import FollowingComp from '../components/FollowingComp'
-import QuestionsComp from '../components/QuestionsComp'
-import AnswersComp from '../components/AnswersComp'
+import AnswerQuestion from '@/components/AnswerQuestion.vue'
+import AddQuestion from '@/components/AddQuestion.vue'
+
 
 const routes = [
   {
@@ -13,30 +13,22 @@ const routes = [
     component: HomePage
   },
   {
+
     path: '/profile',
     name: 'profile',
     component: UserProfile
   },
-  {
-    path: '/followers',
-    name: 'followers',
-    component: FollowersComp
+  
+ 
+    path: '/answer',
+    name: 'answer',
+    component: AnswerQuestion
   },
   {
-    path: '/following',
-    name: 'following',
-    component: FollowingComp
-  },
-  {
-    path: '/questions',
-    name: 'questions',
-    component: QuestionsComp
-  },
-  {
-    path: '/answers',
-    name: 'answers',
-    component: AnswersComp
-  },
+    path: '/question',
+    name: 'question',
+    component: AddQuestion
+  },  
 ]
 
 const router = createRouter({

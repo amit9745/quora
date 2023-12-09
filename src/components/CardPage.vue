@@ -29,42 +29,61 @@
     </div>
 
     <div class="bottom-div">
-     <div class="bottom-left-div">
-        <div class="left">
-           
-            <div class="up"><img class="icon" :src="like" /></div>
-            
-            <div class="upvote">
-                <p>Upvote</p>
-            </div>
+      <div class="bottom-left-div">
+        <div class="left" @click="callParent(index)">
+          <div class="up"><img class="icon" :src="like" /></div>
+
+          <div class="upvote">
+            <p>Upvote</p>
+          </div>
         </div>
         <div class="upvote-count">{{ cardItem.upvoteCount }}</div>
         <div class="down"><img class="icon" :src="dislike" /></div>
-     </div>
-     <div class="bottom-right-div">
-        <div class="comment"></div>
-        <div class="comment-count"></div>
-     </div>
+        <div class="dislike-count">15</div>
+      </div>
+      <div class="bottom-right-div">
+        <div class="comment" @click="isCommenting=!isCommenting"><img class="icon" :src="comment" /></div>
+        <div class="comment-count">15</div>
+      </div>
+      <div v-if="isCommenting">showCommentinggg..</div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import like from "@/assets/like.svg"
-import dislike from "@/assets/dislike.svg"
+import { defineComponent,ref } from "vue";
+import like from "@/assets/like.svg";
+import dislike from "@/assets/dislike.svg";
+import comment from "@/assets/comment.svg";
 export default defineComponent({
   props: {
     cardItem: {
       type: Object,
       required: true,
     },
+    index:{
+        type:Number,
+        required:true
+    }
   },
-  setup() {
+  emits:["upvoteClicked"],
+
+  setup(props,context) {
+    // const onUpvoteClicked = ()=>{
+    //     //add vote api call on success
+    //     props.cardItem.upvoteCount++;
+    // }
+    const isCommenting = ref(false);
+
+    const callParent = ()=>context.emit("upvoteClicked",props.index)
     return {
-            like,
-            dislike
-        }
+      like,
+      dislike,
+      comment,
+      callParent,
+      isCommenting
+    //   onUpvoteClicked
+    };
   },
 });
 </script>
@@ -107,39 +126,56 @@ export default defineComponent({
 .middle-bottom-div p {
   text-align: justify;
 }
-.bottom-div{
-    margin-top: 20%;
-    border-style: groove;
-    padding: 2px;
+.bottom-div {
+  margin-top: 20%;
+  border-style: groove;
+  padding: 2px;
+  display: flex;
+  align-items: center;
 }
-.bottom-left-div{
-    border-style: groove;
-    display: flex;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    width: 30%;
-    border-radius: 37px;
-    height: 38px;
-   
+.bottom-left-div {
+  border-style: groove;
+  display: flex;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  width: 34%;
+  border-radius: 37px;
+  height: 38px;
 }
-.up{
+.bottom-right-div {
+  margin-left: 2%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+.up {
   height: 30px;
   width: 30px;
 }
 
-
-.down{
-   margin-left: 40px;
+.down {
+  margin-left: 40px;
   height: 30px;
   width: 30px;
-}
-.left{
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  cursor: pointer;
 }
 
-
+.comment {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.left {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.dislike-count{
+margin-left: 10px;
+}
 </style>

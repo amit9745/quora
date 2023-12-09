@@ -5,7 +5,7 @@
       <a @click="takeMeHome">Quora</a>
     </div>
     <div class="nav-left">
-      <a @click="takeMeHome">Answer</a>
+      <a @click="takeMeAnswer">Answer</a>
     </div>
 
     <div
@@ -35,7 +35,7 @@
             </p>
           </div>
           <div class="sub-menu">
-            <button class="search-button">Add Question</button>
+            <button @click="takeMeQuestion" class="search-button">Add Question</button>
           </div>
           <!-- <p>Hi! {{ userName }}</p> -->
         </div>
@@ -45,19 +45,35 @@
 </template>
    
   <script>
-  import search from "@/assets/search.svg"
+  
+import search from "@/assets/search.svg"
+import router from "@/router"
 import { defineComponent } from "vue"
+
 import { useRouter } from "vue-router"
+  
   export default defineComponent({
    
     setup() {
-      const route = useRouter()
-      const goToProfile = () => {
-        route.push("/profile")
+      const router = useRouter()
+      const takeMeHome=()=>{
+        router.push("/")
+       }
+       const takeMeAnswer=()=>{
+        router.push("/answer")
+       }
+       const takeMeQuestion=()=>{
+        router.push("/question")
+       },
+       const goToProfile = () => {
+        router.push("/profile")
       } 
         return {
             search,
-            goToProfile
+            takeMeAnswer,
+            takeMeHome,
+            takeMeQuestion,
+            goToProfile,
         }
     },
 })
