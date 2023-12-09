@@ -48,49 +48,51 @@
         <div class="comment-count">15</div>
       </div>
     </div>
+    <div v-if="isCommenting">
+      <div class="comment-div">
+        <div class="img-div">
+          <img
+            class="img"
+            src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
+            alt=""
+          />
+        </div>
 
-    <div class="comment-div" v-if="isCommenting">
-      <div class="img-div">
-        <img
-          class="img"
-          src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
-          alt=""
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Add a comment..."
+          v-model="searchInput"
         />
-      </div>
 
-      <input
-        type="text"
-        class="search-input"
-        placeholder="Add a comment..."
-        v-model="searchInput"
-      />
-
-      <div>
-        <button class="search-button" @click="takeMeToSearch">
-          Add comment
-        </button>
+        <div>
+          <button class="search-button" @click="takeMeToSearch">
+            Add comment
+          </button>
+        </div>
       </div>
+      <!-- <div>This is below div to check </div> -->
+      <CommentSection />
+      <hr>
+      <CommentSection />
+      <CommentSection />
+      <CommentSection />
+      <CommentSection />
     </div>
-    
-<div>
-    <CommentSection/>
-</div>
-
+    <div></div>
   </div>
 </template>
 
 <script>
-import   CommentSection  from "@/components/CommentSection.vue";
+import CommentSection from "@/components/CommentSection.vue";
 import { defineComponent, ref } from "vue";
 import like from "@/assets/like.svg";
 import dislike from "@/assets/dislike.svg";
 import comment from "@/assets/comment.svg";
 export default defineComponent({
-    components:{
-        CommentSection
-       
-       
-    },
+  components: {
+    CommentSection,
+  },
   props: {
     cardItem: {
       type: Object,
@@ -220,7 +222,6 @@ export default defineComponent({
   margin-top: 15px;
 }
 .img-div {
-
   height: 40px;
   width: 40px;
   border-radius: 3px;

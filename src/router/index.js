@@ -28,7 +28,8 @@ const routes = [
     path: '/question',
     name: 'question',
     component: AddQuestion
-  },  
+  }, 
+   
 ]
 
 const router = createRouter({
