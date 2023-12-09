@@ -3,7 +3,7 @@ import HomePage from '../components/HomePage'
 
 import UserProfile from '../components/UserProfile';
 import AnswerQuestion from '@/components/AnswerQuestion.vue'
-import AddQuestion from '@/components/AddQuestion.vue'
+import AddQuestion from '@/components/AddQuestionDialog.vue'
 
 
 const routes = [
