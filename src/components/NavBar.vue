@@ -35,22 +35,46 @@
             </p>
           </div>
           <div class="sub-menu">
-            <button @click="takeMeQuestion" class="search-button">Add Question</button>
+            <button class="search-button" @click="openAddQuestionDialog">Add Question</button>
           </div>
-          <!-- <p>Hi! {{ userName }}</p> -->
         </div>
       </div>
     </div>
+    <add-question-dialog
+      :is-open="isAddQuestionDialogOpen"
+      :close="closeAddQuestionDialog"
+      :post-question="postQuestion"
+    ></add-question-dialog>
   </div>
 </template>
-   
-  <script>
-  
+
+
+<script>
 import search from "@/assets/search.svg"
 import router from "@/router"
 import { defineComponent } from "vue"
+import AddQuestionDialogue from "./AddQuestionDialogue.vue";
  
-  export default defineComponent({
+  export default{
+    components:{
+      'add-question-dialog': AddQuestionDialogue,
+    },
+    data() {
+    return {
+      isAddQuestionDialogOpen: false,
+    };
+  },
+  methods: {
+    openAddQuestionDialog() {
+      this.isAddQuestionDialogOpen = true;
+    },
+    closeAddQuestionDialog() {
+      this.isAddQuestionDialogOpen = false;
+    },
+  },
+};
+  
+  defineComponent({
    
     setup() {
  
@@ -60,103 +84,19 @@ import { defineComponent } from "vue"
        const takeMeAnswer=()=>{
         router.push("/answer")
        }
-       const takeMeQuestion=()=>{
-        router.push("/question")
-       }
+  
+       
         return {
             search,
             takeMeAnswer,
-            takeMeHome,
-            takeMeQuestion
+            takeMeHome
         }
     },
 })
-
-
-
-//   import { defineComponent, computed, ref, onBeforeMount, watch } from "vue";
-//   import userIcon from "@/assets/userIcon.svg";
-//   import ordericon from "@/assets/ordericon.svg";
-//   import shopingcart from "@/assets/shopingcart.svg";
-//   import { useRouter, useRoute } from "vue-router";
-//   import useAuthStore from "@/store/auth-store.js";
-//   export default defineComponent({
-//     setup() {
-//       const authStore = useAuthStore();
-//       const route = useRoute()
-//       const isLoggedIn = computed(() => {
-//         const token = sessionStorage.getItem("jwtToken");
-//         return token !== null && token.length !== 0;
-//       });
-//       const searchInput = ref("");
-//       const logout = () => {
-//         sessionStorage.removeItem("jwtToken");
-//         sessionStorage.removeItem("username");
-//         sessionStorage.removeItem("userId")
-//         isLoggedIn.value = false;
-//         window.location.href = '/'
-//       };
-//       const takeMeToLogin = () => {
-//         router.push("/login");
-//       };
-//       const takeMeToSignup = () => {
-//         router.push("/register");
-//       };
-//       const takeMeToOrders = () => {
-//         router.push("/orders");
-//       };
-//       watch(route, () => {
-//         if (route.query?.searchInput) {
-//           searchInput.value = route.query.searchInput
-//         }
-//       })
-//       const takeMeToSearch = () => {
-//         router.push({
-//           name: "search",
-//           query: {
-//             searchInput: searchInput.value,
-//           },
-//         });
-//       };
-//       const userName = computed(() => authStore.userName)
-
-//       onBeforeMount(() => {
-//         authStore.getUserNameById(authStore.userID)
-//       })
-//       const takeMeToCart = () => {
-//         router.push("/cart");
-//       };
-//       const logedIn = computed(() => authStore.userJWT.length > 0);
-//       const router = useRouter();
-//       const takeMeHome = () => {
-//         router.push("/");
-//       };
-//       const takeMeOrder = () => {
-//         router.push("/orders");
-//       };
-
-//       return {
-//         takeMeToSignup,
-//         userIcon,
-//         ordericon,
-//         shopingcart,
-//         isLoggedIn,
-//         logout,
-//         takeMeHome,
-//         takeMeOrder,
-//         logedIn,
-//         takeMeToLogin,
-//         takeMeToOrders,
-//         takeMeToSearch,
-//         takeMeToCart,
-//         searchInput,
-//         userName,
-//       };
-//     },
-//   });
-//
 </script>
-  <style scoped>
+
+
+<style scoped>
 .search-cnt-loggedin {
   flex: 0.8;
   padding: auto;
@@ -199,7 +139,6 @@ import { defineComponent } from "vue"
 
 .sub-menu {
   display: flex;
-  /* margin-right: 2rem; */
 }
 
 
