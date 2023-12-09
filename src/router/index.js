@@ -19,7 +19,7 @@ const routes = [
     component: UserProfile
   },
   
- 
+  {
     path: '/answer',
     name: 'answer',
     component: AnswerQuestion

@@ -47,7 +47,6 @@
   <script>
   
 import search from "@/assets/search.svg"
-import router from "@/router"
 import { defineComponent } from "vue"
 
 import { useRouter } from "vue-router"
@@ -64,7 +63,8 @@ import { useRouter } from "vue-router"
        }
        const takeMeQuestion=()=>{
         router.push("/question")
-       },
+       }
+
        const goToProfile = () => {
         router.push("/profile")
       } 
