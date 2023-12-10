@@ -72,7 +72,6 @@ import { useRouter } from "vue-router"
        const takeMeQuestion=()=>{
         router.push("/question")
        }
-
        const goToProfile = () => {
         router.push("/profile")
       } 

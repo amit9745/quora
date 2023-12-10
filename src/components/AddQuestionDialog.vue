@@ -5,7 +5,7 @@
       <form>
         <div class="form-group">
           <label for="question-category">Question Category</label><br />
-          <select id="question-category">
+          <select id="question-category" v-model="selectedCategory">
             <option value="food">Food</option>
             <option value="music">Music</option>
             <option value="sports">Sports</option>
@@ -28,30 +28,43 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   props: {
     isOpen: Boolean,
     close: Function,
     postQuestion: Function,
   },
-  data() {
-    return {
-      questionBody: '',
+  setup(props) {
+    const selectedCategory = ref('food');
+    const questionBody = ref('');
+
+    const cancel = () => {
+      props.close();
+      reset();
     };
-  },
-  methods: {
-    cancel() {
-      this.close();
-      this.reset();
-    },
-    post() {
-      this.postQuestion(this.questionBody);
-      this.close();
-      this.reset();
-    },
-    reset() {
-      this.questionBody = '';
-    },
+
+    const post = () => {
+      props.postQuestion({
+        category: selectedCategory.value,
+        body: questionBody.value,
+      });
+      props.close();
+      reset();
+    };
+
+    const reset = () => {
+      selectedCategory.value = 'food';
+      questionBody.value = '';
+    };
+
+    return {
+      selectedCategory,
+      questionBody,
+      cancel,
+      post,
+    };
   },
 };
 </script>

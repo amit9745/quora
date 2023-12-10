@@ -1,65 +1,92 @@
 <template>
-    <div class="app">
-      <main>
-        <h2>Questions for you</h2>
-        <div>
-          <div v-for="(question, index) in questions" :key="index" class="question">
-            <p>{{ question.text }}</p>
-            <button @click="openDialog(index)" class="submit-btn">Answer</button>
-          </div>
+ 
+  <div class="app">
+    <main>
+      <h2>Questions for you</h2>
+      <div>
+        <div v-for="(question, index) in questions" :key="index" class="question">
+          <p>{{ question.question }}</p>
+          <button @click="openDialog(index)" class="submit-btn">Answer</button>
         </div>
-      </main>
-  
-      <div v-if="isDialogVisible" class="dialog-overlay">
-        <div class="dialog-content">
-            <p style="display:inline-block;">
-            <img src="/Users/mukundreddy/Desktop/profile.png">
+      </div>
+    </main>
+    <!-- {{ questions }} -->
+    <div v-if="isDialogVisible" class="dialog-overlay">
+      <div class="dialog-content">
+        <p style="display:inline-block;">
+          <img src="/Users/mukundreddy/Desktop/profile.png" alt="Profile Image">
           Profile Name
-          </p>
-          <h3>Sample Question</h3>
-          <textarea placeholder="Write your answer" id="answer" v-model="currentAnswer" class="textarea" rows="10" cols="80"></textarea>
-          <div>
+        </p>
+        <h3>Sample Question</h3>
+        <textarea
+          placeholder="Write your answer"
+          id="answer"
+          v-model="currentAnswer"
+          class="textarea"
+          rows="10"
+          cols="80"
+        ></textarea>
+        <div>
           <button @click="closeDialog" class="submit-btn">Cancel</button>
           <button @click="postAnswer" class="submit-btn">Post</button>
-          </div>
- 
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        questions: [
-          { text: "Sample Question" },
-          { text: "Sample Question" },
-          { text: "Sample Question" }
-        ],
-        isDialogVisible: false,
-        currentAnswer: ""
-      };
-    },
-    methods: {
-      openDialog(index) {
-        this.currentQuestionIndex = index;
-        this.isDialogVisible = true;
-      },
-      closeDialog() {
-        this.currentAnswer = "";
-        this.isDialogVisible = false;
-      },
-      postAnswer() {
-        console.log("Posting answer:", this.currentAnswer);
- 
-        this.closeDialog();
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
+  </div>
+</template>
+
+<script>
+ import {computed, ref} from 'vue';
+ import questionStore from '@/store/question-store.js'
+export default {
+  setup() {
+    
+    // const questions = [
+    //   { text: "Sample Questiotryryytn" },
+    //   { text: "Sample Question" },
+    //   { text: "Sample Question" },
+    // ];
+
+const qs = questionStore();
+
+    qs.FETCH_QUESTION();
+      
+    const questions = computed(()=> qs.questions)
+
+    const isDialogVisible = ref(false);
+    const currentAnswer = ref("");
+    let currentQuestionIndex = ref(null);
+
+    const openDialog = (index) => {
+      currentQuestionIndex.value = index;
+      isDialogVisible.value = true;
+    };
+
+    const closeDialog = () => {
+      currentAnswer.value = "";
+      isDialogVisible.value = false;
+    };
+
+    const postAnswer = () => {
+      console.log("Posting answer:", currentAnswer.value);
+      closeDialog();
+    };
+
+    return {
+      // questions,
+     
+      isDialogVisible,
+      currentAnswer,
+      openDialog,
+      closeDialog,
+      postAnswer,
+      questions
+    };
+  },
+};
+</script>
+
+<style scoped>
   .app{
     margin-top: 90px;
   }
@@ -129,3 +156,4 @@
     text-align: center;
   }
   </style>
+@/store/question-store.js
