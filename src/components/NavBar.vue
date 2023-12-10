@@ -35,26 +35,35 @@
             </p>
           </div>
           <div class="sub-menu">
-            <button @click="takeMeQuestion" class="search-button">Add Question</button>
+            <button @click="openAddQuestionDialog"  class="search-button">Add Question</button>
           </div>
           <!-- <p>Hi! {{ userName }}</p> -->
         </div>
       </div>
     </div>
+    <AddQuestionDialog
+      :is-open="isQuestionDialogueOpen"
+      :close="closeAddQuestionDialog"
+      :post-question="postQuestion"
+    ></AddQuestionDialog>
   </div>
 </template>
    
-  <script>
+<script>
   
 import search from "@/assets/search.svg"
-import { defineComponent } from "vue"
+import { defineComponent ,ref} from "vue"
+import AddQuestionDialog from "./AddQuestionDialog.vue"
 
 import { useRouter } from "vue-router"
   
   export default defineComponent({
-   
+   components:{
+    "AddQuestionDialog":AddQuestionDialog
+   },
     setup() {
       const router = useRouter()
+      const isQuestionDialogueOpen = ref(false);
       const takeMeHome=()=>{
         router.push("/")
        }
@@ -67,12 +76,21 @@ import { useRouter } from "vue-router"
        const goToProfile = () => {
         router.push("/profile")
       } 
+      const openAddQuestionDialog = ()=>{
+        isQuestionDialogueOpen.value = true;
+      }
+      const closeAddQuestionDialog = ()=>{
+        isQuestionDialogueOpen.value = false;
+      }
         return {
             search,
             takeMeAnswer,
             takeMeHome,
             takeMeQuestion,
             goToProfile,
+            openAddQuestionDialog,
+            closeAddQuestionDialog,
+            isQuestionDialogueOpen
         }
     },
 })

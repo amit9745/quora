@@ -3,9 +3,13 @@ import HomePage from '../components/HomePage'
 
 import UserProfile from '../components/UserProfile';
 import AnswerQuestion from '@/components/AnswerQuestion.vue'
-import AddQuestion from '@/components/AddQuestion.vue'
+
+
 import SignIn from '@/components/SignIn.vue'
 import SignUp from '@/components/SignUp.vue'
+
+import AddQuestionDialog from '@/components/AddQuestionDialog.vue'
+
 
 const routes = [
   {
@@ -28,7 +32,8 @@ const routes = [
   {
     path: '/question',
     name: 'question',
-    component: AddQuestion
+    component: AddQuestionDialog
+
   },
   {
     path: '/login',
@@ -40,6 +45,8 @@ const routes = [
     name: 'signUp',
     component: SignUp
   }    
+  }, 
+   
 ]
 
 const router = createRouter({

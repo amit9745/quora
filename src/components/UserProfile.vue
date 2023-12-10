@@ -6,7 +6,9 @@
                 <p class="user-name">Name</p>
                 <p class="followers-following"><span>Followers</span><span>{} Following</span></p>
             </div>
+
             <button class="edit" @click="goToSignIn">LogOut</button>
+
         </div>
     </div>
       

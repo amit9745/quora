@@ -1,9 +1,12 @@
 <template>
     <div class="followers-container">
       <div v-for="follower in followers" :key="follower.id" class="follower-item">
+        <div class="profile">
         <img :src="follower.imgUrl" class="profile-img">
+        <p class="name">{{ follower.name }}</p>
+      </div>
         <div class="follower-details">
-          <p class="name">{{ follower.name }}</p>
+          
           <button class="unfollow">Follow</button>
         </div>
       </div>
@@ -12,24 +15,30 @@
   
   <script>
   import { ref } from 'vue';
-  
+  import follower1 from "../assets/follower1.jpeg";
   export default {
     setup() {
+      // /Users/amitkumar/Desktop/quora/src/assets/follower1.jpeg
       const followers = ref([
         {
-          imgUrl: './src/assets/follower1.jpeg',
-          name: 'karan',
+          imgUrl: follower1,
+          name: 'karan karan',
         },
         {
           imgUrl: './src/assets/follower2.jpeg',
           name: 'kunal',
         },
         {
-          imgUrl: './src/assets/follower3.jpeg',
+  
+          imgUrl: follower1,
+          name: 'kunal',
+        },
+        {
+          imgUrl: follower1,
           name: 'raj',
         },
         {
-          imgUrl: '',
+          imgUrl: follower1,
           name: 'rajiu',
         },
       ]);
@@ -58,17 +67,23 @@
   .followers-container {
     margin: 50px;
   }
-  
+  .profile{
+    display: flex;
+
+  }
   .profile-img {
-    width: 55px; 
+    width: 50px; 
+    height: 50px;
     border-radius: 50%;
     margin-right: 15px; 
   }
   
   .follower-details {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
   }
   
   .name {
@@ -77,7 +92,11 @@
   
   .follower-item {
     display: flex;
+    margin-bottom: 28px;
+    width: 30%;
+   
     align-items: center;
-    margin-bottom: 15px; 
+    justify-content: space-between;
+   
   }
   </style>

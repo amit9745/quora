@@ -42,47 +42,84 @@
         <div class="dislike-count">15</div>
       </div>
       <div class="bottom-right-div">
-        <div class="comment" @click="isCommenting=!isCommenting"><img class="icon" :src="comment" /></div>
+        <div class="comment" @click="isCommenting = !isCommenting">
+          <img class="icon" :src="comment" />
+        </div>
         <div class="comment-count">15</div>
       </div>
-      <div v-if="isCommenting">showCommentinggg..</div>
     </div>
+    <div v-if="isCommenting">
+      <div class="comment-div">
+        <div class="img-div">
+          <img
+            class="img"
+            src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
+            alt=""
+          />
+        </div>
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Add a comment..."
+          v-model="searchInput"
+        />
+
+        <div>
+          <button class="search-button" @click="takeMeToSearch">
+            Add comment
+          </button>
+        </div>
+      </div>
+      <!-- <div>This is below div to check </div> -->
+      <CommentSection />
+      <hr>
+      <CommentSection />
+      <CommentSection />
+      <CommentSection />
+      <CommentSection />
+    </div>
+    <div></div>
   </div>
 </template>
 
 <script>
-import { defineComponent,ref } from "vue";
+import CommentSection from "@/components/CommentSection.vue";
+import { defineComponent, ref } from "vue";
 import like from "@/assets/like.svg";
 import dislike from "@/assets/dislike.svg";
 import comment from "@/assets/comment.svg";
 export default defineComponent({
+  components: {
+    CommentSection,
+  },
   props: {
     cardItem: {
       type: Object,
       required: true,
     },
-    index:{
-        type:Number,
-        required:true
-    }
+    index: {
+      type: Number,
+      required: true,
+    },
   },
-  emits:["upvoteClicked"],
+  emits: ["upvoteClicked"],
 
-  setup(props,context) {
+  setup(props, context) {
     // const onUpvoteClicked = ()=>{
     //     //add vote api call on success
     //     props.cardItem.upvoteCount++;
     // }
     const isCommenting = ref(false);
 
-    const callParent = ()=>context.emit("upvoteClicked",props.index)
+    const callParent = () => context.emit("upvoteClicked", props.index);
     return {
       like,
       dislike,
       comment,
       callParent,
-      isCommenting
-    //   onUpvoteClicked
+      isCommenting,
+      //   onUpvoteClicked
     };
   },
 });
@@ -175,7 +212,42 @@ export default defineComponent({
   gap: 10px;
   cursor: pointer;
 }
-.dislike-count{
-margin-left: 10px;
+.dislike-count {
+  margin-left: 10px;
+}
+
+.comment-div {
+  display: flex;
+
+  margin-top: 15px;
+}
+.img-div {
+  height: 40px;
+  width: 40px;
+  border-radius: 3px;
+}
+.img-div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+.search-input {
+  width: 80%;
+  border-radius: 1rem;
+  border: none;
+  padding: 1rem;
+  background-color: #f3f3f3;
+  margin: 0 15px;
+  border-radius: 12px;
+}
+
+.search-button {
+  position: absolute;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #292d32;
+  color: #fff;
+  cursor: pointer;
 }
 </style>
