@@ -34,6 +34,10 @@
           content: 'What is the best way to learn Vue.js for beginners?',
         },
       ]);
+ 
+     
+
+
   
       return {
         answers,

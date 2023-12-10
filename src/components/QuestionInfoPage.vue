@@ -1,5 +1,7 @@
 <template>
     <h1 class="amit">This is Question Info Page</h1>
+
+    
 </template>
 
 <style scoped>
