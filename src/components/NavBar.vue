@@ -20,6 +20,7 @@
           class="search-input"
           placeholder="Search Quora!!"
           v-model="searchInput"
+          @click="openSearchDialog"
         />
         <button class="search-button-icon" @click="takeMeToSearch"><img class="icon" :src="search" /></button>
       </div>
@@ -46,6 +47,7 @@
       :close="closeAddQuestionDialog"
       :post-question="postQuestion"
     ></AddQuestionDialog>
+    <SearchDialog :is-open="isSearchDialogOpen" :close="closeSearchDialog" /> 
   </div>
 </template>
    
@@ -54,16 +56,28 @@
 import search from "@/assets/search.svg"
 import { defineComponent ,ref} from "vue"
 import AddQuestionDialog from "./AddQuestionDialog.vue"
-
+import SearchDialog  from "./SearchDialog.vue"
 import { useRouter } from "vue-router"
   
   export default defineComponent({
    components:{
-    "AddQuestionDialog":AddQuestionDialog
+    "AddQuestionDialog":AddQuestionDialog,
+    SearchDialog
    },
     setup() {
       const router = useRouter()
       const isQuestionDialogueOpen = ref(false);
+
+      const isSearchDialogOpen = ref(false);
+      const searchInput = ref('');
+  
+      const openSearchDialog = () => {
+        isSearchDialogOpen.value = true;
+      };
+  
+      const closeSearchDialog = () => {
+        isSearchDialogOpen.value = false;
+      };
       const takeMeHome=()=>{
         router.push("/")
        }
@@ -90,94 +104,15 @@ import { useRouter } from "vue-router"
             goToProfile,
             openAddQuestionDialog,
             closeAddQuestionDialog,
-            isQuestionDialogueOpen
+            isQuestionDialogueOpen,
+            openSearchDialog,
+            closeSearchDialog,
+            isSearchDialogOpen,
+            searchInput
         }
     },
 })
 
-
-
-//   import { defineComponent, computed, ref, onBeforeMount, watch } from "vue";
-//   import userIcon from "@/assets/userIcon.svg";
-//   import ordericon from "@/assets/ordericon.svg";
-//   import shopingcart from "@/assets/shopingcart.svg";
-//   import { useRouter, useRoute } from "vue-router";
-//   import useAuthStore from "@/store/auth-store.js";
-//   export default defineComponent({
-//     setup() {
-//       const authStore = useAuthStore();
-//       const route = useRoute()
-//       const isLoggedIn = computed(() => {
-//         const token = sessionStorage.getItem("jwtToken");
-//         return token !== null && token.length !== 0;
-//       });
-//       const searchInput = ref("");
-//       const logout = () => {
-//         sessionStorage.removeItem("jwtToken");
-//         sessionStorage.removeItem("username");
-//         sessionStorage.removeItem("userId")
-//         isLoggedIn.value = false;
-//         window.location.href = '/'
-//       };
-//       const takeMeToLogin = () => {
-//         router.push("/login");
-//       };
-//       const takeMeToSignup = () => {
-//         router.push("/register");
-//       };
-//       const takeMeToOrders = () => {
-//         router.push("/orders");
-//       };
-//       watch(route, () => {
-//         if (route.query?.searchInput) {
-//           searchInput.value = route.query.searchInput
-//         }
-//       })
-//       const takeMeToSearch = () => {
-//         router.push({
-//           name: "search",
-//           query: {
-//             searchInput: searchInput.value,
-//           },
-//         });
-//       };
-//       const userName = computed(() => authStore.userName)
-
-//       onBeforeMount(() => {
-//         authStore.getUserNameById(authStore.userID)
-//       })
-//       const takeMeToCart = () => {
-//         router.push("/cart");
-//       };
-//       const logedIn = computed(() => authStore.userJWT.length > 0);
-//       const router = useRouter();
-//       const takeMeHome = () => {
-//         router.push("/");
-//       };
-//       const takeMeOrder = () => {
-//         router.push("/orders");
-//       };
-
-//       return {
-//         takeMeToSignup,
-//         userIcon,
-//         ordericon,
-//         shopingcart,
-//         isLoggedIn,
-//         logout,
-//         takeMeHome,
-//         takeMeOrder,
-//         logedIn,
-//         takeMeToLogin,
-//         takeMeToOrders,
-//         takeMeToSearch,
-//         takeMeToCart,
-//         searchInput,
-//         userName,
-//       };
-//     },
-//   });
-//
 </script>
   <style scoped>
 .search-cnt-loggedin {
