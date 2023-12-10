@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <h1>question</h1>
   
 
@@ -16,4 +16,4 @@ export default defineComponent({
   },
   setup(props) {},
 });
-</script>
+</script> -->
