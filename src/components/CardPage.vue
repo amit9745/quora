@@ -10,14 +10,16 @@
         />
       </div>
       <div class="top-right-div">
-        <h2>{{ cardItem.profileData.profileName }}</h2>
+        <!-- <h2>{{ cardItem.profileData.profileName }}</h2>
+         -->
+        <h2>Piyush</h2>
         <p>Answered 3 days ago</p>
       </div>
     </div>
 
     <div class="middle-div">
       <div class="middle-top-div">
-        <h3>
+        <h3 @click="routeMeToQuestionInfoPage">
           {{ cardItem.question }}
         </h3>
       </div>
@@ -37,13 +39,13 @@
             <p>Upvote</p>
           </div>
         </div>
-        <div class="upvote-count">{{ cardItem.upvoteCount }}</div>
+        <div class="upvote-count">{{ cardItem.upvotes }}</div>
         <div class="down"><img class="icon" :src="dislike" /></div>
         <div class="dislike-count">15</div>
       </div>
       <div class="bottom-right-div">
-        <div class="comment" @click="isCommenting = !isCommenting">
-          <img class="icon" :src="comment" />
+        <div class="comment" @click="switchCommenting(cardItem.answerId)">
+          <img class="icon" :src="commentIcon" />
         </div>
         <div class="comment-count">15</div>
       </div>
@@ -72,12 +74,11 @@
         </div>
       </div>
       <!-- <div>This is below div to check </div> -->
-      <CommentSection />
-      <hr>
-      <CommentSection />
-      <CommentSection />
-      <CommentSection />
-      <CommentSection />
+      <div v-for="(comment,index) in comments  " :key="index">
+        <CommentSection :comment="comment" />
+        <!-- <hr> -->
+      </div>
+      <!-- -->
     </div>
     <div></div>
   </div>
@@ -88,7 +89,8 @@ import CommentSection from "@/components/CommentSection.vue";
 import { defineComponent, ref } from "vue";
 import like from "@/assets/like.svg";
 import dislike from "@/assets/dislike.svg";
-import comment from "@/assets/comment.svg";
+import commentIcon from "@/assets/comment.svg";
+import router from "../router/index.js";
 export default defineComponent({
   components: {
     CommentSection,
@@ -110,15 +112,38 @@ export default defineComponent({
     //     //add vote api call on success
     //     props.cardItem.upvoteCount++;
     // }
+
+    const comments = ref([]);
+    const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
+      const apiUrl = `http://10.20.3.163:8091/comment/getComments/${answerId}`;
+
+      const res = await fetch(apiUrl);
+
+      const jsonnew = await res.json();
+      comments.value = jsonnew.resultData;
+      console.log(comments.value);
+    };
     const isCommenting = ref(false);
+    const switchCommenting = async (answerId)=>{
+        isCommenting.value=!isCommenting.value;
+        await FETCH_COMMENTS_BY_ANSWERID(answerId)
+    }
+    
+    const routeMeToQuestionInfoPage = () => {
+      router.push("/questioninfopage");
+    };
 
     const callParent = () => context.emit("upvoteClicked", props.index);
     return {
       like,
       dislike,
-      comment,
+      comments,
       callParent,
       isCommenting,
+      routeMeToQuestionInfoPage,
+      FETCH_COMMENTS_BY_ANSWERID,
+      switchCommenting,
+      commentIcon
       //   onUpvoteClicked
     };
   },
@@ -151,6 +176,12 @@ export default defineComponent({
 }
 .top-right-div h2 {
   text-align: justify;
+  font-size: larger;
+}
+
+.top-right-div p {
+  text-align: justify;
+  font-size: small;
 }
 .middle-div {
   display: flex;
@@ -159,12 +190,15 @@ export default defineComponent({
 .middle-top-div h3 {
   text-align: justify;
   margin-bottom: 15px;
+  font-size: larger;
+  cursor: pointer;
 }
 .middle-bottom-div p {
   text-align: justify;
+  font-size: medium;
 }
 .bottom-div {
-  margin-top: 20%;
+  margin-top: 8%;
   border-style: groove;
   padding: 2px;
   display: flex;
@@ -175,7 +209,7 @@ export default defineComponent({
   display: flex;
   padding: 10px;
   display: flex;
-  align-items: center;
+
   width: 34%;
   border-radius: 37px;
   height: 38px;
@@ -184,7 +218,7 @@ export default defineComponent({
   margin-left: 2%;
   padding: 10px;
   display: flex;
-  align-items: center;
+  margin-top: 8px;
   width: 30%;
 }
 .up {
