@@ -1,6 +1,5 @@
 <template>
-    {{ userId }}
-    <div class="top-div">
+    <div @click="takeMeToProfile" class="top-div">
           <div class="top-left-div">
             <img
               class="img"
@@ -18,7 +17,8 @@
     </template>
      
     <script>
-    import { defineComponent, onBeforeMount ,ref} from 'vue';
+    import router from '@/router';
+import { defineComponent, onBeforeMount ,ref} from 'vue';
      
     export default defineComponent({
     props: {
@@ -40,7 +40,16 @@
       onBeforeMount(()=>{
         FETCH_USER(props.userId)
       })
+      const takeMeToProfile=()=>
+      {
+        router.push("/userprofile")
+      }
+
+      return {
+        takeMeToProfile
     }
+    }
+  
     });
      
     </script>

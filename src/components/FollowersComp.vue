@@ -4,7 +4,10 @@
         
         <div class="profile">
         <img :src="follower.imgUrl" class="profile-img">
+        <div>
         <p class="name">{{ follower.name }}</p>
+        <p class="name2">@{{ follower.name }}</p>
+      </div>
       </div>
         <div class="follower-details">
           
@@ -69,6 +72,13 @@
   
   .followers-container {
     margin: 50px;
+    background: #fff;
+    padding: 28px;
+    width: 43%;
+    margin: auto;
+    box-shadow: 0px 0px 7px 2px;
+    margin-bottom: 60px;
+
   }
   .profile{
     display: flex;
@@ -90,13 +100,16 @@
   }
   
   .name {
-    margin-bottom: 10px; 
+    margin-bottom: 2px; 
+  }
+  .name2{
+    font-size: x-small;
   }
   
   .follower-item {
     display: flex;
     margin-bottom: 28px;
-    width: 30%;
+    
    
     align-items: center;
     justify-content: space-between;
