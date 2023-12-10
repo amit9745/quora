@@ -1,21 +1,7 @@
 <template>
   <!-- {{ cardItem }} -->
   <div class="container">
-    <div class="top-div">
-      <div class="top-left-div">
-        <img
-          class="img"
-          src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
-          alt=""
-        />
-      </div>
-      <div class="top-right-div">
-        <!-- <h2>{{ cardItem.profileData.profileName }}</h2>
-         -->
-        <h2>Piyush</h2>
-        <p>Answered 3 days ago</p>
-      </div>
-    </div>
+    <ProfileView></ProfileView>
 
     <div class="middle-div">
       <div class="middle-top-div">
@@ -64,11 +50,11 @@
           type="text"
           class="search-input"
           placeholder="Add a comment..."
-          v-model="searchInput"
+          v-model="comment"
         />
 
         <div>
-          <button class="search-button" @click="takeMeToSearch">
+          <button class="search-button" @click="addComment">
             Add comment
           </button>
         </div>
@@ -91,10 +77,13 @@ import like from "@/assets/like.svg";
 import dislike from "@/assets/dislike.svg";
 import commentIcon from "@/assets/comment.svg";
 import router from "../router/index.js";
+import ProfileView from "./ProfileView.vue";
+
 export default defineComponent({
   components: {
     CommentSection,
-  },
+    ProfileView,
+},
   props: {
     cardItem: {
       type: Object,
@@ -108,11 +97,6 @@ export default defineComponent({
   emits: ["upvoteClicked"],
 
   setup(props, context) {
-    // const onUpvoteClicked = ()=>{
-    //     //add vote api call on success
-    //     props.cardItem.upvoteCount++;
-    // }
-
     const comments = ref([]);
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
       const apiUrl = `http://10.20.3.163:8091/comment/getComments/${answerId}`;
@@ -123,6 +107,7 @@ export default defineComponent({
       comments.value = jsonnew.resultData;
       console.log(comments.value);
     };
+    const comment = ref("")
     const isCommenting = ref(false);
     const switchCommenting = async (answerId)=>{
         isCommenting.value=!isCommenting.value;
@@ -132,7 +117,28 @@ export default defineComponent({
     const routeMeToQuestionInfoPage = () => {
       router.push("/questioninfopage");
     };
-
+    
+    const addComment = async () => {
+    
+        const head = {
+            // mode: 'no-cors',
+            method: 'POST',
+            body: JSON.stringify({
+                answerId:props.cardItem.answerId,
+                commentTypes : "default",
+                content: comment.value,
+                userId:"dasf"
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        const res = await fetch("http://10.20.3.163:8091/comment/addComment", head)
+        const parsedResponse = await res.json()
+        // window.location.reload()
+        console.log('comment added', parsedResponse)
+        await FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
+    }
     const callParent = () => context.emit("upvoteClicked", props.index);
     return {
       like,
@@ -143,7 +149,9 @@ export default defineComponent({
       routeMeToQuestionInfoPage,
       FETCH_COMMENTS_BY_ANSWERID,
       switchCommenting,
-      commentIcon
+      commentIcon,
+      comment,
+      addComment
       //   onUpvoteClicked
     };
   },
