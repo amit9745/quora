@@ -1,103 +1,101 @@
 <template>
-    <div class="reply-section">
-      <div class="top-div">
-        <div class="top-left-div">
-          <img
-            class="img"
-            src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
-            alt=""
-          />
-        </div>
-        <div class="top-right-div">
-          <h4>Amit kumar</h4>
-          <p>Answered 3 days ago</p>
-        </div>
+  <div class="reply-section">
+    <div class="top-div">
+      <div class="top-left-div">
+        <img
+          class="img"
+          src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
+          alt=""
+        />
       </div>
-      <p class="para">
-        I'm 22, an unemployed graduate, preparing for government exams. So let me
-        tell you how lonely I am? I recharge for unlimited calls and talk to
-        nobody. This is how lonely I am 😅. I have no friend circle, not even a
-        
-      </p>
+      <div class="top-right-div">
+        <h4>Amit kumar</h4>
+        <p>Answered 3 days ago</p>
+      </div>
     </div>
-  </template>
+    <p class="para">
+      {{ reply.message }}
+    </p>
+  </div>
+</template>
   
   <script>
-  import { defineComponent, ref } from "vue";
-  
-  export default defineComponent({
-    setup() {
-      const message = ref("");
-      const isDisabled = () => {
-        return message.value > 0;
-      };
+import { defineComponent, ref } from "vue";
 
-  
-      return {
-        isDisabled,
-      };
+export default defineComponent({
+  props: {
+    reply: {
+      type: Object,
+      required: true,
     },
-  });
-  </script>
+  },
+  setup() {
+    const message = ref("");
+    const isDisabled = () => {
+      return message.value > 0;
+    };
+
+    return {
+      isDisabled,
+    };
+  },
+});
+</script>
   
   
   <style scoped>
-  .reply-section{
-      margin-left: 60px;
-      margin-top: 15px;
-  }
-  
-  .top-div {
-    display: flex;
-    align-items: center;
-  }
-  .top-left-div {
-    height: 40px;
-    width: 40px;
-    border-radius: 3px;
-  }
-  .top-left-div img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-  }
-  .top-right-div {
-    margin-left: 20px;
-    text-align: left;
-    font-size: small;
-  }
-  .top-right-div h2 {
-    text-align: justify;
-  }
-  .para {
-    text-align: justify;
-    margin-left: 55px;
-  }
-  .reply {
-    display: flex;
-    margin-top: 5px;
-    justify-content: flex-start;
-  }
-  .reply-button{
-      display: block;
-      text-align: left;
-      margin-left:55px ;
-      margin-top: 5px;
-      padding: 6px;
-  }
-  .textarea {
-    width: 80%;
-    border-radius: 12px;
-    margin-right: 10px;
-    height: 30px;
-    padding: 6px;
-  
-    background-color: #f3f3f3;
-    z-index: 5;
-  }
-  .button {
-    border-radius: 12px;
-    width: 20%;
-    background-color: aqua;
-  }
-  </style>
+.reply-section {
+  margin-left: 60px;
+  margin-top: 15px;
+}
+
+.top-div {
+  display: flex;
+  align-items: center;
+}
+.top-left-div {
+  height: 40px;
+  width: 40px;
+  border-radius: 3px;
+}
+.top-left-div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+.top-right-div {
+  margin-left: 20px;
+  text-align: left;
+  font-size: small;
+}
+.top-right-div h2 {
+  text-align: justify;
+}
+.para {
+  text-align: justify;
+  margin-left: 55px;
+  font-size: small;
+}
+.reply {
+  display: flex;
+  margin-top: 5px;
+  justify-content: flex-start;
+}
+.reply-button {
+  display: block;
+  text-align: left;
+  margin-left: 55px;
+  margin-top: 5px;
+  padding: 6px;
+}
+.textarea {
+  width: 80%;
+  border-radius: 12px;
+  margin-right: 10px;
+  height: 30px;
+  padding: 6px;
+
+  background-color: #f3f3f3;
+  z-index: 5;
+}
+</style>

@@ -14,9 +14,7 @@
       </div>
     </div>
     <p class="para">
-      I'm 22, an unemployed graduate, preparing for government exams. So let me
-      tell you how lonely I am? I recharge for unlimited calls and talk to
-      nobody. This is how lonely I am 😅. I have no friend circle, not even a
+     {{ comment.content }}
       
     </p>
     <div v-if="isReplying">
@@ -24,18 +22,19 @@
         <textarea
             class="textarea"
             v-model="message"
-            placeholder="  Reply..."
+            placeholder="Reply.."
         ></textarea>
       <button class="button" v-bind:disabled="!isDisabled">Reply</button>
     </div></div>
     <div v-else>
-        <button @click="isReplying = !isReplying" class="reply-button">Reply</button>
+        <button @click="switchReplying(comment.commentId)" class="reply-button">Reply</button>
     </div>
+    <div v-for="(reply,index) in replies  " :key="index">
+        <ReplySection :reply="reply" />
+        <!-- <hr> -->
+      </div>
+   
     
-    <ReplySection/>
-    <ReplySection/>
-    <ReplySection/>
-    <ReplySection/>
   </div>
 </template>
 
@@ -46,17 +45,41 @@ export default defineComponent({
 components: {
     ReplySection,
   },
+  props:{
+    comment:{
+        type:Object,
+        required:false
+    },
+   
+  },
   setup() {
-    
     const message = ref("");
     const isDisabled = () => {
       return message.value > 0;
     };
     const isReplying = ref(false);
 
+    const replies = ref([]);
+    const FETCH_REPLIES_BY_COMMENTID = async (commentId) => {
+      const apiUrl = `http://10.20.3.163:8091/comment/getReplies/${commentId}`;
+
+      const res = await fetch(apiUrl);
+
+      const jsonnew = await res.json();
+      replies.value = jsonnew.resultData;
+      console.log(replies.value);
+    };
+    const switchReplying = async (commentId)=>{
+        isReplying.value=!isReplying.value;
+        await FETCH_REPLIES_BY_COMMENTID(commentId)
+    }
+
     return {
       isReplying,
       isDisabled,
+      FETCH_REPLIES_BY_COMMENTID,
+      replies,
+      switchReplying
     };
   },
 });
@@ -90,10 +113,16 @@ components: {
 }
 .top-right-div h2 {
   text-align: justify;
+  font-size: large;
+}
+
+.top-right-div h4 {
+  text-align: justify;
 }
 .para {
   text-align: justify;
   margin-left: 55px;
+  font-size: medium;
 }
 .reply {
   display: flex;
@@ -108,18 +137,23 @@ components: {
     padding: 6px;
 }
 .textarea {
-  width: 80%;
-  border-radius: 12px;
-  margin-right: 10px;
-  height: 30px;
-  padding: 6px;
-
-  background-color: #f3f3f3;
-  z-index: 5;
+    border: none;
+    width: 86%;
+    border-radius: 12px;
+    margin-right: 11px;
+    margin-left: 55px;
+    height: 30px;
+    padding: 6px;
+    background-color: #f3f3f3;
+    z-index: 5;
+    padding-left: 18px;
 }
 .button {
-  border-radius: 12px;
-  width: 20%;
-  background-color: aqua;
+    width: 14%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #292d32;
+    color: #fff;
+    cursor: pointer;
 }
 </style>

@@ -7,9 +7,16 @@ export const useHomeStore = defineStore("home", () => {
 
 
   const FETCH_HOME = async () => {
-    const res = await fetch("https://run.mocky.io/v3/2b126cf3-8778-40ea-afbd-3663287f05d7");
+    const apiUrl = "http://10.20.3.163:8091/answer/getHome";
+    const queryParams = new URLSearchParams();
+    queryParams.set("userId","dsfsdfd");
+    queryParams.set("page",0);
+    queryParams.set("size",4);
+
+    const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
+    
     const jsonnew = await res.json();
-    home.value = jsonnew.resulData;
+    home.value = jsonnew.resultData;
     console.log(home.value)
   };
 
