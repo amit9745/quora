@@ -21,11 +21,11 @@
           name: 'karan',
         },
         {
-          imgUrl: './src/assets/follower1.jpeg',
+          imgUrl: './src/assets/follower2.jpeg',
           name: 'kunal',
         },
         {
-          imgUrl: './src/assets/follower1.jpeg',
+          imgUrl: './src/assets/follower3.jpeg',
           name: 'raj',
         },
         {

@@ -6,7 +6,7 @@
                 <p class="user-name">Name</p>
                 <p class="followers-following"><span>Followers</span><span>{} Following</span></p>
             </div>
-            <button class="edit" @click="editProfile">LogOut</button>
+            <button class="edit" @click="goToSignIn">LogOut</button>
         </div>
     </div>
       
@@ -42,6 +42,7 @@
     import FollowingComp from './FollowingComp.vue';
     import QuestionsComp from './QuestionsComp.vue';
     import AnswersComp from './AnswersComp.vue';
+import { useRouter } from 'vue-router';
 
   export default defineComponent({
     components: {
@@ -54,13 +55,18 @@
  
     setup() {
         const activeTab = ref('followers');
-
+        const route = useRouter()
         const changeTab = (tab) => {
             activeTab.value = tab;
         };
+
+        const goToSignIn = () => {
+            route.push('/login')
+        }
         return {
             activeTab,
-            changeTab
+            changeTab,
+            goToSignIn
         }
     }
   });
