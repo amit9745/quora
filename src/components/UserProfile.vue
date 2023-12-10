@@ -3,8 +3,11 @@
         <img src="../assets/profile-img.jpeg" class="profile-img">
         <div class="text-container">
             <div class="user-info">
-                <p class="user-name">Name</p>
-                <p class="followers-following"><span>Followers</span><span>{} Following</span></p>
+                <p class="user-name">Amit Kumar</p>
+                <p class="followers-following">
+                    <span> 10k Followers     </span>
+                    <span> 5 Following</span>
+                </p>
             </div>
             <button class="edit" @click="editProfile">Logout</button>
         </div>
@@ -124,7 +127,8 @@
     }
 
     .followers-following {
-        margin-top: 30px;
+        margin: 10px;
+        display: flex;
     }
 
     .tab button.active {
@@ -178,11 +182,9 @@
   font-size: 18px;
   font-weight: bold;
   margin: 0;
+  margin-bottom: 30px;
 }
 
-.followers-following {
-  margin: 0;
-}
 
 .edit {
   margin: 0;
