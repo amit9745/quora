@@ -10,8 +10,8 @@
                 </p>
             </div>
 
-            <button class="edit" @click="goToSignIn">LogOut</button>
-
+            <button class="edit" >Follow</button>
+          
         </div>
     </div>
       
@@ -98,7 +98,7 @@ import { useRouter } from 'vue-router';
 
     .tab {
         overflow: hidden;
-        border: 1px solid #ccc;
+       
         /*background-color: #f1f1f1; */
         display: flex;
         justify-content: space-evenly;
@@ -133,14 +133,15 @@ import { useRouter } from 'vue-router';
         margin-bottom: 0px;
         margin-left: 300px;
     }
-
+    
     .followers-following {
         margin: 10px;
         display: flex;
     }
 
     .tab button.active {
-        background-color: #ccc;
+        color: rgb(247, 111, 111);
+    border-bottom: 1px solid rgb(161, 158, 158);
     }
 
     .tabcontent {
