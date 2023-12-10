@@ -25,6 +25,11 @@
           name: 'karan karan',
         },
         {
+          imgUrl: './src/assets/follower2.jpeg',
+          name: 'kunal',
+        },
+        {
+  
           imgUrl: follower1,
           name: 'kunal',
         },

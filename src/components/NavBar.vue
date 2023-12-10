@@ -54,6 +54,7 @@
 import search from "@/assets/search.svg"
 import { defineComponent ,ref} from "vue"
 import AddQuestionDialog from "./AddQuestionDialog.vue"
+
 import { useRouter } from "vue-router"
   
   export default defineComponent({
@@ -72,7 +73,6 @@ import { useRouter } from "vue-router"
        const takeMeQuestion=()=>{
         router.push("/question")
        }
-
        const goToProfile = () => {
         router.push("/profile")
       } 
