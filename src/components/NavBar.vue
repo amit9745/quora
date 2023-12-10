@@ -22,7 +22,7 @@
           v-model="searchInput"
           @click="openSearchDialog"
         />
-        <button class="search-button-icon" @click="takeMeToSearch"><img class="icon" :src="search" /></button>
+        <button class="search-button-icon" @click="searchNow"><img class="icon" :src="search" /></button>
       </div>
     </div>
 
@@ -58,7 +58,7 @@ import { defineComponent ,ref} from "vue"
 import AddQuestionDialog from "./AddQuestionDialog.vue"
 import SearchDialog  from "./SearchDialog.vue"
 import { useRouter } from "vue-router"
-  
+import {useSearchStore} from "../store/search-store.js";
   export default defineComponent({
    components:{
     "AddQuestionDialog":AddQuestionDialog,
@@ -67,7 +67,7 @@ import { useRouter } from "vue-router"
     setup() {
       const router = useRouter()
       const isQuestionDialogueOpen = ref(false);
-
+ 
       const isSearchDialogOpen = ref(false);
       const searchInput = ref('');
   
@@ -96,6 +96,15 @@ import { useRouter } from "vue-router"
       const closeAddQuestionDialog = ()=>{
         isQuestionDialogueOpen.value = false;
       }
+      
+        const searchStore = useSearchStore();
+        
+        const searchNow = (()=>{
+          searchStore.FETCH_Search();
+
+        })
+      
+
         return {
             search,
             takeMeAnswer,
@@ -108,7 +117,8 @@ import { useRouter } from "vue-router"
             openSearchDialog,
             closeSearchDialog,
             isSearchDialogOpen,
-            searchInput
+            searchInput,
+            searchNow
         }
     },
 })
