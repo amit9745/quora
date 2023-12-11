@@ -1,3 +1,4 @@
+import { apiUrls } from "@/components/apiUrls";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -17,7 +18,8 @@ export const question = defineStore("question", () => {
 
 
   const FETCH_QUESTIONS_BY_CATEGORY = async () => {
-    const apiUrl = "http://10.20.3.163:8091/quora/question/getQuestionsByCategory";
+    const apiUrl = apiUrls.getQuestions;
+    // const apiUrl = "http://10.20.3.163:8091/quora/question/getQuestionsByCategory";
     const queryParams = new URLSearchParams();
     queryParams.set("userId","uid14");
     const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
