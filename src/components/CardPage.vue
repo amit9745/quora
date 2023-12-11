@@ -78,7 +78,7 @@ import dislike from "@/assets/dislike.svg";
 import commentIcon from "@/assets/comment.svg";
 import router from "../router/index.js";
 import ProfileView from "./ProfileView.vue";
-
+import { useAnswerStore } from "../store/answer-store"
 import { header } from "./apiUrls";
 
 export default defineComponent({
@@ -99,7 +99,9 @@ export default defineComponent({
   emits: ["upvoteClicked"],
 
   setup(props, context) {
+    const answerStore = useAnswerStore();
     const comments = ref([]);
+
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
       const apiUrl = `http://10.20.3.163:8091/quora/comment/getComments/${answerId}`;
 
@@ -109,6 +111,7 @@ export default defineComponent({
       comments.value = jsonnew.resultData;
       console.log(comments.value);
     };
+
     const comment = ref("")
     const isCommenting = ref(false);
     const switchCommenting = async (answerId)=>{
@@ -117,7 +120,11 @@ export default defineComponent({
     }
     
     const routeMeToQuestionInfoPage = () => {
-      router.push("/questioninfopage");
+      
+      answerStore.updateQuestionInfo( props.cardItem.questionId );
+      answerStore.updateQuestionName( props.cardItem.question );
+      console.log('selected Question Id', props.cardItem.questionId  )
+      router.push("/questioninfopage"); 
     };
     
     const addComment = async () => {
@@ -140,7 +147,10 @@ export default defineComponent({
         comment.value='';
         await FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
     }
-    const callParent = () => context.emit("upvoteClicked", props.index);
+    const callParent = () => context.emit("upvoteClicked", props.index,
+);
+
+
     return {
       like,
       dislike,
@@ -153,6 +163,7 @@ export default defineComponent({
       commentIcon,
       comment,
       addComment
+      // selectedQuestionId
       //   onUpvoteClicked
     };
   },
@@ -291,5 +302,9 @@ export default defineComponent({
   width: 30px;
   cursor: pointer;
 }
+}
+
+.up-clicked {
+  color: red;
 }
 </style>

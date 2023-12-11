@@ -115,4 +115,11 @@ export default {
   justify-content: space-between;
  
 }
+
+@media screen and (min-width: 360px) and (max-width: 900px) {
+    .followers-container {
+      width: 80%; 
+      padding: 20px; 
+    }
+}
 </style>

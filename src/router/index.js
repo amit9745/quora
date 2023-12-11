@@ -3,14 +3,18 @@ import HomePage from '../components/HomePage'
 
 import MyProfile from '../components/MyProfile';
 import AnswerQuestion from '@/components/AnswerQuestion.vue'
+
 import AddProfile from "../components/AddProfile.vue"
 import AddCategory from "../components/CategoryPage.vue"
+
 import SignIn from '@/components/SignIn.vue'
 import SignUp from '@/components/SignUp.vue'
 
 import AddQuestionDialog from '@/components/AddQuestionDialog.vue'
  import QuestionInfoPage from '@/components/QuestionInfoPage.vue'
+
 import UserProfilePage from '@/components/UserProfilePage'
+import SearchPage from '@/components/SearchPage.vue'
 
 const routes = [
   {
@@ -61,13 +65,19 @@ const routes = [
     path: '/questioninfopage',
     name: 'questioninfopage',
     component : QuestionInfoPage 
-  },{
-  path: '/userprofile',
-  name: 'userprofile',
-  component : UserProfilePage
-  }
+  },
 
-   
+  {
+   path: '/userprofile',
+   name: 'userprofile',
+   component : UserProfilePage
+  },
+
+  {
+    path: '/search',
+    name: 'search',
+    component : SearchPage
+  },
 ]
 
 const router = createRouter({
