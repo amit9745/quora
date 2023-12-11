@@ -115,7 +115,7 @@
         addProfile,
         userDesc,
         uploadFile,
-        avatar
+        avatar,
         selected: '', 
         options: ['private', 'public'] 
 

@@ -25,7 +25,7 @@ const header = {
     fetchReplies :`${feedDomain}/comment/getReplies`,
     addReply:`${feedDomain}/comment/addReply`,
 
-    addUser : `${profileDomain}/profile/addProfile`
+    addUser : `${profileDomain}/profile/addProfile`,
     addCategories :`${profileDomain}/profile/addCategories`,
     getUser: `${profileDomain}/profile/getProfile`,
 
