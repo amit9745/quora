@@ -1,7 +1,7 @@
 
 
-const feedDomain = "http://10.20.3.163:8091/quora"
-const profileDomain =  "http://10.20.3.163:8088/quora"
+const feedDomain = "http://172.20.10.3:8091/quora"
+const profileDomain =  "http://172.20.10.3:8088/quora"
 
 const header = {
     'Content-Type': 'application/json',
@@ -14,10 +14,15 @@ const header = {
     getQuestions: `${feedDomain}/question/getQuestionsByCategory`,
     addAnswer: `${feedDomain}/answer/addAnswer`,
     updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
-    updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
-    updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
+
     updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
     getAllAnswersByQuestionId: `${feedDomain}/answer/getAnswers`,
+
+    fetchCommentsUrl: `${feedDomain}/comment/getComments`,
+    addComment:`${feedDomain}/comment/addComment`,
+    
+    fetchReplies :`${feedDomain}/comment/getReplies`,
+    addReply:`${feedDomain}/comment/addReply`,
 
     addUser : `${profileDomain}/profile/addProfile`
 
