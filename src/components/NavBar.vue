@@ -79,7 +79,6 @@ import {useSearchStore} from "../store/search-store.js";
       // const closeSearchDialog = () => {
       //   isSearchDialogOpen.value = false;
       // };
-
       const takeMeHome=()=>{
         router.push("/")
        }

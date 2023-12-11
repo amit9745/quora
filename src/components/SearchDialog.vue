@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="dialog-overlay" v-if="isOpen">
       <div class="dialog-content">
           {{ searchedValue }}
@@ -87,4 +87,4 @@ import {useSearchStore} from "../store/search-store.js";
     color: #333;
   }
   </style>
-  
+   -->

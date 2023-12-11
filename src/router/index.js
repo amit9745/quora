@@ -56,7 +56,7 @@ const routes = [
     component: AddProfile
   },
   {
-    path: '/getCategory',
+    path: '/addCategory',
     name: 'addCategory',
     component: AddCategory
   },
