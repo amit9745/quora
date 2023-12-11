@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../components/HomePage'
 
-import UserProfile from '../components/UserProfile';
+import MyProfile from '../components/MyProfile';
 import AnswerQuestion from '@/components/AnswerQuestion.vue'
 import AddProfile from "../components/AddProfile.vue"
 import AddCategory from "../components/CategoryPage.vue"
@@ -10,6 +10,7 @@ import SignUp from '@/components/SignUp.vue'
 
 import AddQuestionDialog from '@/components/AddQuestionDialog.vue'
  import QuestionInfoPage from '@/components/QuestionInfoPage.vue'
+import UserProfilePage from '@/components/UserProfilePage'
 
 const routes = [
   {
@@ -21,7 +22,7 @@ const routes = [
 
     path: '/profile',
     name: 'profile',
-    component: UserProfile
+    component: MyProfile
   },
   
   {
@@ -60,7 +61,11 @@ const routes = [
     path: '/questioninfopage',
     name: 'questioninfopage',
     component : QuestionInfoPage 
-  }  
+  },{
+  path: '/userprofile',
+  name: 'userprofile',
+  component : UserProfilePage
+  }
 
    
 ]

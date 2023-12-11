@@ -20,11 +20,12 @@
     <div v-if="isReplying">
         <div class="reply" v-if="isReplying">
         <textarea
+        v-model="reply"
             class="textarea"
-            v-model="message"
+            
             placeholder="Reply.."
         ></textarea>
-      <button class="button" v-bind:disabled="!isDisabled">Reply</button>
+      <button @click="addReply" class="button" >Reply</button>
     </div></div>
     <div v-else>
         <button @click="switchReplying(comment.commentId)" class="reply-button">Reply</button>
@@ -52,14 +53,13 @@ components: {
     },
    
   },
-  setup() {
-    const message = ref("");
-    const isDisabled = () => {
-      return message.value > 0;
-    };
+  setup(props) {
+
+    const reply = ref("");
     const isReplying = ref(false);
 
     const replies = ref([]);
+   
     const FETCH_REPLIES_BY_COMMENTID = async (commentId) => {
       const apiUrl = `http://10.20.3.163:8091/comment/getReplies/${commentId}`;
 
@@ -73,13 +73,38 @@ components: {
         isReplying.value=!isReplying.value;
         await FETCH_REPLIES_BY_COMMENTID(commentId)
     }
+    
+    const addReply = async () => {
+    
+    const head = {
+        // mode: 'no-cors',
+        method: 'POST',
+        body: JSON.stringify({
+            commentId:props.comment.commentId,
+            message: reply.value,
+            userId:"dasf"
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+    const res = await fetch("http://10.20.3.163:8091/comment/addReply", head)
+    const parsedResponse = await res.json()
+    // window.location.reload()
+    console.log('reply added', parsedResponse)
+    await FETCH_REPLIES_BY_COMMENTID(props.comment.commentId)
+}
+
+
 
     return {
       isReplying,
-      isDisabled,
+      
       FETCH_REPLIES_BY_COMMENTID,
       replies,
-      switchReplying
+      switchReplying,
+      addReply,
+      reply
     };
   },
 });

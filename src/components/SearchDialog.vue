@@ -1,35 +1,33 @@
 <template>
     <div class="dialog-overlay" v-if="isOpen">
       <div class="dialog-content">
- 
-        <div class="button-container">
+          {{ searchedValue }}
+        <div class="button-container" >
       </div>
     </div>
     </div>
   </template>
   
   <script>
-  import { ref } from 'vue';
+  import { computed } from "vue";
+import {useSearchStore} from "../store/search-store.js";
   
   export default {
     props: {
       isOpen: Boolean,
       close: Function,
     },
-    setup(props, { emit }) {
-      const searchQuery = ref('');
+    setup(){
+      const  searchStore = useSearchStore();
+     const searchedValue = computed(()=>searchStore.searchData)
+
+     return{
+      searchedValue
+     }
+    }
   
-      const search = () => {
-        console.log('Searching:', searchQuery.value);
-        emit('close');
-      };
-  
-      return {
-        searchQuery,
-        search
-      };
-    },
-  };
+
+    }
   </script>
   
   <style scoped>
@@ -47,7 +45,7 @@
   
   .dialog-content {
     background: #ffffff;
-    padding-top: 560px;
+    padding-top: 660px;
     padding-bottom: 100px;
     padding-left: 400px;
     padding-right: 200px;

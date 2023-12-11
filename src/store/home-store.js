@@ -7,8 +7,10 @@ export const useHomeStore = defineStore("home", () => {
 
 
   const FETCH_HOME = async () => {
+
     const apiUrl = apiUrls.getHome;
     // console.log(apiUrl)
+
     const queryParams = new URLSearchParams();
     queryParams.set("userId","dsfsdfd");
     queryParams.set("page",0);

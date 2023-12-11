@@ -16,12 +16,12 @@
         </div>
         <div class="form-group">
           <label for="question-body">Question Body</label><br />
-          <textarea v-model="questionBody" id="question-body" rows="10" cols="10" placeholder="Enter your question here"></textarea>
+          <textarea v-model="questionBody" id="question-body" rows="10" cols="10" placeholder="Enter your question here" ></textarea>
         </div>
       </form>
       <div class="button-container">
         <button @click="cancel" class="btn btn-cancel">Cancel</button>
-        <button @click="post" class="btn btn-post">Post</button>
+        <button @click="addQuestion" class="btn btn-post" >Post</button>
       </div>
     </div>
   </div>
@@ -45,25 +45,48 @@ export default {
       reset();
     };
 
-    const post = () => {
-      props.postQuestion({
-        category: selectedCategory.value,
-        body: questionBody.value,
-      });
-      props.close();
-      reset();
-    };
+   
 
     const reset = () => {
       selectedCategory.value = 'food';
       questionBody.value = '';
     };
 
+
+  const addQuestion = async () => {
+    try{
+      const head = {
+        // mode: 'no-cors',
+        method: 'POST',
+        body: JSON.stringify({
+            createdAt:"2023-12-10T13:28:46.028Z",              
+            question:questionBody.value.toString,
+            status : "default",
+            topicName: selectedCategory.value.toString,
+            userId:"dasf"
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+    const res = await fetch("http://10.20.3.163:8091/question/addQuestion", head)
+    const parsedResponse = await res.json()
+    console.log('question added', parsedResponse)
+    props.close()
+    reset();
+    }catch(e){
+      console.log(e)
+    }
+    
+
+}
+
     return {
       selectedCategory,
       questionBody,
       cancel,
-      post,
+      addQuestion,
+      
     };
   },
 };

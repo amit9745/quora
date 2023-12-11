@@ -101,7 +101,7 @@ export default defineComponent({
   setup(props, context) {
     const comments = ref([]);
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
-      const apiUrl = `http://10.20.3.163:8091/comment/getComments/${answerId}`;
+      const apiUrl = `http://172.20.10.3:8091/comment/getComments/${answerId}`;
 
       const res = await fetch(apiUrl);
 
@@ -133,10 +133,11 @@ export default defineComponent({
             }),
             headers: header
         }
-        const res = await fetch("http://10.20.3.163:8091/comment/addComment", head)
+        const res = await fetch("http://172.20.10.3:8091/comment/addComment", head)
         const parsedResponse = await res.json()
         // window.location.reload()
         console.log('comment added', parsedResponse)
+        comment.value='';
         await FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
     }
     const callParent = () => context.emit("upvoteClicked", props.index);
@@ -160,7 +161,7 @@ export default defineComponent({
 
 <style scoped>
 .container {
-  margin-top: 90px;
+  margin-top: 16px;
   margin-left: 50px;
   margin-right: 50px;
 }
