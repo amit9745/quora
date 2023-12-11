@@ -5,7 +5,7 @@
 
 
  <div class="left">
-    <CardPage v-for = "(item,index) in home" @upvoteClicked ="updateUpvote"  :key="index" :cardItem = "item" :index="index"  class="left-div"/>
+    <CardPage v-for = "(item,index) in home" @upvoteClicked ="updateUpvote" :key="index" :cardItem = "item" :index="index"  class="left-div"/>
    
  </div>
  <div class="right-div"> Ads</div>
@@ -32,10 +32,12 @@ export default defineComponent({
     setup(){
         const homeStore = useHomeStore();
         homeStore.FETCH_HOME();
+        
         const home = computed(() => homeStore.home);
         const updateUpvote = (index)=>{
             home.value[index].upvoteCount++;
         }
+      
         // console.log(home.value)
         return{
             home,
