@@ -90,4 +90,3 @@
   }
   </style>
   
-has context menu
