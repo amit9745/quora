@@ -4,8 +4,9 @@
         <div class="text-container">
             <div class="user-info">
                 <p class="user-name">Amit Kumar</p>
+                <p class="user-name2">@beginner</p>
                 <p class="followers-following">
-                    <span> 10k Followers     </span>
+                    <span class="span"> 10k Followers     </span>
                     <span> 5 Following</span>
                 </p>
             </div>
@@ -86,6 +87,9 @@ import { useRouter } from 'vue-router';
         width: 185px;
     }
 
+    .span{
+        margin-right: 20px;
+    }
     .profile-container {
         margin: 50px;;
     }
@@ -118,20 +122,20 @@ import { useRouter } from 'vue-router';
     }
 
     .edit {
-        margin: 30px;
-        display: inline-block;
         padding: 13px 25px;
-        font-size: 15px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        outline: none;
-        color: #fff;
-        background-color: #292d32;
-        border: none;
-        border-radius: 15px;
-        margin-bottom: 0px;
-        margin-left: 300px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #292d32;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: -49px;
+   margin-left: -160px;
+    position: relative;
+    margin-top: auto;
     }
 
     .followers-following {
@@ -150,21 +154,7 @@ import { useRouter } from 'vue-router';
         border: 1px solid #ccc;
         border-top: none;
     }
-
-    @media screen and (max-width: 600px) {
-    .tab {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .tab button {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-}
-
-.profile-img {
+    .profile-img {
   float: left;
   border-radius: 50%;
   max-height: 200px;
@@ -192,26 +182,37 @@ import { useRouter } from 'vue-router';
   font-size: 18px;
   font-weight: bold;
   margin: 0;
-  margin-bottom: 30px;
+ 
+}
+.user-name2{
+    margin-bottom: 30px;
+    font-size: small;
 }
 
 
-.edit {
-  margin: 0;
-  display: inline-block;
-  padding: 13px 25px;
-  font-size: 15px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #292d32;
-  border: none;
-  border-radius: 15px;
-  margin-bottom: 0px;
-  margin-left: 800px;
+    @media screen and (max-width: 600px) {
+    .tab {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tab button {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .profile-img{
+    float: left; 
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    }
 }
+
+
+
+
 
 </style> 
 

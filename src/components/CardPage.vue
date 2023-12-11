@@ -55,7 +55,7 @@
 
         <div>
           <button class="search-button" @click="addComment">
-            Add comment
+            Comment
           </button>
         </div>
       </div>
@@ -79,7 +79,7 @@ import commentIcon from "@/assets/comment.svg";
 import router from "../router/index.js";
 import ProfileView from "./ProfileView.vue";
 import { useAnswerStore } from "../store/answer-store"
-import { header } from "./apiUrls";
+import { header,apiUrls } from "./apiUrls";
 
 export default defineComponent({
   components: {
@@ -103,7 +103,8 @@ export default defineComponent({
     const comments = ref([]);
 
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
-      const apiUrl = `http://10.20.3.163:8091/quora/comment/getComments/${answerId}`;
+      const fetchCommentsUrl = apiUrls.fetchCommentsUrl;
+      const apiUrl = `${fetchCommentsUrl}/${answerId}`;
 
       const res = await fetch(apiUrl);
 
@@ -140,7 +141,8 @@ export default defineComponent({
             }),
             headers: header
         }
-        const res = await fetch("http://10.20.3.163:8091/quora/comment/addComment", head)
+        const apiUrl = apiUrls.addComment
+        const res = await fetch(apiUrl, head)
         const parsedResponse = await res.json()
         // window.location.reload()
         console.log('comment added', parsedResponse)
@@ -258,7 +260,7 @@ export default defineComponent({
   border-radius: 50px;
 }
 .search-input {
-  width: 80%;
+  width: 73%;
   border-radius: 1rem;
   border: none;
   padding: 1rem;

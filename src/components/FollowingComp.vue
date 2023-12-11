@@ -11,7 +11,7 @@
     </div>
       <div class="follower-details">
         
-        <button class="unfollow">Unfollow</button>
+       <Follow :userId="jbjdu"  />
       </div>
      
     </div>
@@ -22,7 +22,11 @@
 <script>
 import { ref } from 'vue';
 import follower1 from "../assets/follower1.jpeg";
+import Follow from '@/components/Follow';
 export default {
+  components:{
+      Follow
+    },
   setup() {
     // /Users/amitkumar/Desktop/quora/src/assets/follower1.jpeg
     const followers = ref([

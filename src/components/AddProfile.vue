@@ -17,7 +17,23 @@
         placeholder="Enter user description"
         class="description-input"
       />
+      <div>
+    <h3>
+      Select type of account
+      <select v-model="selected">
+        <option value="" selected disabled>
+          Choose
+        </option>
+        <option v-for="item in options" :key="item">
+          {{ item }}
+        </option>
+      </select>
+      
+    </h3>
+  </div>
       <button class="button" @click="addProfile">Next</button>
+
+    
     </div>
   </template>
   
@@ -98,8 +114,11 @@
         selectImage,
         addProfile,
         userDesc,
-      uploadFile,
-      avatar
+        uploadFile,
+        avatar
+        selected: '', 
+        options: ['private', 'public'] 
+
       };
 
     },
@@ -158,6 +177,7 @@
     padding: 8px;
     font-size: 16px;
     width: 80%;
+    margin-bottom: 10%;
   }
   .button {
     display: inline-block;
