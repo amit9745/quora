@@ -1,4 +1,4 @@
-const domain = "http://172.20.10.11:8091/quora"
+const domain = "http://10.20.3.163:8091/quora"
 const header = {
     'Content-Type': 'application/json',
     
