@@ -1,13 +1,16 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-
+import { apiUrls } from "@/components/apiUrls";
 
 export const useHomeStore = defineStore("home", () => {
     const home = ref(null);
 
 
   const FETCH_HOME = async () => {
-    const apiUrl = "http://172.20.10.3:8091/answer/getHome";
+
+    const apiUrl = apiUrls.getHome;
+    // console.log(apiUrl)
+
     const queryParams = new URLSearchParams();
     queryParams.set("userId","dsfsdfd");
     queryParams.set("page",0);

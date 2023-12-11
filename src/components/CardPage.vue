@@ -79,6 +79,8 @@ import commentIcon from "@/assets/comment.svg";
 import router from "../router/index.js";
 import ProfileView from "./ProfileView.vue";
 
+import { header } from "./apiUrls";
+
 export default defineComponent({
   components: {
     CommentSection,
@@ -129,9 +131,7 @@ export default defineComponent({
                 content: comment.value,
                 userId:"dasf"
             }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: header
         }
         const res = await fetch("http://172.20.10.3:8091/comment/addComment", head)
         const parsedResponse = await res.json()
