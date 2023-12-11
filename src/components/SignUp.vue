@@ -74,7 +74,7 @@ export default {
        const user = res.user;
         profileStore.updateUserAfterAuth(user);
        console.log(user)
-       profileStore.
+       
         console.log('Successfully signed up!');
         router.replace('/addProfile')
         

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { apiUrls } from "@/components/apiUrls";
+import { apiUrls ,header} from "@/components/apiUrls";
 
 export const useProfileStore = defineStore("profile", () => {
     const profile = ref(null);
@@ -12,18 +12,21 @@ export const useProfileStore = defineStore("profile", () => {
     const  GET_USER_FROM_DB = async() =>{
 
     }
-  const ADD_USER_TO_DB = async () => {
-    const apiUrl = apiUrls.ge;
-    const queryParams = new URLSearchParams();
-    queryParams.set("userId","dsfsdfd");
-    queryParams.set("page",0);
-    queryParams.set("size",4);
-
-    const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
+  const ADD_USER_TO_DB = async (profileData) => {
+    const apiUrl = apiUrls.addUser;
+    const head = {
+      method: 'POST',
+      body: JSON.stringify(
+        profileData
+      ),
+      headers: header
+  }
+    const res = await fetch(apiUrl,head);
     
     const jsonnew = await res.json();
-    profile.value = jsonnew.resultData;
-    console.log(profile.value)
+    profile.value = profileData;
+    console.log("profileData",profile.value)
+    console.log(jsonnew);
   };
 
   return{

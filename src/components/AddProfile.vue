@@ -4,25 +4,35 @@
         <img v-if="image" :src="image" alt="Profile Image" />
         <div v-else class="default-image">Select Image</div>
       </div>
+     
       <input
         v-model="username"
         type="text"
         placeholder="Enter your username"
         class="username-input"
       />
-      <button @click="addProfile">Next</button>
+      <input
+        v-model="description"
+        type="text"
+        placeholder="Enter user description"
+        class="description-input"
+      />
+      <button class="button" @click="addProfile">Next</button>
     </div>
   </template>
   
   <script>
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import { useRouter } from 'vue-router';
+  import {useProfileStore} from "../store/profile-store.js"
   export default {
     setup() {
         const router = useRouter()
       const image = ref(null);
       const username = ref('');
-  
+      const userDesc = ref('')
+      const profileStore = useProfileStore()
+      const firebaseUser = computed(()=>profileStore.firebaseUser)
       const selectImage = () => {
         const input = document.createElement('input');
         input.type = 'file';
@@ -41,7 +51,22 @@
           reader.readAsDataURL(file);
         }
       };
-     const addProfile = ()=>{
+
+     const addProfile = async ()=>{
+      console.log("token",firebaseUser.value.stsTokenManager.accessToken)
+      const profileData =   {
+          points: 0,
+          "profileAvatar": "",
+          "profileDesc": userDesc.value,
+          "profileEmail": firebaseUser.value.email,
+          "profileId": firebaseUser.value.uid,
+          "profileName": username.value,
+          "profileStatus": "active",
+          "profileType": "public",
+          "role": "owner"
+        }
+
+        await profileStore.ADD_USER_TO_DB(profileData)
         router.replace("./addCategory")
      }
 
@@ -50,7 +75,8 @@
         image,
         username,
         selectImage,
-        addProfile
+        addProfile,
+        userDesc
       };
 
     },
@@ -59,10 +85,19 @@
   
   <style scoped>
   .profile-container {
+   margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin-top: 90px;
+    background: #fff;
+    padding: 28px;
+    width: 43%;
+    
+    box-shadow: 0px 0px 7px 2px;
+   
+
   }
   
   .profile-header {
@@ -89,9 +124,40 @@
   }
   
   .username-input {
+    margin-top: 30px;
+    padding: 8px;
+    font-size: 16px;
+    width: 80%;
+  }
+ 
+  .description-input {
     margin-top: 10px;
     padding: 8px;
     font-size: 16px;
+    width: 80%;
   }
+  .button {
+    display: inline-block;
+    margin-top: 41px;
+    padding: 6px 43px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #545a58;
+    border: none;
+    border-radius: 15px;
+    box-shadow: -2px 2px #999;
+}
+
+.button:hover {background-color: #737473}
+
+.button:active {
+  background-color: #d4d4d4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
   </style>
   

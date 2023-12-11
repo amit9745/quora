@@ -1,24 +1,31 @@
-const domain = "http://10.20.3.163:8091/quora"
+
+
+const feedDomain = "http://10.20.3.163:8091/quora"
+const profileDomain =  "http://10.20.3.163:8088/quora"
+
 const header = {
     'Content-Type': 'application/json',
     
 };
  const apiUrls = {
-    getHome: `${domain}/answer/getHome`,
-    addQuestion: `${domain}/question/addQuestion`,
-    getQuestions: `${domain}/question/getQuestionsByCategory`,
-    addAnswer: `${domain}/answer/addAnswer`,
-    updateUpvotes : `${domain}/answer/updateUpvotes`,
-    updateDownvotes : `${domain}/answer/updateDownvotes`,
 
+    getHome: `${feedDomain}/answer/getHome`,
+    addQuestion: `${feedDomain}/question/addQuestion`,
+    getQuestions: `${feedDomain}/question/getQuestionsByCategory`,
+    addAnswer: `${feedDomain}/answer/addAnswer`,
+    updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
+    updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
+    updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
+    updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
+    getAllAnswersByQuestionId: `${feedDomain}/answer/getAnswers`,
 
-    addUser : `${domain}/profile//addProfile`
+    addUser : `${profileDomain}/profile/addProfile`
 
   };
 
   export {
     apiUrls,
-    domain,
+    feedDomain,
     header
   }
  

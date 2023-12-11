@@ -1,41 +1,50 @@
-[17:55] Piyush Kumar Nayan
+
 <template>
     <div class="container">
       <div v-for="item in items" :key="item.id" :class="{ 'selected': item.selected }" class="box">
         <input type="checkbox" v-model="item.selected" class="checkbox">
         <img :src="item.imageSrc" alt="Image" class="image">
+       <p class="title"> {{ item?.title }}</p>
       </div>
     </div>
   </template>
   
   <script>
   import { ref } from 'vue';
-  
+  import image_1 from "../assets/image_1.jpeg";
+  import image_2 from "../assets/image_2.jpeg";
+  import image_3 from "../assets/image_3.png";
+  import image_4 from "../assets/image_4.jpeg";
+  import image_5 from "../assets/image_5.jpeg";
+  import image_6 from "../assets/image_6.jpeg";
+ 
+ 
   export default {
     setup() {
       const items = ref([
-        { id: 1, imageSrc: 'path_to_image_1.jpg', selected: false },
-        { id: 2, imageSrc: 'path_to_image_2.jpg', selected: false },
-        { id: 3, imageSrc: 'path_to_image_3.jpg', selected: false },
-        { id: 4, imageSrc: 'path_to_image_4.jpg', selected: false },
-        { id: 5, imageSrc: 'path_to_image_5.jpg', selected: false },
-        { id: 6, imageSrc: 'path_to_image_6.jpg', selected: false },
-        { id: 7, imageSrc: 'path_to_image_7.jpg', selected: false },
-        { id: 8, imageSrc: 'path_to_image_8.jpg', selected: false },
-        { id: 9, imageSrc: 'path_to_image_9.jpg', selected: false },
-        { id: 10, imageSrc: 'path_to_image_10.jpg', selected: false },
+        { id: 1, imageSrc: image_1, selected: false, title:"Food" },
+        { id: 2, imageSrc: image_2, selected: false ,title:"Music"},
+        { id: 3, imageSrc: image_3, selected: false ,title:"Sports"},
+        { id: 4, imageSrc: image_4, selected: false ,title:"Travel"},
+        { id: 5, imageSrc: image_5, selected: false ,title:"Fashion"},
+        { id: 6, imageSrc: image_6, selected: false ,title:"Entertainment"},
+        
       ]);
   
-      return { items };
+      return { items,image_1,image_2,image_3,image_4,image_5,image_6 };
     },
   };
   </script>
   
   <style scoped>
     .container {
+      margin-top: 90px;
+      margin-left: 10%;
+      margin-right: 10%;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+
     }
   
     .box {
@@ -60,7 +69,12 @@
       height: 100%;
       object-fit: cover;
     }
-  
+  .title{
+    position: absolute;
+      top: 0;
+      font-weight: bold;
+     
+  }
     .selected {
       border-color: #3498db;
     }
