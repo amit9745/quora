@@ -102,5 +102,12 @@
     border-radius: 4px;
     cursor: pointer;
   }
+
+  @media screen and (min-width: 360px) and (max-width: 900px) {
+    .questions-container {
+      width: 90%; 
+      padding: 20px; 
+    }
+}
   </style>
   

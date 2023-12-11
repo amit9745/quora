@@ -213,4 +213,8 @@ import { useRouter } from 'vue-router';
   margin-left: 800px;
 }
 
-</style>
+</style> 
+
+
+
+
