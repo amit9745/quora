@@ -2,15 +2,6 @@
   <div class="container">
 
     <h1>Sign Up</h1>
-    <!-- <form @submit.prevent="signUp">
-      <label for="email">Email:</label>
-      <input type="email" v-model="email" required>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" v-model="password" required>
-      <br>
-      <button type="submit">Login</button>
-    </form> -->
     <form @submit.prevent = "signUp">
     <div class="sub-container">
       <label for="email"><b>Name</b></label>
@@ -67,13 +58,18 @@ export default {
     const redirectToSignIn = () => {
       router.push("/login")
     }
+
     const signUp =  async() => {
       console.log("i am in register ", email.value, password.value);
       try {
        const res =  await createUserWithEmailAndPassword(getAuth(),email.value,password.value)
+
+       ///add sooraj ka api call and populate user and session storage me daal do iska token
        const user = res.user;
         profileStore.updateUserAfterAuth(user);
        console.log(user)
+       sessionStorage.setItem("token",user.stsTokenManager.accessToken)
+       sessionStorage.setItem("userId",user.uid)
        
         console.log('Successfully signed up!');
         router.replace('/addProfile')

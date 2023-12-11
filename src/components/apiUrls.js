@@ -13,6 +13,7 @@ const header = {
     addQuestion: `${feedDomain}/question/addQuestion`,
     getQuestions: `${feedDomain}/question/getQuestionsByCategory`,
     addAnswer: `${feedDomain}/answer/addAnswer`,
+
     updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
 
     updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
@@ -25,6 +26,8 @@ const header = {
     addReply:`${feedDomain}/comment/addReply`,
 
     addUser : `${profileDomain}/profile/addProfile`
+    addCategories :`${profileDomain}/profile/addCategories`,
+    getUser: `${profileDomain}/profile/getProfile`,
 
   };
 

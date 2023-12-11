@@ -7,7 +7,7 @@
       </div> -->
   
       <!-- Display search results as div elements -->
-      <div class="search-results" v-if="searchValues.length > 0">
+      <div class="search-results" v-if="searchValues?.length > 0">
         <div v-for="(searchValue, index) in searchValues" :key="index" class="result-item">
             <div v-if="searchValue?.profileId !== null" > 
                 <ProfileView></ProfileView>
