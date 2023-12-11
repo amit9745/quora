@@ -3,10 +3,11 @@
   <div class="app">
     <main>
       <h2>Questions for you</h2>
+      {{ questions }}
       <div>
         <div v-for="(question, index) in questions" :key="index" class="question">
           <p>{{ question.question }}</p>
-          <button @click="openDialog(index)" class="submit-btn">Answer</button>
+          <button @click="openDialog(index,question.questionId)" class="submit-btn">Answer</button>
         </div>
       </div>
     </main>
@@ -14,7 +15,7 @@
     <div v-if="isDialogVisible" class="dialog-overlay">
       <div class="dialog-content">
         <p style="display:inline-block;">
-          <img src="/Users/mukundreddy/Desktop/profile.png" alt="Profile Image">
+          <img src="" alt="Profile Image">
           Profile Name
         </p>
         <h3>Sample Question</h3>
@@ -37,7 +38,8 @@
 
 <script>
  import {computed, ref} from 'vue';
- import questionStore from '@/store/question-store.js'
+//  import questionStore, { question } from '@/store/question-store.js'
+import questionStore from '@/store/question-store.js'
 export default {
   setup() {
     
@@ -47,31 +49,66 @@ export default {
     //   { text: "Sample Question" },
     // ];
 
+  
+
 const qs = questionStore();
 
-    qs.FETCH_QUESTION();
-      
+    // qs.FETCH_QUESTION();
+    qs.FETCH_QUESTIONS_BY_CATEGORY();
     const questions = computed(()=> qs.questions)
-
+    const selectedQuestionId = ref(null)
     const isDialogVisible = ref(false);
     const currentAnswer = ref("");
     let currentQuestionIndex = ref(null);
 
-    const openDialog = (index) => {
-      currentQuestionIndex.value = index;
+    const openDialog = (index,) => {
       isDialogVisible.value = true;
+      currentQuestionIndex.value = index;
+      selectedQuestionId.value = questions.value[index].questionId
+      
     };
 
     const closeDialog = () => {
       currentAnswer.value = "";
       isDialogVisible.value = false;
-    };
+    };    
 
-    const postAnswer = () => {
-      console.log("Posting answer:", currentAnswer.value);
-      closeDialog();
-    };
+    // const postAnswer = () => {
+    //   console.log("Posting answer:", currentAnswer.value);
+    //   closeDialog();
+    // };
 
+    // const answers = ref([]);
+    // const FETCH_ANSWERS_BY_QUESTIONID = async (questionId) => {
+    //   const apiUrl = `http://10.20.3.163:8091/answer/getAnswers/${questionId}`;
+    //   const res = await fetch(apiUrl);
+    //   const jsonnew = await res.json();
+    //   answers.value = jsonnew.resultData;
+    //   console.log(answers.value);
+    // }
+    const answer = ref("")
+    const postAnswer = async () => {
+      const head = {
+        method: 'POST',
+        body: JSON.stringify({
+          answer: currentAnswer.value,
+          createdAt: "2023-12-11T06:47:19.431Z",
+          downvotes: 0,
+          questionId: selectedQuestionId.value,
+          upvotes: 0,
+          userId: "uid14"
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      
+        const res = await fetch("http://10.20.3.163:8091/quora/answer/addAnswer", head)
+        const parsedResponse = await res.json()
+        console.log('Answer posted', parsedResponse)
+      }
+  
+ 
     return {
       // questions,
      
@@ -80,9 +117,10 @@ const qs = questionStore();
       openDialog,
       closeDialog,
       postAnswer,
-      questions
+      questions,
+      answer
     };
-  },
+  }
 };
 </script>
 
