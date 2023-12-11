@@ -6,12 +6,12 @@
         <div class="form-group">
           <label for="question-category">Question Category</label><br />
           <select id="question-category" v-model="selectedCategory">
-            <option value="food">Food</option>
-            <option value="music">Music</option>
-            <option value="sports">Sports</option>
-            <option value="travel">Travel</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="fashion">Fashion</option>
+            <option value="Food">Food</option>
+            <option value="Music">Music</option>
+            <option value="Sports">Sports</option>
+            <option value="Travel">Travel</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Fashion">Fashion</option>
           </select>
         </div>
         <div class="form-group">
@@ -29,7 +29,7 @@
 
 <script>
 import { ref } from 'vue';
-
+import { apiUrls,header } from './apiUrls';
 export default {
   props: {
     isOpen: Boolean,
@@ -60,17 +60,16 @@ export default {
         method: 'POST',
         body: JSON.stringify({
             createdAt:"2023-12-10T13:28:46.028Z",              
-            question:questionBody.value.toString,
+            question:questionBody.value,
             status : "default",
-            topicName: selectedCategory.value.toString,
+            topicName: selectedCategory.value,
             userId:"dasf"
         }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: header
     }
-    const res = await fetch("http://10.20.3.163:8091/question/addQuestion", head)
+    const res = await fetch(apiUrls.addQuestion, head)
     const parsedResponse = await res.json()
+    console.log("head",head)
     console.log('question added', parsedResponse)
     props.close()
     reset();

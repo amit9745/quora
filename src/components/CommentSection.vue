@@ -182,4 +182,43 @@ components: {
     color: #fff;
     cursor: pointer;
 }
+
+@media screen and (min-width: 360px) and (max-width: 900px) {
+.para{
+  width: 65%;
+  font-size: small;
+}
+.reply {
+  display: flex;
+  margin-top: 5px;
+  justify-content: flex-start;
+}
+.reply-button{
+    display: block;
+    text-align: left;
+    margin-left:55px ;
+    margin-top: 5px;
+    padding: 2px;
+    
+}
+.textarea{
+  border: none;
+    width: 50%;
+    border-radius: 12px;
+    margin-right: 6px;
+    margin-left: 55px;
+    height: 28px;
+    padding: 6px;
+    background-color: #f3f3f3;
+    z-index: 5;
+    padding-left: 12px;
+    font-size: small;
+}
+.button {
+    width: 24%;
+    border-radius: 0;
+    font-size: x-small;
+}
+}
+
 </style>

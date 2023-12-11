@@ -192,7 +192,7 @@ export default defineComponent({
   font-size: medium;
 }
 .bottom-div {
-  margin-top: 8%;
+  margin-top: 4%;
   border-style: groove;
   padding: 2px;
   display: flex;
@@ -288,20 +288,49 @@ export default defineComponent({
     border-radius: 37px;
     height: 43px;
 }
-.bottom-div {
-    margin-top: 8%;
-    border-style: groove;
-    padding: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 .down {
   margin-left: 15px;
   height: 30px;
   width: 30px;
   cursor: pointer;
 }
+
+
+.up{
+  width: 15px;
+  margin-left:-15px;
+ 
+}
+.upvote{
+  font-size: small;
+  margin-left: 1px;
+}
+.upvote-count{
+  margin-left: -6px;
+}
+.dislike-count{
+  margin-left: -4px;
+}
+.search-input{
+  width: 46%;
+    border-radius: 1rem;
+    border: none;
+    padding: 0rem;
+    background-color: #f3f3f3;
+    margin: 3px 5px;
+    border-radius: 12px;
+}
+.search-button{
+  position: absolute;
+    border-radius: 12px;
+    border: none;
+    background-color: #292d32;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 1px;
+}
+
 }
 
 .up-clicked {
