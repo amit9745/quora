@@ -9,13 +9,20 @@
 <script>
 import NavBar from '@/components/NavBar';
 import { defineComponent } from 'vue';
-
+import { useProfileStore } from "./store/profile-store.js"
 
 
 export default defineComponent({
   
   components: {
     NavBar
+  },
+  setup(){
+    const profileStore = useProfileStore();
+    if(sessionStorage.getItem('userId')){
+      profileStore.GET_USER_FROM_DB();
+    }
+    
   }
 });
 

@@ -1,7 +1,6 @@
 <template>
     <div class="followers-container">
       <div v-for="follower in followers" :key="follower.id" class="follower-item">
-        
         <div class="profile">
         <img :src="follower.imgUrl" class="profile-img">
         <div>
