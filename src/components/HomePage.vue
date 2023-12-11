@@ -2,11 +2,16 @@
  <main class="main">
 
  <!-- {{ home }} -->
- <div class="">
+
+
+ <div class="left">
     <CardPage v-for = "(item,index) in home" @upvoteClicked ="updateUpvote"  :key="index" :cardItem = "item" :index="index"  class="left-div"/>
-    <div class="right-div"></div>
+   
  </div>
- 
+ <div class="right-div"> Ads</div>
+ <!-- <div class="right">
+    <div class="right-div"></div>
+ </div> -->
 
 </main>
 </template>
@@ -46,16 +51,41 @@ export default defineComponent({
 
 .main{
     margin-top: 80px;
+    display: flex;
 }
 .left-div{
-    width:60%;
+    width:90%;
     background-color: white;
     padding: 2%;
     
 }
 .right-div{
-width:25%
+    width: 160%;
+    background-color: white;
+    margin-right: 16px;
+    height: 432px;
+    margin-top: 16px;
 }
 
+@media screen and (min-width: 360px) and (max-width: 900px) {
+    .right-div {
+    background-color: white;
+    height: 419px;
+    margin-top: 10px;
+    margin-left: -85px;
+    min-width: 95px;
+}
+.container {
+    margin-top: 10px;
+    margin-left: 9px;
+    margin-right: 15px;
+}
+.left-div {
+    width: 71%;
+    background-color: white;
+    padding: 2%;
+    min-width: 246px;
+}
+}
 </style>
 

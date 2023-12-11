@@ -7,7 +7,7 @@ export const useHomeStore = defineStore("home", () => {
 
 
   const FETCH_HOME = async () => {
-    const apiUrl = "http://172.20.10.3:8091/answer/getHome";
+    const apiUrl = "http://10.20.3.163:8091/quora/answer/getHome";
     const queryParams = new URLSearchParams();
     queryParams.set("userId","dsfsdfd");
     queryParams.set("page",0);

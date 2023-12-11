@@ -55,21 +55,36 @@ import { defineComponent, onBeforeMount ,ref} from 'vue';
     </script>
      
     <style scoped>
+  
+
     .top-div {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    .top-left-div {
-      height: 60px;
-      width: 60px;
-      border-radius: 3px;
-    }
-    .top-left-div img {
-      width: 100%;
-      height: 100%;
-      border-radius: 20%;
-    }
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.top-left-div {
+  height: 60px;
+  width: 60px;
+  border-radius: 3px;
+}
+.top-left-div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20%;
+}
+.top-right-div {
+  margin-left: 20px;
+}
+.top-right-div h2 {
+  text-align: justify;
+  font-size: larger;
+}
+
+.top-right-div p {
+  text-align: justify;
+  font-size: small;
+}
+    
     </style>
     has context menu
     Compose
