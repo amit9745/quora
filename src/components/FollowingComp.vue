@@ -77,7 +77,7 @@ export default {
   width: 43%;
   margin: auto;
   box-shadow: 0px 0px 7px 2px;
-
+  margin-bottom: 60px;
 
 }
 .profile{

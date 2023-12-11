@@ -61,7 +61,7 @@ components: {
     const replies = ref([]);
    
     const FETCH_REPLIES_BY_COMMENTID = async (commentId) => {
-      const apiUrl = `http://10.20.3.163:8091/comment/getReplies/${commentId}`;
+      const apiUrl = `http://10.20.3.163:8091/quora/comment/getReplies/${commentId}`;
 
       const res = await fetch(apiUrl);
 
@@ -88,10 +88,11 @@ components: {
             'Content-Type': 'application/json',
         },
     }
-    const res = await fetch("http://10.20.3.163:8091/comment/addReply", head)
+    const res = await fetch("http://10.20.3.163:8091/quora/comment/addReply", head)
     const parsedResponse = await res.json()
     // window.location.reload()
     console.log('reply added', parsedResponse)
+    reply.value=''
     await FETCH_REPLIES_BY_COMMENTID(props.comment.commentId)
 }
 

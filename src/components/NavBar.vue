@@ -5,7 +5,7 @@
       <a @click="takeMeHome">Quora</a>
     </div>
     <div class="nav-left">
-      <a @click="takeMeAnswer">Answer</a>
+      <a class="answer" @click="takeMeAnswer">Answer</a>
     </div>
 
     <div
@@ -139,6 +139,7 @@ import {useSearchStore} from "../store/search-store.js";
 }
 
 .nav-cnt {
+    max-width: 1500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -233,13 +234,28 @@ import {useSearchStore} from "../store/search-store.js";
   padding: 0 1rem;
   font-weight: 800;
   font-size: 1.1rem;
+  margin-left: -8px;
 }
 
 @media screen and (min-width: 360px) and (max-width: 900px) {
   .search {
     min-width: 250px;
-    margin-left: -30px;
+    margin-left: -72px;
   }
+
+  .nav-cnt a {
+  padding: 13px;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+  /* .nav-cnt a {
+  margin-left: -1px;
+} */
+
+.answer{
+    margin-left: -20px;
+}
 
   .dropbtn {
     display: block;
@@ -255,9 +271,7 @@ import {useSearchStore} from "../store/search-store.js";
     margin-left: -10px;
   }
 
-  .nav-cnt {
-    margin-left: -14px;
-  }
+  
 
   .dropdown {
     position: relative;
@@ -281,5 +295,14 @@ import {useSearchStore} from "../store/search-store.js";
   .dropdown:hover .dropbtn {
     background-color: #626262;
   }
+
+  .search-button {
+  padding: 9px;
+  border-radius: 1rem;
+  border: none;
+  background-color: #292d32;
+  color: #fff;
+  cursor: pointer;
+}
 }
 </style>

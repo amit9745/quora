@@ -101,7 +101,7 @@ export default defineComponent({
   setup(props, context) {
     const comments = ref([]);
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
-      const apiUrl = `http://172.20.10.3:8091/comment/getComments/${answerId}`;
+      const apiUrl = `http://10.20.3.163:8091/quora/comment/getComments/${answerId}`;
 
       const res = await fetch(apiUrl);
 
@@ -133,7 +133,7 @@ export default defineComponent({
             }),
             headers: header
         }
-        const res = await fetch("http://172.20.10.3:8091/comment/addComment", head)
+        const res = await fetch("http://10.20.3.163:8091/quora/comment/addComment", head)
         const parsedResponse = await res.json()
         // window.location.reload()
         console.log('comment added', parsedResponse)
@@ -165,33 +165,7 @@ export default defineComponent({
   margin-left: 50px;
   margin-right: 50px;
 }
-.top-div {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-}
-.top-left-div {
-  height: 60px;
-  width: 60px;
-  border-radius: 3px;
-}
-.top-left-div img {
-  width: 100%;
-  height: 100%;
-  border-radius: 20%;
-}
-.top-right-div {
-  margin-left: 20px;
-}
-.top-right-div h2 {
-  text-align: justify;
-  font-size: larger;
-}
 
-.top-right-div p {
-  text-align: justify;
-  font-size: small;
-}
 .middle-div {
   display: flex;
   flex-wrap: wrap;
@@ -218,10 +192,8 @@ export default defineComponent({
   display: flex;
   padding: 10px;
   display: flex;
-
-  width: 34%;
   border-radius: 37px;
-  height: 38px;
+  height: 43px;
 }
 .bottom-right-div {
   margin-left: 2%;
@@ -292,5 +264,32 @@ export default defineComponent({
   background-color: #292d32;
   color: #fff;
   cursor: pointer;
+}
+
+
+
+
+@media screen and (min-width: 360px) and (max-width: 900px) {
+.bottom-left-div {
+    border-style: groove;
+    padding: 10px;
+    display: flex;
+    border-radius: 37px;
+    height: 43px;
+}
+.bottom-div {
+    margin-top: 8%;
+    border-style: groove;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.down {
+  margin-left: 15px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
 }
 </style>

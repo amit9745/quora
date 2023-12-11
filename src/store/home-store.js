@@ -8,6 +8,7 @@ export const useHomeStore = defineStore("home", () => {
 
   const FETCH_HOME = async () => {
 
+
     const apiUrl = apiUrls.getHome;
     // console.log(apiUrl)
 
