@@ -3,8 +3,8 @@ import HomePage from '../components/HomePage'
 
 import MyProfile from '../components/MyProfile';
 import AnswerQuestion from '@/components/AnswerQuestion.vue'
-
-
+import AddProfile from "../components/AddProfile.vue"
+import AddCategory from "../components/CategoryPage.vue"
 import SignIn from '@/components/SignIn.vue'
 import SignUp from '@/components/SignUp.vue'
 
@@ -46,6 +46,17 @@ const routes = [
     name: 'signUp',
     component: SignUp
   },
+  {
+    path: '/addProfile',
+    name: 'addProfile',
+    component: AddProfile
+  },
+  {
+    path: '/getCategory',
+    name: 'addCategory',
+    component: AddCategory
+  },
+
   {
     path: '/questioninfopage',
     name: 'questioninfopage',
