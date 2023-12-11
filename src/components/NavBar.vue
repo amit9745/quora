@@ -20,9 +20,9 @@
           class="search-input"
           placeholder="Search Quora!!"
           v-model="searchInput"
-          @click="openSearchDialog"
+          @click="takeMeSearch"
         />
-        <button class="search-button-icon" @click="searchNow"><img class="icon" :src="search" /></button>
+        <button class="search-button-icon" @click="searchNow" ><img class="icon" :src="search" /></button>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
       :close="closeAddQuestionDialog"
       :post-question="postQuestion"
     ></AddQuestionDialog>
-    <SearchDialog :is-open="isSearchDialogOpen" :close="closeSearchDialog" /> 
+    <!-- <SearchDialog :is-open="isSearchDialogOpen" :close="closeSearchDialog" />  -->
   </div>
 </template>
    
@@ -56,28 +56,30 @@
 import search from "@/assets/search.svg"
 import { defineComponent ,ref} from "vue"
 import AddQuestionDialog from "./AddQuestionDialog.vue"
-import SearchDialog  from "./SearchDialog.vue"
+// import SearchDialog  from "./SearchDialog.vue"
 import { useRouter } from "vue-router"
+// import debounce from 'lodash.debounce';
 import {useSearchStore} from "../store/search-store.js";
   export default defineComponent({
    components:{
     "AddQuestionDialog":AddQuestionDialog,
-    SearchDialog
+    // SearchDialog
    },
     setup() {
       const router = useRouter()
       const isQuestionDialogueOpen = ref(false);
  
-      const isSearchDialogOpen = ref(false);
+      // const isSearchDialogOpen = ref(false);
       const searchInput = ref('');
   
-      const openSearchDialog = () => {
-        isSearchDialogOpen.value = true;
-      };
+      // const openSearchDialog = () => {
+      //   isSearchDialogOpen.value = true;
+      // };
   
-      const closeSearchDialog = () => {
-        isSearchDialogOpen.value = false;
-      };
+      // const closeSearchDialog = () => {
+      //   isSearchDialogOpen.value = false;
+      // };
+
       const takeMeHome=()=>{
         router.push("/")
        }
@@ -90,6 +92,10 @@ import {useSearchStore} from "../store/search-store.js";
        const goToProfile = () => {
         router.push("/profile")
       } 
+      const takeMeSearch = () => {
+        console.log("I am taken to search");
+        router.push("/search")
+      }
       const openAddQuestionDialog = ()=>{
         isQuestionDialogueOpen.value = true;
       }
@@ -99,10 +105,18 @@ import {useSearchStore} from "../store/search-store.js";
       
         const searchStore = useSearchStore();
         
-        const searchNow = (()=>{
-          searchStore.FETCH_Search();
+        // const searchNow = (()=>{
+        //   debounce(() => {
+        //     searchStore.FETCH_Search(searchInput.value);
+        //     }, 1000);
 
-        })
+        // })
+
+        const searchNow = ()=>{
+            searchStore.FETCH_Search(searchInput.value);
+          // })
+         
+        }
       
 
         return {
@@ -110,13 +124,14 @@ import {useSearchStore} from "../store/search-store.js";
             takeMeAnswer,
             takeMeHome,
             takeMeQuestion,
+            takeMeSearch,
             goToProfile,
             openAddQuestionDialog,
             closeAddQuestionDialog,
             isQuestionDialogueOpen,
-            openSearchDialog,
-            closeSearchDialog,
-            isSearchDialogOpen,
+            // openSearchDialog,
+            // closeSearchDialog,
+            // isSearchDialogOpen,
             searchInput,
             searchNow
         }
