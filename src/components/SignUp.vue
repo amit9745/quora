@@ -3,39 +3,38 @@
 
     <h1>Sign Up</h1>
     <form @submit.prevent = "signUp">
-    <div class="sub-container">
-      <label for="email"><b>Name</b></label>
-      
-      <input v-model="name" type="text" placeholder="Enter Your Name" name="name" required>
+      <div class="sub-container">
+        <label for="email"><b>Name</b></label>
+        <input v-model="name" type="text" placeholder="Enter Your Name" name="name" required>
 
-      <label for="email"><b>Email</b></label>
-      <input v-model="email" type="text" placeholder="Enter Email" name="email" required>
+        <label for="email"><b>Email</b></label>
+        <input v-model="email" type="text" placeholder="Enter Email" name="email" required>
+        <p v-if="emailError">{{ emailError }}</p>
 
-      <label for="psw"><b>Password</b></label>
-      <input v-model="password" type="password" placeholder="Enter Password" name="password" required>
+        <label for="psw"><b>Password</b></label>
+        <input v-model="password" type="password" placeholder="Enter Password" name="password" required>
+        <p v-if="passwordError">{{ passwordError }}</p>
 
-      <div class="clearfix">
-        <button type="submit" class="signupbtn">Sign Up</button>
-      </div>
-      </div>
-    </form> 
-      <p> Already have an account? <span @click="redirectToSignIn"> Sign In </span></p>
-      <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center; margin-top: 20px; ">
-        <span style="background-color: rgb(252, 252, 251); padding: 0 10px;">
-          or connect with
-        </span>
-      </div>
-      <div class="social-login">
-        <button @click="signInWithGoogle"><img
+        <div class="clearfix">
+          <button type="submit" class="signupbtn">Sign Up</button>
+        </div>
+
+        <p> Already have an account? <span @click="redirectToSignIn"> Sign In </span></p>
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center; margin-top: 20px; ">
+            <span style="background-color: rgb(252, 252, 251); padding: 0 10px;">
+                or connect with
+            </span>
+          </div>
+          <div class="social-login">
+            <button @click="signInWithGoogle"><img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png"
             width="50px"></button>
-        <button @click="signInWithFacebook"><img src="../assets/facebook.png" width="50px"></button>
-        <button @click="signInWithInstagram"><img src="../assets/instagram.png" width="50px"></button>
+            <button @click="signInWithFacebook"><img src="../assets/facebook.png" width="50px"></button>
+            <button @click="signInWithInstagram"><img src="../assets/instagram.png" width="50px"></button>
+          </div>
       </div>
-    </div>
-
-
-  
+    </form>
+  </div>
 </template>
     
 <script>
@@ -59,9 +58,41 @@ export default {
       router.push("/login")
     }
 
+    const passwordError = ref('')
+    const emailError = ref('')
+    
+
     const signUp =  async() => {
-      console.log("i am in register ", email.value, password.value);
+      const validatePassword = () => {
+        if(password.value.lastIndexOf>=8 && password.value.length<=18) {
+            passwordError.value = 'Password must be at least 8 characters long.';
+            console.log(passwordError)
+        }
+        else
+            passwordError.value = ''; 
+      };
+      
+      const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            emailError.value = 'Invalid email address';
+        } 
+        else {
+            emailError.value = '';
+        }
+      };
+      
       try {
+
+        
+
+      
+      validateEmail(email.value)
+      validatePassword(password.value)
+      
+      if(passwordError.value === '' && emailError.value === '') {
+        
+        
        const res =  await createUserWithEmailAndPassword(getAuth(),email.value,password.value)
 
        ///add sooraj ka api call and populate user and session storage me daal do iska token
@@ -70,9 +101,14 @@ export default {
        console.log(user)
        sessionStorage.setItem("token",user.stsTokenManager.accessToken)
        sessionStorage.setItem("userId",user.uid)
+
        
         console.log('Successfully signed up!');
         router.replace('/addProfile')
+      }
+      else {
+        console.log("Error validating email and password")
+      }
         
       } catch (error) {
         console.error('Error logging in:', error.message);
@@ -99,7 +135,9 @@ export default {
       email,
       password,
       signUp,
-      redirectToSignIn
+      redirectToSignIn,
+      emailError,
+      passwordError
     }
   }
 }
