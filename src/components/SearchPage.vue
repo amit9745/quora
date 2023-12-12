@@ -7,13 +7,13 @@
       </div> -->
   
       <!-- Display search results as div elements -->
-      <div class="search-results" v-if="searchValues.length > 0">
+      <div class="search-results" v-if="searchValues?.length > 0">
         <div v-for="(searchValue, index) in searchValues" :key="index" class="result-item">
             <div v-if="searchValue?.profileId !== null" > 
                 <ProfileView></ProfileView>
             </div>
-            <div v-if="searchValue?.questionId !=null">{{ searchValue.searchTerm }}</div>
-            <div v-if="searchValue?.businessProfileId !==null"><ProfileView/> {{  searchValue.searchTerm  }}</div>
+            <div v-if="searchValue?.questionId !=null" @click="routeToQn(questionId,searchValue.searchTerm)">{{ searchValue.searchTerm }}</div>
+            <div v-if="searchValue?.businessProfileId !==null"><ProfileView /> {{  searchValue.searchTerm  }}</div>
           
         </div>
       </div>
@@ -27,6 +27,8 @@
   import { ref, computed } from 'vue';
   import useSearchStore from '@/store/search-store';
 import ProfileView from './ProfileView.vue';
+import router from '../router/index.js';
+import {useAnswerStore} from '../store/answer-store.js';
   // import debounce from 'lodash.debounce';
 
   export default {
@@ -34,14 +36,23 @@ import ProfileView from './ProfileView.vue';
         const searchBarActive = ref(false);
         const searchText = ref('');
         const searchStore = useSearchStore();
+        const answerStore = useAnswerStore()
         // searchStore.FETCH_Search();
         const searchValues = computed(() => {
             return searchStore.searchData;
         });
+
+        const routeToQn = (questionId,questionName) => {
+          answerStore.updateQuestionInfo( questionId,);
+      answerStore.updateQuestionName(questionName );
+    
+      router.push("/questioninfopage"); 
+        }
         return {
             searchBarActive,
             searchText,
             searchValues,
+            routeToQn
         };
     },
     components: { ProfileView }

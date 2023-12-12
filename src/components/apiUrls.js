@@ -13,8 +13,7 @@ const header = {
     addQuestion: `${feedDomain}/question/addQuestion`,
     getQuestions: `${feedDomain}/question/getQuestionsByCategory`,
     addAnswer: `${feedDomain}/answer/addAnswer`,
-    updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
-    updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
+
     updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
     updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
     getAllAnswersByQuestionId: `${feedDomain}/answer/getAnswers`,

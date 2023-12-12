@@ -26,10 +26,13 @@ export const question = defineStore("question", () => {
     console.log(questions.value);
   };
 
+
+
   return{
     // FETCH_QUESTION,
     questions,
-    FETCH_QUESTIONS_BY_CATEGORY
+    FETCH_QUESTIONS_BY_CATEGORY,
+    question, 
   }
 
 });
