@@ -179,7 +179,7 @@ components: {
     padding-left: 18px;
 }
 .button {
-    width: 14%;
+    width: 12%;
     border-radius: 1rem;
     border: none;
     background-color: #292d32;

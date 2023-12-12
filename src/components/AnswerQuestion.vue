@@ -6,7 +6,7 @@
       <!-- {{ questions }} -->
       <div>
         <div v-for="(question, index) in questions" :key="index" class="question">
-          <p>{{ question.question }}</p>
+          <p class="para">{{ question.question }}</p>
           <button @click="openDialog(index,question.questionId)" class="submit-btn">Answer</button>
         </div>
       </div>
@@ -143,12 +143,17 @@ const qs = questionStore();
   .h2 {
     color: #4285f4;
   }
+  .para{
+    margin-bottom: 20px;
+    font-size: large;
+  }
   
   .question {
+    margin: auto;
     background-color: #f5f5f5;
     padding: 10px;
-    border-radius: 5px;
     margin-bottom: 20px;
+    width: 70%;
   }
   
   .textarea {
