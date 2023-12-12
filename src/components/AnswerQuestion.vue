@@ -2,6 +2,18 @@
  
   <div class="app">
     <main>
+      <div class="filter-container">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter" v-model="selectedCategory" @change="filterByCategory">
+          <option value="">All Categories</option>
+          <option value="Food">Food</option>
+          <option value="Music">Music</option>
+          <option value="Sports">Sports</option>
+          <option value="Travel">Travel</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Fashion">Fashion</option>
+        </select>
+      </div>
       <h2>Questions for you</h2>
       <!-- {{ questions }} -->
       <div>
@@ -51,11 +63,20 @@ export default {
 
   
 
-const qs = questionStore();
+    const qs = questionStore();
 
     // qs.FETCH_QUESTION();
     qs.FETCH_QUESTIONS_BY_CATEGORY();
-    const questions = computed(()=> qs.questions)
+
+    const questions = computed(()=> qs.questions);
+    const selectedCategory = ref('');
+    const filteredQuestions = computed(() => {
+      if (!selectedCategory.value) {
+        return questions.value;
+      } else {
+        return questions.value.filter((question) => question.category === selectedCategory.value);
+      }
+    });
     const selectedQuestionId = ref(null)
     const isDialogVisible = ref(false);
     const currentAnswer = ref("");
@@ -72,6 +93,10 @@ const qs = questionStore();
       currentAnswer.value = "";
       isDialogVisible.value = false;
     };    
+
+    const filterByCategory = () => {
+      qs.FETCH_QUESTIONS_BY_CATEGORY(selectedCategory.value);
+    };
 
     // const postAnswer = () => {
     //   console.log("Posting answer:", currentAnswer.value);
@@ -102,10 +127,9 @@ const qs = questionStore();
           'Content-Type': 'application/json',
         },
       }
-      
-        const res = await fetch("http://10.20.3.163:8091/quora/answer/addAnswer", head)
-        const parsedResponse = await res.json()
-        console.log('Answer posted', parsedResponse)
+      const res = await fetch("http://10.20.3.163:8091/quora/answer/addAnswer", head)
+      const parsedResponse = await res.json()
+      console.log('Answer posted', parsedResponse)
       }
   
  
@@ -118,7 +142,10 @@ const qs = questionStore();
       closeDialog,
       postAnswer,
       questions,
-      answer
+      answer,
+      selectedCategory,
+      filteredQuestions,
+      filterByCategory,
     };
   }
 };
@@ -199,4 +226,4 @@ const qs = questionStore();
     text-align: center;
   }
   </style>
-@/store/question-store.js
+<!-- @/store/question-store.js -->
