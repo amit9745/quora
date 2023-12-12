@@ -24,9 +24,11 @@ const header = {
     fetchReplies :`/quora/feed/comment/getReplies`,
     addReply:`/quora/feed/comment/addReply`,
 
-    addUser : `/quora/feed/profile/addProfile`,
-    addCategories :`/quora/feed/profile/addCategories`,
+    addUser : `/quora/profile/addProfile`,
+    addCategories :`/quora/profile/addCategories`,
     getUser: `/quora/profile/getProfile`,
+
+    
 
   };
 
