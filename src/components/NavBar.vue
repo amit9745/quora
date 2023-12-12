@@ -12,18 +12,31 @@
       :class="{
         'search-cnt-loggedin': logedIn,
         'search-cnt-loggedout': !logedIn,
-      }"
-    >
+      }">
+
       <div class="search">
         <input
-          type="text"
-          class="search-input"
-          placeholder="Search Quora!!"
-          v-model="searchInput"
-          @click="takeMeSearch"
-        />
-        <button class="search-button-icon" @click="searchNow" ><img class="icon" :src="search" /></button>
-      </div>
+        type="text"
+        class="search-input"
+        placeholder="Search Quora!!"
+        v-model="searchInput"
+        @keyup.enter = "searchNow"
+        @click="takeMeSearch"/>
+
+      <button
+        v-if="isSearchActive"
+        class="close-button-icon"
+        @click="deactivateSearch">
+        <img class="icon" :src="close" />
+      </button>  
+
+      <button
+        v-if="!isSearchActive"
+        class="search-button-icon"
+        @click="searchNow">
+        <img class="icon" :src="search" />
+      </button>      
+    </div>
     </div>
 
     <div class="nav-right">
@@ -36,7 +49,7 @@
             </p>
           </div>
           <div class="sub-menu">
-            <button @click="openAddQuestionDialog"  class="search-button">Add Question</button>
+            <button @click="openAddQuestionDialog" class="add-question-button">Add Question</button>
           </div>
           <!-- <p>Hi! {{ userName }}</p> -->
         </div>
@@ -54,6 +67,7 @@
 <script>
   
 import search from "@/assets/search.svg"
+import close from "@/assets/close.png"
 import { defineComponent ,ref} from "vue"
 import AddQuestionDialog from "./AddQuestionDialog.vue"
 // import SearchDialog  from "./SearchDialog.vue"
@@ -66,11 +80,23 @@ import {useSearchStore} from "../store/search-store.js";
     // SearchDialog
    },
     setup() {
+
       const router = useRouter()
       const isQuestionDialogueOpen = ref(false);
  
       // const isSearchDialogOpen = ref(false);
+
       const searchInput = ref('');
+
+      const isSearchActive = ref(false);
+
+      const activateSearch = () => {
+      isSearchActive.value = true;
+    };
+    const deactivateSearch = () => {
+      router.go(-1)
+      isSearchActive.value = false;
+    };
   
       // const openSearchDialog = () => {
       //   isSearchDialogOpen.value = true;
@@ -79,6 +105,7 @@ import {useSearchStore} from "../store/search-store.js";
       // const closeSearchDialog = () => {
       //   isSearchDialogOpen.value = false;
       // };
+
       const takeMeHome=()=>{
         router.push("/")
        }
@@ -93,6 +120,7 @@ import {useSearchStore} from "../store/search-store.js";
       } 
       const takeMeSearch = () => {
         console.log("I am taken to search");
+        isSearchActive.value = true;
         router.push("/search")
       }
       const openAddQuestionDialog = ()=>{
@@ -103,23 +131,22 @@ import {useSearchStore} from "../store/search-store.js";
       }
       
         const searchStore = useSearchStore();
-        
-        // const searchNow = (()=>{
+
+        const searchNow = ()=>{
+            searchStore.FETCH_Search(searchInput.value);
+        }
+
+         // const searchNow = (()=>{
         //   debounce(() => {
         //     searchStore.FETCH_Search(searchInput.value);
         //     }, 1000);
 
         // })
-
-        const searchNow = ()=>{
-            searchStore.FETCH_Search(searchInput.value);
-          // })
-         
-        }
       
 
         return {
             search,
+            close,
             takeMeAnswer,
             takeMeHome,
             takeMeQuestion,
@@ -132,7 +159,10 @@ import {useSearchStore} from "../store/search-store.js";
             // closeSearchDialog,
             // isSearchDialogOpen,
             searchInput,
-            searchNow
+            searchNow,
+            isSearchActive,
+            activateSearch,
+           deactivateSearch,
         }
     },
 })
@@ -226,14 +256,28 @@ import {useSearchStore} from "../store/search-store.js";
 }
 
 .search-button-icon{
-    position: absolute;
-    margin: 10px;
+  position: absolute;
+  margin: 10px;
   padding:6px;
   border-radius: 1rem;
   border: none;
- 
   cursor: pointer;
-  
+}
+.close-button-icon{
+  position: absolute;
+  margin: 10px;
+  padding:6px;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.add-question-button{
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #292d32;
+  color: #fff;
+  cursor: pointer;
 }
 .search-button {
   padding: 0.8rem;

@@ -8,18 +8,22 @@ export const useSearchStore = defineStore("Search", () => {
 
 
     const FETCH_Search = async (searchQuery) => {
-    console.log("searchQuery here",searchQuery)
+      if(searchQuery?.length>2){
+        console.log("searchQuery here",searchQuery)
 
-    const queryParams = new URLSearchParams();
+        const queryParams = new URLSearchParams();
+        
+        const apiUrl = "http://10.20.3.177:8089/quora/search-service/searchterm"
+        queryParams.set("searchTerm",searchQuery);
+        const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
+
+        const jsonnew = await res.json();
+        searchData.value = jsonnew
+        console.log("searchValues", searchData.value)
+      }else{
+        searchData.value=null
+      }
     
-
-    const apiUrl = "http://10.20.3.177:8089/quora/search-service/searchterm"
-    queryParams.set("searchTerm",searchQuery);
-    const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
-
-    const jsonnew = await res.json();
-    searchData.value = jsonnew
-    console.log("searchValues", searchData.value)
   };
  
   return{
