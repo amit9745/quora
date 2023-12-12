@@ -18,7 +18,15 @@ const header = {
     updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
     getAllAnswersByQuestionId: `${feedDomain}/answer/getAnswers`,
 
-    addUser : `${profileDomain}/profile/addProfile`
+    fetchCommentsUrl: `${feedDomain}/comment/getComments`,
+    addComment:`${feedDomain}/comment/addComment`,
+    
+    fetchReplies :`${feedDomain}/comment/getReplies`,
+    addReply:`${feedDomain}/comment/addReply`,
+
+    addUser : `${profileDomain}/profile/addProfile`,
+    addCategories :`${profileDomain}/profile/addCategories`,
+    getUser: `${profileDomain}/profile/getProfile`,
 
   };
 

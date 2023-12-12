@@ -2,15 +2,6 @@
   <div class="container">
 
     <h1>Sign Up</h1>
-    <!-- <form @submit.prevent="signUp">
-      <label for="email">Email:</label>
-      <input type="email" v-model="email" required>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" v-model="password" required>
-      <br>
-      <button type="submit">Login</button>
-    </form> -->
     <form @submit.prevent = "signUp">
       <div class="sub-container">
         <label for="email"><b>Name</b></label>
@@ -66,13 +57,13 @@ export default {
     const redirectToSignIn = () => {
       router.push("/login")
     }
+
     const passwordError = ref('')
     const emailError = ref('')
     
+
     const signUp =  async() => {
-      
-      try {
-        const validatePassword = () => {
+      const validatePassword = () => {
         if(password.value.lastIndexOf>=8 && password.value.length<=18) {
             passwordError.value = 'Password must be at least 8 characters long.';
             console.log(passwordError)
@@ -80,7 +71,7 @@ export default {
         else
             passwordError.value = ''; 
       };
-
+      
       const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email.value)) {
@@ -90,15 +81,27 @@ export default {
             emailError.value = '';
         }
       };
+      
+      try {
+
+        
+
+      
       validateEmail(email.value)
       validatePassword(password.value)
       
       if(passwordError.value === '' && emailError.value === '') {
-        const res =  await createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-        const user = res.user;
+        
+        
+       const res =  await createUserWithEmailAndPassword(getAuth(),email.value,password.value)
+
+       ///add sooraj ka api call and populate user and session storage me daal do iska token
+       const user = res.user;
         profileStore.updateUserAfterAuth(user);
-        console.log("i am in register ", email.value, password.value);
-        console.log(user)
+       console.log(user)
+       sessionStorage.setItem("token",user.stsTokenManager.accessToken)
+       sessionStorage.setItem("userId",user.uid)
+
        
         console.log('Successfully signed up!');
         router.replace('/addProfile')

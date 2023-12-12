@@ -1,7 +1,6 @@
 <template>
     <div class="followers-container">
       <div v-for="follower in followers" :key="follower.id" class="follower-item">
-        
         <div class="profile">
         <img :src="follower.imgUrl" class="profile-img">
         <div>
@@ -11,7 +10,7 @@
       </div>
         <div class="follower-details">
           
-          <button class="unfollow">Follow</button>
+         <FollowButton :userId = "hjvdc"/>
         </div>
        
       </div>
@@ -22,9 +21,15 @@
   <script>
   import { ref } from 'vue';
   import follower1 from "../assets/follower1.jpeg";
+  import FollowButton from '@/components/FollowButton';
   export default {
+    components:{
+      FollowButton
+    },
     setup() {
       // /Users/amitkumar/Desktop/quora/src/assets/follower1.jpeg
+     
+
       const followers = ref([
         {
           imgUrl: follower1,

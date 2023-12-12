@@ -17,7 +17,23 @@
         placeholder="Enter user description"
         class="description-input"
       />
+      <div>
+    <h3>
+      Select type of account
+      <select v-model="selected">
+        <option value="" selected disabled>
+          Choose
+        </option>
+        <option v-for="item in options" :key="item">
+          {{ item }}
+        </option>
+      </select>
+      
+    </h3>
+  </div>
       <button class="button" @click="addProfile">Next</button>
+
+    
     </div>
   </template>
   
@@ -25,9 +41,12 @@
   import { computed, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import {useProfileStore} from "../store/profile-store.js"
+  import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
+
   export default {
     setup() {
-        const router = useRouter()
+      const router = useRouter()
+      const avatar = ref('')
       const image = ref(null);
       const username = ref('');
       const userDesc = ref('')
@@ -49,14 +68,32 @@
             image.value = reader.result;
           };
           reader.readAsDataURL(file);
+          uploadFile(file)
         }
       };
 
+
+
+      const uploadFile = async (selectedFile) => {
+      try {
+        const storage = getStorage();
+        const storageReference = storageRef(storage, 'quora/' + selectedFile.name);
+        await uploadBytes(storageReference, selectedFile);
+        
+        console.log('File uploaded successfully!', storageReference.fullPath);
+        avatar.value = storageReference.fullPath
+      } catch (error) {
+        console.error('Error uploading file:', error.message);
+      }
+    };
+
+
+
      const addProfile = async ()=>{
-      console.log("token",firebaseUser.value.stsTokenManager.accessToken)
+      // console.log("token",firebaseUser.value.stsTokenManager.accessToken)
       const profileData =   {
           points: 0,
-          "profileAvatar": "",
+          "profileAvatar": avatar.value,
           "profileDesc": userDesc.value,
           "profileEmail": firebaseUser.value.email,
           "profileId": firebaseUser.value.uid,
@@ -76,11 +113,16 @@
         username,
         selectImage,
         addProfile,
-        userDesc
+        userDesc,
+        uploadFile,
+        avatar,
+        selected: '', 
+        options: ['private', 'public'] 
+
       };
 
     },
-  };
+  }
   </script>
   
   <style scoped>
@@ -135,6 +177,7 @@
     padding: 8px;
     font-size: 16px;
     width: 80%;
+    margin-bottom: 10%;
   }
   .button {
     display: inline-block;

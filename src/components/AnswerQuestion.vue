@@ -3,7 +3,7 @@
   <div class="app">
     <main>
       <h2>Questions for you</h2>
-      {{ questions }}
+      <!-- {{ questions }} -->
       <div>
         <div v-for="(question, index) in questions" :key="index" class="question">
           <p>{{ question.question }}</p>

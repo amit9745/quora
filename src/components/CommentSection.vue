@@ -19,12 +19,12 @@
     </p>
     <div v-if="isReplying">
         <div class="reply" v-if="isReplying">
-        <textarea
+        <input
         v-model="reply"
             class="textarea"
             
             placeholder="Reply.."
-        ></textarea>
+        />
       <button @click="addReply" class="button" >Reply</button>
     </div></div>
     <div v-else>
@@ -41,6 +41,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { apiUrls } from "./apiUrls";
 import ReplySection from "./ReplySection.vue";
 export default defineComponent({
 components: {
@@ -61,7 +62,8 @@ components: {
     const replies = ref([]);
    
     const FETCH_REPLIES_BY_COMMENTID = async (commentId) => {
-      const apiUrl = `http://10.20.3.163:8091/quora/comment/getReplies/${commentId}`;
+      const fetchReplyUrl = apiUrls.fetchReplies;
+      const apiUrl = `${fetchReplyUrl}/${commentId}`;
 
       const res = await fetch(apiUrl);
 
@@ -88,7 +90,8 @@ components: {
             'Content-Type': 'application/json',
         },
     }
-    const res = await fetch("http://10.20.3.163:8091/quora/comment/addReply", head)
+    const addReply = apiUrls.addReply;
+    const res = await fetch(addReply, head)
     const parsedResponse = await res.json()
     // window.location.reload()
     console.log('reply added', parsedResponse)
@@ -147,18 +150,19 @@ components: {
 }
 .para {
   text-align: justify;
-  margin-left: 55px;
-  font-size: medium;
+  margin-left: 60px;
+  font-size: small;
 }
 .reply {
   display: flex;
   margin-top: 5px;
+
   justify-content: flex-start;
 }
 .reply-button{
     display: block;
     text-align: left;
-    margin-left:55px ;
+    margin-left:60px ;
     margin-top: 5px;
     padding: 6px;
 }
@@ -186,7 +190,7 @@ components: {
 @media screen and (min-width: 360px) and (max-width: 900px) {
 .para{
   width: 65%;
-  font-size: small;
+  font-size: x-small;
 }
 .reply {
   display: flex;
