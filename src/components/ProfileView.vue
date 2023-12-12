@@ -58,7 +58,7 @@ export default defineComponent({
     };
     
     onBeforeMount(async () => {
-     await FETCH_USER()
+    //  await FETCH_USER()
     })
 
     const takeMeToProfile = () => {
@@ -67,7 +67,8 @@ export default defineComponent({
 
     return {
       takeMeToProfile,
-      imageUrl
+      imageUrl,
+      FETCH_USER
     }
   }
 
