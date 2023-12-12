@@ -19,7 +19,7 @@
           <button type="submit" class="signupbtn">Sign Up</button>
         </div>
 
-        <p> Already have an account? <span @click="redirectToSignIn"> Sign In </span></p>
+        <p> Already have an account? <span class="signin" @click="redirectToSignIn"> Sign In </span></p>
           <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center; margin-top: 20px; ">
             <span style="background-color: rgb(252, 252, 251); padding: 0 10px;">
                 or connect with
@@ -253,5 +253,11 @@ button:hover {
 
 .connect {
   margin-top: 15px;
-}</style> 
+}
+.signin{
+  cursor: pointer;
+  color: rgb(8, 0, 255);
+}
+
+</style> 
 

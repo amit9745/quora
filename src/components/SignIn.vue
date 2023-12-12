@@ -12,7 +12,7 @@
             <div class="clearfix">
                 <button type="submit" class="signupbtn" @click="submitForm">Sign In</button>
             </div>
-            <p> Don't have an account? <span @click="redirectToSignUp"> Sign Up </span></p>
+            <p> Don't have an account? <span class="signup" @click="redirectToSignUp"> Sign Up </span></p>
 
             <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center; margin-top: 20px; ">
   <span style="background-color: rgb(252, 252, 251); padding: 0 10px;">
@@ -152,6 +152,10 @@ export default {
 
 .connect {
     margin-top: 15px;
+}
+.signup{
+  cursor: pointer;
+  color: rgb(8, 0, 255);
 }
 </style> 
 

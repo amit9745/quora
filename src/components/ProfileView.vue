@@ -1,17 +1,20 @@
 <template>
-  <div @click="takeMeToProfile" class="top-div">
-    <div class="top-left-div">
-      <img class="img"
-        :src= "imageUrl"
-        alt="" />
-    </div>
-    <div class="top-right-div">
-      <!-- <h2>{{ cardItem.profileData.profileName }}</h2> -->
-      <h2>Piyush</h2>
-      <p>Answered 3 days ago</p>
-    </div>
-  </div>
-</template>
+
+    <div @click="takeMeToProfile" class="top-div">
+          <div class="top-left-div">
+            <img
+              class="img"
+              src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
+              alt=""
+            />
+          </div>
+          <div class="top-right-div">
+            <!-- <h2>{{ cardItem.profileData.profileName }}</h2> -->
+            <h2>Piyush</h2>
+            <p>@beginner</p>
+          </div>
+        </div>
+
      
 <script>
 import router from '@/router';
@@ -81,12 +84,16 @@ export default defineComponent({
   height: 60px;
   width: 60px;
   border-radius: 3px;
+
 }
 
 .top-left-div img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+
+  object-fit:cover;
+
 }
 
 .top-right-div {

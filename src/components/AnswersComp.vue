@@ -4,7 +4,7 @@
         <div v-for="answer in answers" :key="answer.id" class="question-header">
 
           <div class="question">
-        <p class="question-content">
+        <p  class="question-content">
           {{answer.content}}
         </p>
 

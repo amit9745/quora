@@ -10,7 +10,7 @@
       </div>
       <div class="top-right-div">
         <h4>Amit kumar</h4>
-        <p>Answered 3 days ago</p>
+        <p>@beginner</p>
       </div>
     </div>
     <p class="para">
@@ -73,7 +73,7 @@ export default defineComponent({
 }
 .para {
   text-align: justify;
-  margin-left: 55px;
+  margin-left: 60px;
   font-size: small;
 }
 .reply {

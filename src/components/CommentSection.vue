@@ -10,7 +10,7 @@
       </div>
       <div class="top-right-div">
         <h4>Amit kumar</h4>
-        <p>Answered 3 days ago</p>
+        <p>@beginner</p>
       </div>
     </div>
     <p class="para">
@@ -134,6 +134,7 @@ components: {
   width: 100%;
   height: 100%;
   border-radius: 50px;
+  object-fit:cover;
 }
 .top-right-div {
   margin-left: 20px;
@@ -160,11 +161,21 @@ components: {
   justify-content: flex-start;
 }
 .reply-button{
+    /* display: block;
+    text-align: left;
+    margin-left:60px ;
+    margin-top: 5px;
+    padding: 6px; */
     display: block;
     text-align: left;
     margin-left:60px ;
     margin-top: 5px;
-    padding: 6px;
+    padding: 8px 12px;
+    border-radius: 1rem;
+    border: none;
+    background-color: #292d32;
+    color: #fff;
+    cursor: pointer;
 }
 .textarea {
     border: none;
