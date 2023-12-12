@@ -13,8 +13,9 @@ export const useSearchStore = defineStore("Search", () => {
 
         const queryParams = new URLSearchParams();
         
-        const apiUrl = "http://10.20.3.177:8089/quora/search-service/searchterm"
+        // const apiUrl = "http://10.20.3.177:8089/quora/"
         queryParams.set("searchTerm",searchQuery);
+        const apiUrl = "/quora/search/searchterm"
         const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
 
         const jsonnew = await res.json();

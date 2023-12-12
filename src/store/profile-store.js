@@ -9,6 +9,7 @@ export const useProfileStore = defineStore("profile", () => {
     const updateUserAfterAuth = (user)=>{
       firebaseUser.value = user;
     }
+    
     const  GET_USER_FROM_DB = async() =>{
       const userId = sessionStorage.getItem("userId")
       const apiUrl = apiUrls.getUser;

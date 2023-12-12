@@ -1,38 +1,38 @@
 
 
-const feedDomain = "http://10.20.3.163:8091/quora"
-const profileDomain =  "http://10.20.3.163:8088/quora"
+// const feedDomain = "http://10.20.3.163:8091/quora"
+// const profileDomain =  "http://10.20.3.163:8088/quora"
 
 const header = {
     'Content-Type': 'application/json',
-    
+    "authorization":sessionStorage.getItem("token")
 };
  const apiUrls = {
 
-    getHome: `${feedDomain}/answer/getHome`,
-    addQuestion: `${feedDomain}/question/addQuestion`,
-    getQuestions: `${feedDomain}/question/getQuestionsByCategory`,
-    addAnswer: `${feedDomain}/answer/addAnswer`,
+    getHome: `/quora/feed/answer/getHome`,
+    addQuestion: `/quora/feed/question/addQuestion`,
+    getQuestions: `/quora/feed/question/getQuestionsByCategory`,
+    addAnswer: `/quora/feed/answer/addAnswer`,
 
-    updateUpvotes : `${feedDomain}/answer/updateUpvotes`,
-    updateDownvotes : `${feedDomain}/answer/updateDownvotes`,
-    getAllAnswersByQuestionId: `${feedDomain}/answer/getAnswers`,
+    updateUpvotes : `/quora/feed/answer/updateUpvotes`,
+    updateDownvotes : `/quora/feed/answer/updateDownvotes`,
+    getAllAnswersByQuestionId: `/quora/feed/answer/getAnswers`,
 
-    fetchCommentsUrl: `${feedDomain}/comment/getComments`,
-    addComment:`${feedDomain}/comment/addComment`,
+    fetchCommentsUrl: `/quora/feed/comment/getComments`,
+    addComment:`/quora/feed/comment/addComment`,
     
-    fetchReplies :`${feedDomain}/comment/getReplies`,
-    addReply:`${feedDomain}/comment/addReply`,
+    fetchReplies :`/quora/feed/comment/getReplies`,
+    addReply:`/quora/feed/comment/addReply`,
 
-    addUser : `${profileDomain}/profile/addProfile`,
-    addCategories :`${profileDomain}/profile/addCategories`,
-    getUser: `${profileDomain}/profile/getProfile`,
+    addUser : `/quora/feed/profile/addProfile`,
+    addCategories :`/quora/feed/profile/addCategories`,
+    getUser: `/quora/profile/getProfile`,
 
   };
 
   export {
     apiUrls,
-    feedDomain,
+
     header
   }
  
