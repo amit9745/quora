@@ -96,6 +96,7 @@ import {useSearchStore} from "../store/search-store.js";
     const deactivateSearch = () => {
       router.go(-1)
       isSearchActive.value = false;
+      searchInput.value = "";
     };
   
       // const openSearchDialog = () => {

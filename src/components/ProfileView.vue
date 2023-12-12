@@ -37,7 +37,6 @@ export default defineComponent({
     const imageUrl = ref('https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw=');
     
     const FETCH_USER = async () => {
-
       const apiUrl = apiUrls.getUser;
       // console.log("apiurl in profile",apiUrl)
       

@@ -24,9 +24,9 @@ export default defineComponent({
     if(sessionStorage.getItem("userId")){
       profileStore.updateAuthStatus();
       authStatus.value = true
-      router.push("/")
+      // router.push("/")
     }else{
-      router.push("/login")
+      router.replace("/login")
     }
     // const profileStore = useProfileStore();
     // if(sessionStorage.getItem('userId')){

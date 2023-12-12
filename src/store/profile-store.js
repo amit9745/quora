@@ -15,7 +15,7 @@ export const useProfileStore = defineStore("profile", () => {
       firebaseUser.value = user;
     }
     
-    const  GET_USER_FROM_DB = async() =>{
+    const  GET_USERVIEW_FROM_DB = async() =>{
       const userId = sessionStorage.getItem("userId")
       const apiUrl = apiUrls.getUser;
       const res = await fetch(`${apiUrl}/${userId}`);
@@ -45,7 +45,7 @@ export const useProfileStore = defineStore("profile", () => {
   return{
     firebaseUser,
     ADD_USER_TO_DB,
-    GET_USER_FROM_DB,
+    GET_USERVIEW_FROM_DB,
     updateUserAfterAuth,
     profile,
     updateAuthStatus

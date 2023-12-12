@@ -24,9 +24,11 @@ import image_6 from "../assets/image_6.jpeg";
 
 import { apiUrls, header } from './apiUrls.js';
 import router from '@/router';
+import useProfileStore from '@/store/profile-store';
 
 export default {
   setup() {
+    const profileStore = useProfileStore()
     const items = ref([
       { id: 1, imageSrc: image_1, selected: false, title: "Food" },
       { id: 2, imageSrc: image_2, selected: false, title: "Music" },
@@ -64,7 +66,9 @@ export default {
         const parsedResponse = await res.json()
         // window.location.reload()
         console.log('categories added', parsedResponse)
+
         router.replace("/")
+        profileStore.updateAuthStatus(true);
 
     }
 

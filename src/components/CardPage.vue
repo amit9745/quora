@@ -146,7 +146,7 @@ export default defineComponent({
       
       answerStore.updateQuestionInfo( props.cardItem.questionId );
       answerStore.updateQuestionName( props.cardItem.question );
-      console.log('selected Question Id', props.cardItem.questionId  )
+      console.log('selected Question Id', props.cardItem.questionId )
       router.push("/questioninfopage"); 
     };
     
