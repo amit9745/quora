@@ -29,6 +29,8 @@ const header = {
     addCategories :`/quora/profile/addCategories`,
     getUser: `/quora/profile/getProfile`,
 
+    
+
   };
 
   export {

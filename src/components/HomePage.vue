@@ -8,7 +8,13 @@
     <CardPage v-for = "(item,index) in home" @upvoteClicked ="updateUpvote" :key="index" :cardItem = "item" :index="index"  class="left-div"/>
    
  </div>
- <div class="right-div"> Ads</div>
+ <!-- <div class="right-div"> Ads</div> -->
+
+ <div class="right-div">
+    <div class="img-div">
+        <img :src="ad.imageLink" alt="">        
+    </div>
+ </div>
  <!-- <div class="right">
     <div class="right-div"></div>
  </div> -->
@@ -25,6 +31,8 @@
 import CardPage from '@/components/CardPage';
 import { computed, defineComponent } from 'vue';
 import { useHomeStore } from "../store/home-store.js"
+import { useAdStore } from "../store/ads-store.js"
+
 export default defineComponent({
     components:{
         CardPage
@@ -37,11 +45,18 @@ export default defineComponent({
         const updateUpvote = (index)=>{
             home.value[index].upvoteCount++;
         }
+
+        const adStore = useAdStore();
+        adStore.FETCH_ADS_BY_CATEGORY('food');
+
+        const ad = computed(() => adStore.ad);
+
       
         // console.log(home.value)
         return{
             home,
-            updateUpvote
+            updateUpvote,
+            ad
         }
     }
     
@@ -68,7 +83,10 @@ export default defineComponent({
     height: 432px;
     margin-top: 16px;
 }
-
+.img-div{
+    width: 100px;
+    height: 200px;
+}
 @media screen and (min-width: 360px) and (max-width: 900px) {
     .right-div {
     background-color: white;
