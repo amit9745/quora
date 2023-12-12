@@ -132,7 +132,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    margin-top: 90px;
+    margin-top: 130px;
     background: #fff;
     padding: 28px;
     width: 43%;
@@ -202,5 +202,27 @@
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+
+
+
+@media screen and (min-width: 360px) and (max-width: 800px) {
+
+
+.profile-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 109px;
+    background: #fff;
+  
+    width: 91%;
+    box-shadow: 0px 0px 7px 2px;
+}
+
+}
+
   </style>
   
