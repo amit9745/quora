@@ -114,6 +114,7 @@ export default {
           })
           const res2Data = await res2.json()
           console.log("sooraj ka responsse",res2Data)
+
        console.log("sooraj ka token",res2.headers.get('Authorization'))
        sessionStorage.setItem("token",res2.headers.get('Authorization'))
        sessionStorage.setItem("userId",res2Data.uid)
