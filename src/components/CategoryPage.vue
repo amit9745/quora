@@ -1,13 +1,16 @@
 
 <template>
+    <h3 class="main">Select Category</h3>
   <div class="container">
     <div v-for="item in items" :key="item.id" :class="{ 'selected': item.selected }" class="box">
       <input type="checkbox" v-model="item.selected" class="checkbox">
       <img :src="item.imageSrc" alt="Image" class="image">
       <p class="title"> {{ item?.title }}</p>
     </div>
-    <Button @click="onNextButtonClicked">Next</Button>
+   
   </div>
+
+  <Button class="button" @click="onNextButtonClicked">Next</Button>
 </template>
   
 <script>
@@ -71,8 +74,11 @@ export default {
 </script>
   
 <style scoped>
-.container {
+.main{
   margin-top: 90px;
+}
+.container {
+  margin-top: 10px;
   margin-left: 10%;
   margin-right: 10%;
   display: flex;
@@ -114,5 +120,30 @@ export default {
 .selected {
   border-color: #3498db;
 }
+
+.button {
+    display: inline-block;
+    margin-top: 41px;
+    padding: 6px 43px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #545a58;
+    border: none;
+    border-radius: 15px;
+    box-shadow: -2px 2px #999;
+    margin-bottom: 40px;
+}
+.button:hover {background-color: #737473}
+
+.button:active {
+  background-color: #d4d4d4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 </style>
   
