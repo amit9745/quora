@@ -37,7 +37,7 @@ export default {
     postQuestion: Function,
   },
   setup(props) {
-    const selectedCategory = ref('food');
+    const selectedCategory = ref('Food');
     const questionBody = ref('');
 
     const cancel = () => {
@@ -48,7 +48,7 @@ export default {
    
 
     const reset = () => {
-      selectedCategory.value = 'food';
+      selectedCategory.value = 'Food';
       questionBody.value = '';
     };
 

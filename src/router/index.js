@@ -11,7 +11,7 @@ import SignIn from '@/components/SignIn.vue'
 import SignUp from '@/components/SignUp.vue'
 
 import AddQuestionDialog from '@/components/AddQuestionDialog.vue'
- import QuestionInfoPage from '@/components/QuestionInfoPage.vue'
+import QuestionInfoPage from '@/components/QuestionInfoPage.vue'
 
 import UserProfilePage from '@/components/UserProfilePage'
 import SearchPage from '@/components/SearchPage.vue'

@@ -1,19 +1,19 @@
 <template>
 
   <div @click="takeMeToProfile" class="top-div">
-          <div class="top-left-div">
-            <img
-              class="img"
-              src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
-              alt=""
-            />
-          </div>
-          <div class="top-right-div">
-            <!-- <h2>{{ cardItem.profileData.profileName }}</h2> -->
-            <h2>Piyush</h2>
-            <p>@beginner</p>
-          </div>
-        </div>
+    <div class="top-left-div">
+      <img
+        class="img"
+        src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
+        alt=""
+      />
+    </div>
+    <div class="top-right-div">
+      <!-- <h2>{{ cardItem.profileData.profileName }}</h2> -->
+      <h2>Piyush</h2>
+      <p>@beginner</p>
+    </div>
+  </div>
 </template>
 
      
@@ -35,6 +35,7 @@ export default defineComponent({
 
     const profile = ref(null)
     const imageUrl = ref('https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw=');
+    
     const FETCH_USER = async () => {
 
       const apiUrl = apiUrls.getUser;
@@ -54,8 +55,8 @@ export default defineComponent({
         const storageReference = storageRef(storage, profile.value.profileAvatar);
   
       // const storageReference = storageRef(storage, "/quora/follower3.jpeg");
-      imageUrl.value = await getDownloadURL(storageReference);
-      console.log(imageUrl.value)
+        imageUrl.value = await getDownloadURL(storageReference);
+        console.log(imageUrl.value)
       }
       
     };

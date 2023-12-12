@@ -1,6 +1,6 @@
 <template>
   <div class="WA-cnt">
-  <NavBar/>
+    <div v-if="authStatus"> <NavBar/></div>
   <router-view/>
 </div>
 </template>
@@ -8,8 +8,9 @@
 
 <script>
 import NavBar from '@/components/NavBar';
-import { defineComponent } from 'vue';
-// import { useProfileStore } from "./store/profile-store.js"
+import { defineComponent,ref } from 'vue';
+import { useProfileStore } from "./store/profile-store.js"
+import router from './router';
 
 
 export default defineComponent({
@@ -18,11 +19,22 @@ export default defineComponent({
     NavBar
   },
   setup(){
+    const authStatus = ref(false);
+    const profileStore = useProfileStore()
+    if(sessionStorage.getItem("userId")){
+      profileStore.updateAuthStatus();
+      authStatus.value = true
+      router.push("/")
+    }else{
+      router.push("/login")
+    }
     // const profileStore = useProfileStore();
     // if(sessionStorage.getItem('userId')){
     //   profileStore.GET_USER_FROM_DB();
     // }
-    
+    return{
+      authStatus
+    }
   }
 });
 

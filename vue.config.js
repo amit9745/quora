@@ -8,7 +8,7 @@ module.exports = defineConfig({
         changeOrigin : true
       },
       "/quora": {
-        target: "http://10.20.3.164:8765",
+        target: "http://10.20.3.163:8765",
         changeOrigin: true,
         onProxyReq: (val) => {console.log('proxy req', val)},
         

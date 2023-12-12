@@ -3,9 +3,14 @@ import { ref } from "vue";
 import { apiUrls ,header} from "@/components/apiUrls";
 
 export const useProfileStore = defineStore("profile", () => {
+    
     const profile = ref(null);
     const firebaseUser = ref(null)
+    const authstatus = ref(false);
 
+    const updateAuthStatus = (authValue)=>{
+      authstatus.value = authValue;
+    }
     const updateUserAfterAuth = (user)=>{
       firebaseUser.value = user;
     }
@@ -17,7 +22,7 @@ export const useProfileStore = defineStore("profile", () => {
     
       const jsonnew = await res.json();
       
-      console.log("profileData",jsonnew)
+      console.log("CurrentprofileData",jsonnew)
       profile.value = jsonnew;
     }
   const ADD_USER_TO_DB = async (profileData) => {
@@ -42,7 +47,8 @@ export const useProfileStore = defineStore("profile", () => {
     ADD_USER_TO_DB,
     GET_USER_FROM_DB,
     updateUserAfterAuth,
-    profile
+    profile,
+    updateAuthStatus
   }
 
 });
