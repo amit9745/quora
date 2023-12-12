@@ -6,7 +6,7 @@
       <!-- {{ questions }} -->
       <div>
         <div v-for="(question, index) in questions" :key="index" class="question">
-          <p class="para">{{ question.question }}</p>
+          <p  class="para">{{ question.question }}</p>
           <button @click="openDialog(index,question.questionId)" class="submit-btn">Answer</button>
         </div>
       </div>
@@ -107,6 +107,14 @@ const qs = questionStore();
         const parsedResponse = await res.json()
         console.log('Answer posted', parsedResponse)
       }
+
+    //   const routeMeToQuestionInfoPage = () => {
+      
+    //   answerStore.updateQuestionInfo( question.questionId );
+    //   answerStore.updateQuestionName( question.question );
+    //   console.log('selected Question Id', question.questionId )
+    //   router.push("/questioninfopage"); 
+    // };
   
  
     return {

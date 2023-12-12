@@ -362,5 +362,17 @@ import {useSearchStore} from "../store/search-store.js";
   color: #fff;
   cursor: pointer;
 }
+.add-question-button{
+  padding: 8.8px;
+  margin-top: 4px;
+  border-radius: 9px;
+  border: none;
+  background-color: #292d32;
+  color: #fff;
+  cursor: pointer;
+}
+.sub-menu p {
+    margin: 4px 0.8rem;
+}
 }
 </style>

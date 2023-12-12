@@ -6,7 +6,7 @@
       <img :src="follower.imgUrl" class="profile-img">
       <div>
       <p class="name">{{ follower.name }}</p>
-      <p class="name2">@{{ follower.name }}</p>
+      <p class="name2">@beginner</p>
     </div>
     </div>
       <div class="follower-details">
