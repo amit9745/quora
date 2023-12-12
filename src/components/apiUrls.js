@@ -1,6 +1,6 @@
 
 
-const feedDomain = "http://10.20.3.163:8091/quora"
+const feedDomain = "http://10.20.3.163:8765/quora/feed/"
 const profileDomain =  "http://10.20.3.163:8088/quora"
 
 const header = {

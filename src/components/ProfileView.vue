@@ -10,7 +10,7 @@
           <div class="top-right-div">
             <!-- <h2>{{ cardItem.profileData.profileName }}</h2> -->
             <h2>Piyush</h2>
-            <p>Answered 3 days ago</p>
+            <p>@beginner</p>
           </div>
         </div>
      
@@ -66,11 +66,14 @@ import { defineComponent, onBeforeMount ,ref} from 'vue';
   height: 60px;
   width: 60px;
   border-radius: 3px;
+
 }
 .top-left-div img {
   width: 100%;
   height: 100%;
-  border-radius: 20%;
+  border-radius: 50%;
+  object-fit:cover;
+  
 }
 .top-right-div {
   margin-left: 20px;

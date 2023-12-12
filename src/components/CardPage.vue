@@ -6,7 +6,7 @@
     <div class="middle-div">
       <div class="middle-top-div">
         <h3 @click="routeMeToQuestionInfoPage">
-          {{ cardItem.question }}
+          {{ cardItem.question }} 
         </h3>
       </div>
       <div class="middle-bottom-div">
@@ -182,6 +182,7 @@ export default defineComponent({
 .middle-div {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 .middle-top-div h3 {
   text-align: justify;
@@ -216,7 +217,7 @@ export default defineComponent({
   width: 30%;
 }
 .up {
-  height: 30px;
+  height: 20px;
   width: 30px;
 }
 
@@ -239,6 +240,7 @@ export default defineComponent({
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  margin-top: 1px;
 }
 .dislike-count {
   margin-left: 10px;
@@ -258,6 +260,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   border-radius: 50px;
+  object-fit:cover;
 }
 .search-input {
   width: 73%;
