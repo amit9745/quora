@@ -1,13 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { apiUrls } from "@/components/apiUrls";
+import { apiUrls} from "@/components/apiUrls";
 
 export const useHomeStore = defineStore("home", () => {
     const home = ref(null);
 
 
   const FETCH_HOME = async () => {
-
 
     const apiUrl = apiUrls.getHome;
     // console.log(apiUrl)
@@ -17,8 +16,15 @@ export const useHomeStore = defineStore("home", () => {
     queryParams.set("userId","dsfsdfd");
     queryParams.set("page",0);
     queryParams.set("size",4);
+    queryParams.set("CheckAuth", true)
 
-    const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
+    const res = await fetch(`${apiUrl}?${queryParams.toString()}`,{
+      method: "GET", 
+      headers: { 
+        "Authorization": sessionStorage.getItem('token'), 
+        "Content-Type": "application/json", 
+      },
+    });
     
     const jsonnew = await res.json();
     home.value = jsonnew.resultData;
