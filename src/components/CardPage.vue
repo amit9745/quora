@@ -191,8 +191,8 @@ export default defineComponent({
         ),
         headers: header
     }
+    
     const queryParams = new URLSearchParams();
-
     queryParams.set("userId",sessionStorage.getItem("userId"));
     queryParams.set("answerId",props.cardItem.answerId)
     const apiUrl = apiUrls.updateUpvotes

@@ -24,7 +24,10 @@ const header = {
 
     fetchCommentsUrl: `/quora/feed/comment/getComments`,
     addComment:`/quora/feed/comment/addComment`,
-    
+
+    getQuestionsByUser : `/quora/feed/answer/getAllQuestions`,
+    getAnswersByUser: `/quora/feed/answer/getAllAnswers`,
+
     fetchReplies :`/quora/feed/comment/getReplies`,
     addReply:`/quora/feed/comment/addReply`,
 

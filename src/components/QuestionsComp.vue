@@ -1,11 +1,10 @@
 <template>
     <div class="questions-container">
-      
-        <div v-for="question in questions" :key="question.id" class="question-header">
-
+      <!-- {{ questions1 }} -->
+        <div v-for="question in questions1" :key="question.id" class="question-header">
           <div class="question">
         <p class="question-content">
-          {{question.content}}
+          {{question.question}}
         </p>
 
       </div>
@@ -17,9 +16,10 @@
   
   <script>
  import {ref} from 'vue';
-  
+  import { apiUrls } from './apiUrls';
   export default {
     setup() {
+      const questions1 = ref(null)
       const questions = ref([
         {
           content: 'What is the most expensive thing?',
@@ -34,9 +34,20 @@
           content: 'What is the best way to learn Vue.js for beginners?',
         },
       ]);
-  
+      const FETCH_QUESTIONS_BY_USER = async () => {
+        const apiUrl = apiUrls.getQuestionsByUser;
+        // const apiUrl = "http://10.20.3.163:8091/quora/question/getQuestionsByCategory";
+        const queryParams = new URLSearchParams();
+        queryParams.set("userId", sessionStorage.getItem("userId"));
+        const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
+        const jsonnew = await res.json();
+        questions1.value = jsonnew;
+        console.log(questions1.value);
+      }; 
+      FETCH_QUESTIONS_BY_USER()
       return {
         questions,
+        questions1
       };
     },
   
