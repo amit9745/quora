@@ -350,6 +350,7 @@ const downvoteAnswer = async () => {
 
 .comment-div {
   display: flex;
+  margin-bottom: -20px;
 
   margin-top: 15px;
 }
@@ -366,6 +367,7 @@ const downvoteAnswer = async () => {
 }
 .search-input {
   width: 73%;
+  height: 53px;
   border-radius: 1rem;
   border: none;
   padding: 1rem;
@@ -436,6 +438,8 @@ const downvoteAnswer = async () => {
     color: #fff;
     cursor: pointer;
     padding: 10px 1px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 

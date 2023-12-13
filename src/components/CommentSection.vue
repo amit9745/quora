@@ -144,6 +144,7 @@ components: {
   margin-left: 20px;
   text-align: left;
   font-size: small;
+  margin-top: 10px;
 }
 .top-right-div h2 {
   text-align: justify;
@@ -155,8 +156,9 @@ components: {
 }
 .para {
   text-align: justify;
-  margin-left: 60px;
   font-size: small;
+  margin-top: -30px;
+  margin-left: 80px;
 }
 .reply {
   display: flex;
@@ -180,13 +182,14 @@ components: {
     background-color: #292d32;
     color: #fff;
     cursor: pointer;
+    margin-left: 80px;
 }
 .textarea {
     border: none;
     width: 86%;
     border-radius: 12px;
     margin-right: 11px;
-    margin-left: 55px;
+    margin-left: 75px;
     height: 30px;
     padding: 6px;
     background-color: #f3f3f3;
@@ -218,6 +221,7 @@ components: {
     margin-left:55px ;
     margin-top: 5px;
     padding: 2px;
+    margin-left: 80px;
     
 }
 .textarea{
@@ -225,7 +229,7 @@ components: {
     width: 50%;
     border-radius: 12px;
     margin-right: 6px;
-    margin-left: 55px;
+    margin-left: 80px;
     height: 28px;
     padding: 6px;
     background-color: #f3f3f3;
@@ -234,8 +238,8 @@ components: {
     font-size: small;
 }
 .button {
-    width: 24%;
-    border-radius: 0;
+    width: 18%;
+    border-radius: 8px;
     font-size: x-small;
 }
 }
