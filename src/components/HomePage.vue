@@ -1,25 +1,26 @@
 <template>
- <main class="main">
+    <main class="main">
 
- <!-- {{ home }} -->
+        <!-- {{ home }} -->
 
 
- <div class="left">
-    <CardPage v-for = "(item,index) in home" @upvoteClicked ="updateUpvote" :key="index" :cardItem = "item" :index="index"  class="left-div"/>
-   
- </div>
- <!-- <div class="right-div"> Ads</div> -->
+        <div class="left">
+            <CardPage v-for="(item, index) in home" @upvoteClicked="updateUpvote" :key="index" :cardItem="item"
+                :index="index" class="left-div" />
 
- <div class="right-div">
-    <div class="img-div">
-        <img :src="ad.imageLink" alt="">        
-    </div>
- </div>
- <!-- <div class="right">
+        </div>
+        <!-- <div class="right-div"> Ads</div> -->
+
+        <div class="right-div">
+            <div class="img-div">
+                <img :src="ad.imageLink" alt="">
+            </div>
+        </div>
+        <!-- <div class="right">
     <div class="right-div"></div>
  </div> -->
 
-</main>
+    </main>
 </template>
 
 
@@ -34,15 +35,15 @@ import { useHomeStore } from "../store/home-store.js"
 import { useAdStore } from "../store/ads-store.js"
 
 export default defineComponent({
-    components:{
+    components: {
         CardPage
     },
-    setup(){
+    setup() {
         const homeStore = useHomeStore();
         homeStore.FETCH_HOME();
-        
+
         const home = computed(() => homeStore.home);
-        const updateUpvote = (index)=>{
+        const updateUpvote = (index) => {
             home.value[index].upvoteCount++;
         }
 
@@ -51,31 +52,33 @@ export default defineComponent({
 
         const ad = computed(() => adStore.ad);
 
-      
+
         // console.log(home.value)
-        return{
+        return {
             home,
             updateUpvote,
             ad
         }
     }
-    
+
 
 })
 </script>
+
 <style scoped>
- 
-.main{
+.main {
     margin-top: 80px;
     display: flex;
 }
-.left-div{
-    width:90%;
+
+.left-div {
+    width: 90%;
     background-color: white;
     padding: 2%;
-    
+
 }
-.right-div{
+
+.right-div {
     width: 160%;
     background-color: white;
     margin-right: 55px;
@@ -83,36 +86,38 @@ export default defineComponent({
     margin-top: 16px;
 }
 
- 
-.img-div img{
-   
+
+.img-div img {
+
     height: 432px;
     width: 100%;
+}
+    .img-div {
+        width: 100px;
+        height: 200px;
 
-.img-div{
-    width: 100px;
-    height: 200px;
+    }
 
-}
-@media screen and (min-width: 360px) and (max-width: 900px) {
-    .right-div {
-    background-color: white;
-    height: 419px;
-    margin-top: 10px;
-    margin-left: -99px;
-    margin-right: 12px;
-}
-.container {
-    margin-top: 10px;
-    margin-left: 9px;
-    margin-right: 15px;
-}
-.left-div {
-    width: 71%;
-    background-color: white;
-    padding: 2%;
-    min-width: 246px;
-}
-}
-</style>
+    @media screen and (min-width: 360px) and (max-width: 900px) {
+        .right-div {
+            background-color: white;
+            height: 419px;
+            margin-top: 10px;
+            margin-left: -99px;
+            margin-right: 12px;
+        }
+
+        .container {
+            margin-top: 10px;
+            margin-left: 9px;
+            margin-right: 15px;
+        }
+
+        .left-div {
+            width: 71%;
+            background-color: white;
+            padding: 2%;
+            min-width: 246px;
+        }
+    }</style>
 
