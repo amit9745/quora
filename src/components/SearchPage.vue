@@ -1,5 +1,6 @@
 <template>
     <div>
+      
       <!-- Search bar (commented out) -->
       <!-- <div class="search-bar" :class="{ active: searchBarActive }" @click="toggleSearchBar">
         <input type="text" placeholder="Search..." class="search-input" v-model="searchText" @input="onSearch" />
@@ -10,11 +11,11 @@
       <div class="search-results" v-if="searchValues?.length > 0">
         <div v-for="(searchValue, index) in searchValues" :key="index" class="result-item">
             <div v-if="searchValue?.profileId !== null" > 
-                <ProfileView></ProfileView>
+                <ProfileView :userId="searchValue?.profileId" ></ProfileView>
+                <!-- {{ searchValue }} -->
             </div>
             <div v-if="searchValue?.questionId !=null" @click="routeToQn(questionId,searchValue.searchTerm)">{{ searchValue.searchTerm }}</div>
             <div v-if="searchValue?.businessProfileId !==null"><ProfileView /> {{  searchValue.searchTerm  }}</div>
-          
         </div>
       </div>
       <div v-else>

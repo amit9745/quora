@@ -16,7 +16,7 @@ import router from '@/router';
 import { defineComponent, ref } from 'vue';
 import { apiUrls } from './apiUrls';
 import ProfileIcon from './ProfileIcon.vue';
-
+import useProfileStore from '@/store/profile-store';
 export default defineComponent(
   {
     components: {
@@ -32,32 +32,28 @@ export default defineComponent(
 
     setup(props) {
       
-     
+      const profileStore = useProfileStore()
       const profile = ref(null)
       // watch(()=>props.userId,(newPropsValue,)=>{
       //   FETCH_USER(newPropsValue) 
       //       })
       const FETCH_USER = async () => {
         const apiUrl = apiUrls.getUser;
-        // console.log("apiurl in profile",apiUrl,uId)
+
 
         const res = await fetch(`${apiUrl}/${props.userId}`);
-        // const res = await fetch(`${apiUrl}/MrfPnsKlpJQqjpOtLmJ5R2r23oJ3}`);
 
         const jsonnew = await res.json();
-
-        // console.log("profileData", jsonnew)
         profile.value = jsonnew;
 
       };
-  //     watch(() => props.userId, (newPropsValue) => {
-  //   FETCH_USER(newPropsValue);
-  // });
-      // if(props.userId){
+
         FETCH_USER(props.userId)
-      // }
+
 
       const takeMeToProfile = () => {
+
+        profileStore.updateCurrentProfileId(profile.value)
         router.push("/userprofile")
       }
 

@@ -1,16 +1,19 @@
 <template>
+    
     <div class="profile-container">
-        <img src="../assets/profile-img.jpeg" class="profile-img">
+     <ProfileIcon :avatar="userProfile?.profileAvatar"/>
+        <!-- <img src="../assets/profile-img.jpeg" class="profile-img"> -->
         <div class="text-container">
             <div class="user-info">
-                <p class="user-name">Amit Kumar</p>
+                <p class="user-name">{{ userProfile?.profileName }}</p>
                 <p class="user-name2">@beginner</p>
                 <p class="followers-following">
                     <span class="span"> 10k Followers     </span>
                     <span> 5 Following</span>
                 </p>
             </div>
-
+            <!-- {{ userProfile }} -->
+            <!-- {{ userProfile?.profileName }} -->
             <button class="edit" >Follow</button>
 
         </div>
@@ -42,38 +45,72 @@
 </template>
   
 <script>
-    import { ref } from 'vue';
+    import { computed, ref ,} from 'vue';
     import { defineComponent } from 'vue';
     import FollowersComp from './FollowersComp.vue';
     import FollowingComp from './FollowingComp.vue';
     import QuestionsComp from './QuestionsComp.vue';
     import AnswersComp from './AnswersComp.vue';
-import { useRouter } from 'vue-router';
+    import { useRouter } from 'vue-router';
+    import useProfileStore from '@/store/profile-store';
+    import ProfileIcon from './ProfileIcon.vue';
+    // import { apiUrls } from './apiUrls';
 
   export default defineComponent({
     components: {
     FollowersComp,
     FollowingComp,
     QuestionsComp,
-    AnswersComp
+    AnswersComp,
+    ProfileIcon
 
   },
  
     setup() {
+        const profileStore = useProfileStore()
         const activeTab = ref('followers');
         const route = useRouter()
         const changeTab = (tab) => {
             activeTab.value = tab;
         };
 
+        
+        // const userProfile = ref(null)
+        const userProfile = computed(()=>profileStore.currentProfile)
+
+    //     const FETCH_USER = async () => {
+    //         console.log("receibaccdscs", userProfileId.value)
+    //     const apiUrl = apiUrls.getUser;
+
+
+    //     const res = await fetch(`${apiUrl}/${userProfileId.value}`);
+
+    //     const jsonnew = await res.json();
+    //     userProfile.value = jsonnew;
+
+    //     console.log("userProfile",userProfile)
+
+    //   };
+
+    // watch(userProfileId, async (newProfileId, oldProfileId) => {
+    //   console.log('userProfileId changed:', newProfileId, oldProfileId);
+    //   // Call FETCH_USER when userProfileId changes
+    //   await FETCH_USER();
+    // });
+        
         const goToSignIn = () => {
             route.push('/login')
         }
         return {
             activeTab,
             changeTab,
-            goToSignIn
+            goToSignIn,
+            // FETCH_USER,
+            userProfile,
+
         }
+
+        
     }
   });
 
