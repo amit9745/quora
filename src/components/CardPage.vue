@@ -7,6 +7,7 @@
         <h3 @click="routeMeToQuestionInfoPage">
           {{ cardItem.question }} 
         </h3>
+        <h5 class="topic"> @{{ cardItem.topicName }}</h5>
       </div>
       <div class="middle-bottom-div">
         <p>
@@ -288,9 +289,14 @@ const downvoteAnswer = async () => {
 }
 .middle-top-div h3 {
   text-align: justify;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   font-size: larger;
   cursor: pointer;
+}
+.topic{
+  text-align: left;
+  margin-bottom: 10px;
+  color: #ee8484;
 }
 .middle-bottom-div p {
   text-align: justify;

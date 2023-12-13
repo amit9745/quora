@@ -12,7 +12,6 @@
                     <span> {{ profile?.following?.length }} Following</span>
                 </p>
             </div>
-
             <button class="edit" @click="goToSignIn">Logout</button>
 
         </div>
@@ -29,11 +28,11 @@
     </div>
 
     <div v-if="activeTab === 'followers'">
-        <FollowersComp />
+        <FollowersComp :followers2="profile?.followers"/>
     </div>
 
     <div v-if="activeTab === 'following'">
-        <FollowingComp />
+        <FollowingComp :following="profile?.following"/>
     </div>
 
     <div v-if="activeTab === 'questions'">

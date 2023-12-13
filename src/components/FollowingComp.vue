@@ -1,17 +1,18 @@
 <template>
   <div class="followers-container">
-    <div v-for="follower in followers" :key="follower.id" class="follower-item">
+    <div v-for="follower in following" :key="follower.id" class="follower-item">
       
-      <div class="profile">
+      <!-- <div class="profile">
       <img :src="follower.imgUrl" class="profile-img">
       <div>
       <p class="name">{{ follower.name }}</p>
       <p class="name2">@beginner</p>
     </div>
-    </div>
+    </div> -->
+    <ProfileView :userId = "follower"></ProfileView>
       <div class="follower-details">
         
-       <FollowButton :userId="jbjdu"  />
+       <!-- <FollowButton :userId="jbjdu"  /> -->
       </div>
      
     </div>
@@ -22,10 +23,17 @@
 <script>
 import { ref } from 'vue';
 import follower1 from "../assets/follower1.jpeg";
-import FollowButton from '@/components/FollowButton';
+import ProfileView from './ProfileView.vue';
+// import FollowButton from '@/components/FollowButton';
 export default {
   components:{
-    FollowButton
+    ProfileView
+},
+    props:{
+      following:{
+        type:Array,
+        required:false
+      }
     },
   setup() {
     // /Users/amitkumar/Desktop/quora/src/assets/follower1.jpeg
