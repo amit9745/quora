@@ -31,7 +31,9 @@ const header = {
     addCategories :`/quora/profile/addCategories`,
     getUser: `/quora/profile/getProfile`,
 
+
     getMyProfile :`/quora/profile/getProfileView`
+
 
   };
 
