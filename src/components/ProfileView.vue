@@ -96,7 +96,8 @@ export default defineComponent(
 }
 
 .top-right-div {
-  margin-left: 20px;
+  margin-left: 18px;
+    margin-top: -37px;
 }
 
 .top-right-div h2 {

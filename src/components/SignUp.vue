@@ -62,7 +62,7 @@ export default {
     const emailError = ref('')
 
     const validatePassword = () => {
-        if(password.value.length<=8) {
+        if(password.value.length<9) {
             passwordError.value = 'Password must be at least 8 characters long.';
             console.log(passwordError)
         }
