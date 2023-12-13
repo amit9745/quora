@@ -210,7 +210,7 @@ export default defineComponent({
 
 
 const downvoteAnswer = async () => {
-  if(!votes.value.upvotesId.includes(sessionStorage.getItem("userId"))){
+  if(!votes.value.downvotesId.includes(sessionStorage.getItem("userId"))){
       const head = {
         // mode: 'no-cors',
         method: 'POST',
@@ -225,7 +225,7 @@ const downvoteAnswer = async () => {
 
     queryParams.set("userId",sessionStorage.getItem("userId"));
     queryParams.set("answerId",props.cardItem.answerId)
-    const apiUrl = apiUrls.downvoteAnswer
+    const apiUrl = apiUrls.updateDownvotes
 
     const res = await fetch(`${apiUrl}?${queryParams.toString()}`, head)
     const parsedResponse = await res.json()

@@ -17,6 +17,7 @@ const header = {
 
     updateUpvotes : `/quora/feed/answer/updateUpvotes`,
     updateDownvotes : `/quora/feed/answer/updateDownvotes`,
+    
     getAllAnswersByQuestionId: `/quora/feed/answer/getAnswers`,
 
     getVotes :`/quora/feed/answer/getVotes`,

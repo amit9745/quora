@@ -8,8 +8,8 @@
                 <p class="user-name">{{ profile?.profileName }}</p>
                 <p class="user-name2">@beginner</p>
                 <p class="followers-following">
-                    <span class="span"> {{ profile?.followers.length }} Followers </span>
-                    <span> {{ profile?.following.length }} Following</span>
+                    <span class="span"> {{ profile?.followers?.length }} Followers </span>
+                    <span> {{ profile?.following?.length }} Following</span>
                 </p>
             </div>
 

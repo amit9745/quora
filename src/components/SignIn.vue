@@ -90,7 +90,7 @@ export default {
        const user = res.user;
         profileStore.updateUserAfterAuth(user);
        console.log(user)
-
+       
        
        //sooraj ka login
 
@@ -112,15 +112,13 @@ export default {
        sessionStorage.setItem("token",res2.headers.get('Authorization'))
        sessionStorage.setItem("userId",res2Data.uid)
 
-
-      //comment this back
-        // sessionStorage.setItem("token",user.stsTokenManager.accessToken);
-        // sessionStorage.setItem("userId",user.uid);
+       
 
         console.log('Successfully signed up!');
         profileStore.updateAuthStatus(true)
 
         router.replace('/home')
+        profileStore.GET_USERVIEW_FROM_DB()
       }
       else {
         console.log("Error validating email and password")

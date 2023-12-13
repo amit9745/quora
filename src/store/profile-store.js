@@ -5,9 +5,15 @@ import { apiUrls ,header} from "@/components/apiUrls";
 export const useProfileStore = defineStore("profile", () => {
     
     const profile = ref(null);
+
+    const currentProfile = ref(null);
     const firebaseUser = ref(null)
     const authstatus = ref(false);
 
+    const updateCurrentProfileId = (profile)=>{
+      console.log("received",profile)
+      currentProfile.value = profile;
+    }
     const updateAuthStatus = (authValue)=>{
       authstatus.value = authValue;
     }
@@ -49,7 +55,9 @@ export const useProfileStore = defineStore("profile", () => {
     updateUserAfterAuth,
     profile,
     updateAuthStatus,
-    authstatus
+    authstatus,
+    currentProfile,
+    updateCurrentProfileId
   }
 
 });
