@@ -1,6 +1,7 @@
 <template>
   <div class="reply-section">
-    <div class="top-div">
+    <ProfileView :userId = "reply.userId"></ProfileView>
+    <!-- <div class="top-div">
       <div class="top-left-div">
         <img
           class="img"
@@ -12,7 +13,7 @@
         <h4>Amit kumar</h4>
         <p>@beginner</p>
       </div>
-    </div>
+    </div> -->
     <p class="para">
       {{ reply.message }}
     </p>
@@ -21,13 +22,16 @@
   
   <script>
 import { defineComponent, ref } from "vue";
-
+import ProfileView from "./ProfileView.vue";
 export default defineComponent({
   props: {
     reply: {
       type: Object,
       required: true,
     },
+  },
+  components:{
+    ProfileView
   },
   setup() {
     const message = ref("");
