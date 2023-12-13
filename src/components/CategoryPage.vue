@@ -42,7 +42,7 @@ export default {
     const onNextButtonClicked = async ()=>{
       const categories = [];
       items.value.forEach(element => {
-        if(element.selected){
+        if(element.selected===true){
           categories.push(element.title)
         }
         

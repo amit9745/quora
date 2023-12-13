@@ -13,7 +13,7 @@ export const useHomeStore = defineStore("home", () => {
 
     const queryParams = new URLSearchParams();
     // queryParams.set("authorized",false)
-    queryParams.set("userId","dsfsdfd");
+    queryParams.set("userId",sessionStorage.getItem("userId"));
     queryParams.set("page",0);
     queryParams.set("size",50);
     queryParams.set("authorized", true)

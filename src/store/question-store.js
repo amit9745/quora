@@ -21,7 +21,7 @@ export const question = defineStore("question", () => {
     const apiUrl = apiUrls.getQuestions;
     // const apiUrl = "http://10.20.3.163:8091/quora/question/getQuestionsByCategory";
     const queryParams = new URLSearchParams();
-    queryParams.set("userId","uid14");
+    queryParams.set("userId",sessionStorage.getItem("userId"));
     const res = await fetch(`${apiUrl}?${queryParams.toString()}`);
     const jsonnew = await res.json();
     questions.value = jsonnew.resultData;
