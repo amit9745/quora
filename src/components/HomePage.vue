@@ -48,9 +48,8 @@ export default defineComponent({
 
 })
 </script>
-
 <style scoped>
-
+ 
 .main{
     margin-top: 80px;
     display: flex;
@@ -64,18 +63,23 @@ export default defineComponent({
 .right-div{
     width: 160%;
     background-color: white;
-    margin-right: 16px;
+    margin-right: 55px;
     height: 432px;
     margin-top: 16px;
 }
-
+ 
+.img-div img{
+   
+    height: 432px;
+    width: 100%;
+}
 @media screen and (min-width: 360px) and (max-width: 900px) {
     .right-div {
     background-color: white;
     height: 419px;
     margin-top: 10px;
-    margin-left: -85px;
-    min-width: 95px;
+    margin-left: -99px;
+    margin-right: 12px;
 }
 .container {
     margin-top: 10px;

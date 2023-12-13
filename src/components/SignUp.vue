@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <h1>Sign Up</h1>
+    <h1></h1>
     <form @submit.prevent = "signUp">
       <div class="sub-container">
         <label for="email"><b>Name</b></label>
@@ -150,11 +150,11 @@ export default {
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
-
+ 
 * {
   box-sizing: border-box
 }
-
+ 
 input {
   width: 100%;
   padding: 15px;
@@ -163,31 +163,32 @@ input {
   border: 1px solid #333;
   background: #f1f1f1;
 }
-
+ 
 input[type=text]:focus,
 input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
-
+ 
 .sub-container {
-  margin: 450px;
-  margin-top: 80px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 50px;
-  margin-bottom: 0px;
-  border-radius: 4%;
-  background-color: rgb(252, 252, 251);
-  /* background-color: #898888eb; */
+  margin-left: 30%;
+    margin-right: 35%;
+    margin-top: 9%;
+    box-shadow: 0px -1px 5px 5px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    margin-bottom: 0px;
+    border-radius: 4%;
+    background-color: rgb(252, 252, 251);
+    min-width: 560px;
+    max-width: 500px;
 }
-
+ 
 label {
   float: left;
   color: #ddd;
   color: black;
 }
-
+ 
 button {
   background-color: #333;
   color: white;
@@ -198,32 +199,36 @@ button {
   width: 100%;
   opacity: 0.9;
 }
-
+ 
 button:hover {
   opacity: 1;
 }
-
+ 
 .container {
   padding: 16px;
 }
-
+ 
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
-
+ 
 @media screen and (max-width: 768px) {
   .sub-container {
-    margin: 20px;
+    margin-top: 25%;
+   margin-left: 5%;
+   margin-right: 5%;
     padding: 15px;
+    max-width: fit-content;
+    min-width: fit-content;
   }
-
+ 
   button {
     width: 100%;
   }
 }
-
+ 
 .sign-in-container {
   max-width: 400px;
   margin: auto;
@@ -232,12 +237,12 @@ button:hover {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+ 
 .social-login>button {
   background-color: rgb(252, 252, 251);
   width: 33%;
 }
-
+ 
 .connect {
   margin-top: 15px;
 }
@@ -245,6 +250,5 @@ button:hover {
   cursor: pointer;
   color: rgb(8, 0, 255);
 }
-
-</style> 
-
+ 
+</style>
