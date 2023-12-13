@@ -27,6 +27,7 @@ export default defineComponent({
     if(sessionStorage.getItem("userId")){
       profileStore.updateAuthStatus(true);
       router.replace("/home")
+      profileStore.GET_USERVIEW_FROM_DB()
     }else{
       router.replace("/login")
     }

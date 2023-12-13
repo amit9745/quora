@@ -38,13 +38,14 @@
 
     <div v-if="isCommenting">
       <div class="comment-div">
-        <div class="img-div">
+        <ProfileIcon :avatar  = "avatar"/>
+        <!-- <div class="img-div">
           <img
             class="img"
             src="https://media.istockphoto.com/id/1476170969/photo/portrait-of-young-man-ready-for-job-business-concept.webp?b=1&s=170667a&w=0&k=20&c=FycdXoKn5StpYCKJ7PdkyJo9G5wfNgmSLBWk3dI35Zw="
             alt=""
           />
-        </div>
+        </div> -->
 
         <input
           type="text"
@@ -80,6 +81,8 @@ import router from "../router/index.js";
 import ProfileView from "./ProfileView.vue";
 import { useAnswerStore } from "../store/answer-store"
 import { header,apiUrls } from "./apiUrls";
+import ProfileIcon from "./ProfileIcon.vue";
+import useProfileStore from "@/store/profile-store";
 
 
 
@@ -87,6 +90,7 @@ export default defineComponent({
   components: {
     CommentSection,
     ProfileView,
+    ProfileIcon
 },
   props: {
     cardItem: {
@@ -101,10 +105,12 @@ export default defineComponent({
   emits: ["upvoteClicked"],
 
   setup(props, context) {
+    
+    const profilStore = useProfileStore()
     const answerStore = useAnswerStore();
     const comments = ref([]);
     const votes = ref(null)
-
+    const avatar = computed(()=>profilStore.profile?.profileAvatar)
     const commentsLength = computed(()=>props.cardItem?.comments?.length)
    
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
@@ -159,7 +165,7 @@ export default defineComponent({
                 answerId:props.cardItem.answerId,
                 commentTypes : "default",
                 content: comment.value,
-                userId:"dasf"
+                userId:sessionStorage.getItem("userId")
             }),
             headers: header
         }
@@ -204,25 +210,33 @@ export default defineComponent({
 
 
 const downvoteAnswer = async () => {
-    
-    const head = {
+  if(!votes.value.upvotesId.includes(sessionStorage.getItem("userId"))){
+      const head = {
         // mode: 'no-cors',
         method: 'POST',
-        body: JSON.stringify({
-            answerId:props.cardItem.answerId,
-            commentTypes : "default",
-            content: comment.value,
-            userId:"dasf"
-        }),
+        body: JSON.stringify(
+          {
+            
+          }
+        ),
         headers: header
     }
-    const apiUrl = apiUrls.addComment
-    const res = await fetch(apiUrl, head)
+    const queryParams = new URLSearchParams();
+
+    queryParams.set("userId",sessionStorage.getItem("userId"));
+    queryParams.set("answerId",props.cardItem.answerId)
+    const apiUrl = apiUrls.downvoteAnswer
+
+    const res = await fetch(`${apiUrl}?${queryParams.toString()}`, head)
     const parsedResponse = await res.json()
     // window.location.reload()
-    console.log('comment added', parsedResponse)
-    comment.value='';
-    await FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
+    console.log('downvote added', parsedResponse)
+
+    await FETCH_VOTES_BY_ANSWERID(props.cardItem.answerId)
+    }else{
+      alert("you have already downvoted")
+    }
+  
 }
 
 
@@ -251,7 +265,8 @@ const downvoteAnswer = async () => {
       votes,
       commentsLength,
       upvoteAnswer,
-      downvoteAnswer
+      downvoteAnswer,
+      avatar
       // selectedQuestionId
       //   onUpvoteClicked
     };

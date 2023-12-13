@@ -1,6 +1,8 @@
 <template>
   <div class="section">
-    <div class="top-div">
+    <!-- {{ comment }} -->
+   <ProfileView :userId = "comment.userId"></ProfileView>
+    <!-- <div class="top-div">
       <div class="top-left-div">
         <img
           class="img"
@@ -12,7 +14,7 @@
         <h4>Amit kumar</h4>
         <p>@beginner</p>
       </div>
-    </div>
+    </div> -->
     <p class="para">
      {{ comment.content }}
       
@@ -43,10 +45,12 @@
 import { defineComponent, ref } from "vue";
 import { apiUrls } from "./apiUrls";
 import ReplySection from "./ReplySection.vue";
+import ProfileView from "./ProfileView.vue";
 export default defineComponent({
 components: {
     ReplySection,
-  },
+    ProfileView
+},
   props:{
     comment:{
         type:Object,
@@ -84,7 +88,7 @@ components: {
         body: JSON.stringify({
             commentId:props.comment.commentId,
             message: reply.value,
-            userId:"dasf"
+            userId:sessionStorage.getItem("userId")
         }),
         headers: {
             'Content-Type': 'application/json',
