@@ -41,7 +41,7 @@
   import { computed, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import {useProfileStore} from "../store/profile-store.js"
-  import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
+  import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 
   export default {
     setup() {
@@ -77,11 +77,13 @@
       const uploadFile = async (selectedFile) => {
       try {
         const storage = getStorage();
-        const storageReference = storageRef(storage, 'quora/' + selectedFile.name);
-        await uploadBytes(storageReference, selectedFile);
+        const fileRef = storageRef(storage,'quora/'+selectedFile.name);
+
+        await uploadBytes(fileRef, selectedFile);
         
-        console.log('File uploaded successfully!', storageReference.fullPath);
-        avatar.value = storageReference.fullPath
+        // console.log('File uploade d successfully!', storageReference.fullPath);
+        avatar.value = await getDownloadURL(fileRef)
+        console.log('File uploaded successfully!',avatar.value );
       } catch (error) {
         console.error('Error uploading file:', error.message);
       }

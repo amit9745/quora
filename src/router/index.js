@@ -18,7 +18,7 @@ import SearchPage from '@/components/SearchPage.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomePage
   },

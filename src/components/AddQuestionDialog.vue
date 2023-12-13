@@ -63,7 +63,7 @@ export default {
             question:questionBody.value,
             status : "default",
             topicName: selectedCategory.value,
-            userId:"dasf"
+            userId:sessionStorage.getItem("userId")
         }),
         headers: header
     }

@@ -97,27 +97,25 @@ export default {
 
        
        //sooraj ka login
+       const authToken = `Bearer ${user.stsTokenManager.accessToken}`;
+       const apiUrl = "http://10.20.3.164:8765/user-details"; 
 
-       //uncomment later
-      //  const authToken = `Bearer ${user.stsTokenManager.accessToken}`;
-      //  const apiUrl = "http://10.20.3.164:8765/user-details"; 
+          const res2   = await fetch(apiUrl, { 
+            method: "GET", 
+            headers: { 
+              "Authorization": authToken, 
+              "Content-Type": "application/json", 
+            }, 
+          })
+          const res2Data = await res2.json()
+          console.log("sooraj ka responsse",res2Data)
 
-      //     const res2   = await fetch(apiUrl, { 
-      //       method: "GET", 
-      //       headers: { 
-      //         "Authorization": authToken, 
-      //         "Content-Type": "application/json", 
-      //       }, 
-      //     })
-      //     const res2Data = await res2.json()
-      //     console.log("sooraj ka responsse",res2Data)
+       console.log("sooraj ka token",res2.headers.get('Authorization'))
+       sessionStorage.setItem("token",res2.headers.get('Authorization'))
+       sessionStorage.setItem("userId",res2Data.uid)
 
-      //  console.log("sooraj ka token",res2.headers.get('Authorization'))
-      //  sessionStorage.setItem("token",res2.headers.get('Authorization'))
-      //  sessionStorage.setItem("userId",res2Data.uid)
-
-        sessionStorage.setItem("token",user.stsTokenManager.accessToken);
-        sessionStorage.setItem("userId",user.uid);
+        // sessionStorage.setItem("token",user.stsTokenManager.accessToken);
+        // sessionStorage.setItem("userId",user.uid);
 
         console.log('Successfully signed up!');
         router.replace('/addProfile')
@@ -127,6 +125,7 @@ export default {
       }
         
       } catch (error) {
+        alert(error)
         console.error('Error logging in:', error.message);
         // Handle login errors
       }

@@ -67,7 +67,7 @@ export default {
         // window.location.reload()
         console.log('categories added', parsedResponse)
 
-        router.replace("/")
+        router.replace("/home")
         profileStore.updateAuthStatus(true);
 
     }

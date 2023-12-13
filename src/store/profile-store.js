@@ -17,7 +17,7 @@ export const useProfileStore = defineStore("profile", () => {
     
     const  GET_USERVIEW_FROM_DB = async() =>{
       const userId = sessionStorage.getItem("userId")
-      const apiUrl = apiUrls.getUser;
+      const apiUrl = apiUrls.getMyProfile;
       const res = await fetch(`${apiUrl}/${userId}`);
     
       const jsonnew = await res.json();
@@ -48,7 +48,8 @@ export const useProfileStore = defineStore("profile", () => {
     GET_USERVIEW_FROM_DB,
     updateUserAfterAuth,
     profile,
-    updateAuthStatus
+    updateAuthStatus,
+    authstatus
   }
 
 });

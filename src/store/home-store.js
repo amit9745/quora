@@ -28,7 +28,7 @@ export const useHomeStore = defineStore("home", () => {
     
     const jsonnew = await res.json();
     home.value = jsonnew.resultData;
-    console.log(home.value)
+    // console.log(home.value)
   };
 
   return{

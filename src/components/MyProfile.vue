@@ -1,13 +1,15 @@
 <template>
     <div class="profile-container">
-        <img src="../assets/profile-img.jpeg" class="profile-img">
+        {{ profile }}
+        <ProfileIcon :avatar="profile?.profileAvatar" class="avatar"/>
+        <!-- <img src="../assets/profile-img.jpeg" class="profile-img"> -->
         <div class="text-container">
             <div class="user-info">
-                <p class="user-name">Amit Kumar</p>
+                <p class="user-name">{{ profile?.profileName }}</p>
                 <p class="user-name2">@beginner</p>
                 <p class="followers-following">
-                    <span class="span"> 10k Followers </span>
-                    <span> 5 Following</span>
+                    <span class="span"> {{ profile?.followers.length }} Followers </span>
+                    <span> {{ profile?.following.length }} Following</span>
                 </p>
             </div>
 
@@ -44,7 +46,7 @@
 </template>
   
 <script>
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
 import { defineComponent } from 'vue';
 import FollowersComp from './FollowersComp.vue';
 import FollowingComp from './FollowingComp.vue';
@@ -52,18 +54,24 @@ import QuestionsComp from './QuestionsComp.vue';
 import AnswersComp from './AnswersComp.vue';
 import { useRouter } from 'vue-router';
 import useProfileStore from '@/store/profile-store';
+import ProfileIcon from './ProfileIcon.vue';
 
 export default defineComponent({
     components: {
         FollowersComp,
         FollowingComp,
         QuestionsComp,
-        AnswersComp
+        AnswersComp,
+        ProfileIcon
 
     },
 
     setup() {
         const profileStore = useProfileStore()
+
+        profileStore.GET_USERVIEW_FROM_DB();
+
+        const profile = computed(()=>profileStore.profile)
 
         const activeTab = ref('followers');
         const route = useRouter()
@@ -75,11 +83,15 @@ export default defineComponent({
             sessionStorage.clear()
             profileStore.updateAuthStatus(false)
             route.replace('/login')
+            // route.go(-100)
+            window.location.reload()
+            // route.replace('/login')
         }
         return {
             activeTab,
             changeTab,
-            goToSignIn
+            goToSignIn,
+            profile
         }
     }
 });
@@ -87,6 +99,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
 .profile-img {
     float: left;
     border-radius: 50%;
@@ -100,7 +114,6 @@ export default defineComponent({
 
 .profile-container {
     margin: 50px;
-    ;
 }
 
 .text-container {

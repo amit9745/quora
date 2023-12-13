@@ -108,7 +108,7 @@ import {useSearchStore} from "../store/search-store.js";
       // };
 
       const takeMeHome=()=>{
-        router.push("/")
+        router.push("/home")
        }
        const takeMeAnswer=()=>{
         router.push("/answer")

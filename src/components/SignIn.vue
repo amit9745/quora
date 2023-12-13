@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <h1>Sign In</h1>
-    <form @submit.prevent="signUp">
+    <form @submit.prevent="signIn">
     <div class="sub-container">
       <label for="email"><b>Email</b></label>
       <input v-model="email" type="text" placeholder="Enter Email" name="email" required>
+      <p v-if="emailError">{{ emailError }}</p>
 
       <label for="psw"><b>Password</b></label>
-      <input v-model="password" type="text" placeholder="Enter Password" name="psw" required>
+      <input v-model="password" type="password" placeholder="Enter Password" name="psw" required>
+      <p v-if="passwordError">{{ passwordError }}</p>
 
       <div class="clearfix">
         <button type="submit" class="signupbtn" @click="submitForm">Sign In</button>
@@ -34,39 +36,113 @@
     
 <script>
 // import {  ref } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { getAuth,signInWithEmailAndPassword } from 'firebase/auth';
+import {useProfileStore} from "../store/profile-store.js"
 export default {
   props: {
     // formType: String,
   },
   setup() {
-    //     const authStore = useAuthStore()
-    //     const email = ref('');
-    //     const password = ref('');
+
+    const profileStore = useProfileStore()
+    const name = ref("")
+    const email = ref('');
+    const password = ref('');
     const router = useRouter()
-    //     const userType = ref('customer')
+
     const redirectToSignUp = () => {
-      router.push("/SignUp")
+      router.replace("/SignUp")
     }
-    const submitForm = async () => {
-      //         const loginStatus = await authStore.LOGIN({ email: email.value, password: password.value })
-      //         if(loginStatus){
-      //             alert("Login successful")
-      //             if(userType.value==='user')
-      //                 router.push("/addProduct")
-      //             else
-      router.push('/')
-      //         }
-      //         else{
-      //             alert('Login unsuccessful')
-      //       }
+    const passwordError = ref('')
+    const emailError = ref('')
+
+    const validatePassword = () => {
+        if(password.value.length<=8) {
+            passwordError.value = 'Password must be at least 8 characters long.';
+            console.log(passwordError)
+        }
+        else
+            passwordError.value = ''; 
+      };
+      
+      const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            emailError.value = 'Invalid email address';
+        } 
+        else {
+            emailError.value = '';
+        }
+      };
+    const signIn =  async() => {
+      
+      try {
+      validateEmail(email.value)
+      validatePassword(password.value)
+      
+      if(passwordError.value === '' && emailError.value === '') {
+        
+       const res =  await signInWithEmailAndPassword(getAuth(),email.value,password.value)
+
+       ///add sooraj ka api call and populate user and session storage me daal do iska token
+       const user = res.user;
+        profileStore.updateUserAfterAuth(user);
+       console.log(user)
+
+       
+       //sooraj ka login
+
+       //uncomment later
+       const authToken = `Bearer ${user.stsTokenManager.accessToken}`;
+       const apiUrl = "http://10.20.3.164:8765/user-details"; 
+
+          const res2   = await fetch(apiUrl, { 
+            method: "GET", 
+            headers: { 
+              "Authorization": authToken, 
+              "Content-Type": "application/json", 
+            }, 
+          })
+          const res2Data = await res2.json()
+          console.log("sooraj ka responsse",res2Data)
+
+       console.log("sooraj ka token",res2.headers.get('Authorization'))
+       sessionStorage.setItem("token",res2.headers.get('Authorization'))
+       sessionStorage.setItem("userId",res2Data.uid)
+
+
+      //comment this back
+        // sessionStorage.setItem("token",user.stsTokenManager.accessToken);
+        // sessionStorage.setItem("userId",user.uid);
+
+        console.log('Successfully signed up!');
+        profileStore.updateAuthStatus(true)
+
+        router.replace('/home')
+      }
+      else {
+        console.log("Error validating email and password")
+      }
+        
+      } catch (error) {
+        alert(error)
+        console.error('Error logging in:', error.message);
+        // Handle login errors
+      }
+
     };
 
     return {
-      //         email,
-      //         password,
-      submitForm,
+
       redirectToSignUp,
+      name,
+      email,
+      password,
+      signIn,
+      emailError,
+      passwordError
       //         userType
     }
   }

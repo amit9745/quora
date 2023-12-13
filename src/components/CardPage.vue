@@ -1,7 +1,7 @@
 <template>
   <!-- {{ cardItem }} -->
   <div class="container">
-    <ProfileView></ProfileView>
+    <ProfileView :userId = "cardItem.userId" />
     <div class="middle-div">
       <div class="middle-top-div">
         <h3 @click="routeMeToQuestionInfoPage">
