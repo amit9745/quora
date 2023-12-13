@@ -15,7 +15,7 @@ export const useHomeStore = defineStore("home", () => {
     // queryParams.set("authorized",false)
     queryParams.set("userId","dsfsdfd");
     queryParams.set("page",0);
-    queryParams.set("size",10);
+    queryParams.set("size",50);
     queryParams.set("authorized", true)
 
     const res = await fetch(`${apiUrl}?${queryParams.toString()}`,{

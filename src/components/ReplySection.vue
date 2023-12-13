@@ -80,8 +80,8 @@ export default defineComponent({
   text-align: justify;
   margin-left: 80px;
   font-size: small;
-  margin-top: -45px;
-    margin-bottom: 28px;
+  margin-top: -30px;
+  margin-bottom: 15px;
   
 }
 .reply {

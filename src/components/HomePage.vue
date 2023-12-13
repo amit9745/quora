@@ -89,7 +89,8 @@ export default defineComponent({
     /* width: 160%; */
     /* background-color: white; */
     margin-right: 55px;
-    /* height: 432px; */
+    /* display: inline-block; */
+    /* height: 100px; */
     margin-top: 16px;
 }
 
