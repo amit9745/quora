@@ -1,6 +1,6 @@
 <template>
     <div class="profile-container">
-        {{ profile }}
+        <!-- {{ profile }} -->
         <ProfileIcon :avatar="profile?.profileAvatar" class="avatar"/>
         <!-- <img src="../assets/profile-img.jpeg" class="profile-img"> -->
         <div class="text-container">
