@@ -1,8 +1,7 @@
 <template>
   <!-- {{ cardItem }} -->
   <div class="container">
-    <ProfileView></ProfileView>
-
+    <ProfileView :userId = "cardItem.userId" />
     <div class="middle-div">
       <div class="middle-top-div">
         <h3 @click="routeMeToQuestionInfoPage">
@@ -15,27 +14,28 @@
         </p>
       </div>
     </div>
-
+   
     <div class="bottom-div">
       <div class="bottom-left-div">
         <div class="left" @click="callParent(index)">
-          <div class="up"><img class="icon" :src="like" /></div>
+          <div class="up"><img class="icon" :src="like" @click="upvoteAnswer"/></div>
 
           <div class="upvote">
             <p>Upvote</p>
           </div>
         </div>
-        <div class="upvote-count">{{ cardItem.upvotes }}</div>
-        <div class="down"><img class="icon" :src="dislike" /></div>
-        <div class="dislike-count">15</div>
+        <div class="upvote-count">{{ votes?.upvotesId.length }}</div>
+        <div class="down"><img class="icon" :src="dislike" @click="downvoteAnswer"/></div>
+        <div class="dislike-count">{{  votes?.downvotesId.length }}</div>
       </div>
       <div class="bottom-right-div">
         <div class="comment" @click="switchCommenting(cardItem.answerId)">
           <img class="icon" :src="commentIcon" />
         </div>
-        <div class="comment-count">15</div>
+        <div class="comment-count">{{ comments.length }}</div>
       </div>
     </div>
+
     <div v-if="isCommenting">
       <div class="comment-div">
         <div class="img-div">
@@ -72,7 +72,7 @@
 
 <script>
 import CommentSection from "@/components/CommentSection.vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref,computed } from "vue";
 import like from "@/assets/like.svg";
 import dislike from "@/assets/dislike.svg";
 import commentIcon from "@/assets/comment.svg";
@@ -80,6 +80,8 @@ import router from "../router/index.js";
 import ProfileView from "./ProfileView.vue";
 import { useAnswerStore } from "../store/answer-store"
 import { header,apiUrls } from "./apiUrls";
+
+
 
 export default defineComponent({
   components: {
@@ -101,7 +103,10 @@ export default defineComponent({
   setup(props, context) {
     const answerStore = useAnswerStore();
     const comments = ref([]);
+    const votes = ref(null)
 
+    const commentsLength = computed(()=>props.cardItem?.comments?.length)
+   
     const FETCH_COMMENTS_BY_ANSWERID = async (answerId) => {
       const fetchCommentsUrl = apiUrls.fetchCommentsUrl;
       const apiUrl = `${fetchCommentsUrl}/${answerId}`;
@@ -110,21 +115,38 @@ export default defineComponent({
 
       const jsonnew = await res.json();
       comments.value = jsonnew.resultData;
+      // props.cardItem.cardItem = comments.value
+      // propscardItem.commentIds = comments.value
       console.log(comments.value);
     };
+    
+    const FETCH_VOTES_BY_ANSWERID = async (answerId) => {
+      const fetchVotesUrl = apiUrls.getVotes;
+      const apiUrl = `${fetchVotesUrl}/${answerId}`;
+
+      const res = await fetch(apiUrl);
+
+      const jsonnew = await res.json();
+      votes.value = jsonnew.resultData;
+      console.log(votes.value);
+    };
+
+    
+    FETCH_VOTES_BY_ANSWERID(props.cardItem.answerId)
+    FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
 
     const comment = ref("")
     const isCommenting = ref(false);
-    const switchCommenting = async (answerId)=>{
+    const switchCommenting = async ()=>{
         isCommenting.value=!isCommenting.value;
-        await FETCH_COMMENTS_BY_ANSWERID(answerId)
+        // await FETCH_COMMENTS_BY_ANSWERID(answerId)
     }
     
     const routeMeToQuestionInfoPage = () => {
       
       answerStore.updateQuestionInfo( props.cardItem.questionId );
       answerStore.updateQuestionName( props.cardItem.question );
-      console.log('selected Question Id', props.cardItem.questionId  )
+      console.log('selected Question Id', props.cardItem.questionId )
       router.push("/questioninfopage"); 
     };
     
@@ -149,6 +171,66 @@ export default defineComponent({
         comment.value='';
         await FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
     }
+
+  const upvoteAnswer = async () => {
+    if(!votes.value.upvotesId.includes(sessionStorage.getItem("userId"))){
+      const head = {
+        // mode: 'no-cors',
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            
+          }
+        ),
+        headers: header
+    }
+    const queryParams = new URLSearchParams();
+
+    queryParams.set("userId",sessionStorage.getItem("userId"));
+    queryParams.set("answerId",props.cardItem.answerId)
+    const apiUrl = apiUrls.updateUpvotes
+
+    const res = await fetch(`${apiUrl}?${queryParams.toString()}`, head)
+    const parsedResponse = await res.json()
+    // window.location.reload()
+    console.log('upvote added', parsedResponse)
+
+    await FETCH_VOTES_BY_ANSWERID(props.cardItem.answerId)
+    }else{
+      alert("you have already voted")
+    }
+    
+}
+
+
+const downvoteAnswer = async () => {
+    
+    const head = {
+        // mode: 'no-cors',
+        method: 'POST',
+        body: JSON.stringify({
+            answerId:props.cardItem.answerId,
+            commentTypes : "default",
+            content: comment.value,
+            userId:"dasf"
+        }),
+        headers: header
+    }
+    const apiUrl = apiUrls.addComment
+    const res = await fetch(apiUrl, head)
+    const parsedResponse = await res.json()
+    // window.location.reload()
+    console.log('comment added', parsedResponse)
+    comment.value='';
+    await FETCH_COMMENTS_BY_ANSWERID(props.cardItem.answerId)
+}
+
+
+
+
+
+
+
     const callParent = () => context.emit("upvoteClicked", props.index,
 );
 
@@ -161,10 +243,15 @@ export default defineComponent({
       isCommenting,
       routeMeToQuestionInfoPage,
       FETCH_COMMENTS_BY_ANSWERID,
+      FETCH_VOTES_BY_ANSWERID,
       switchCommenting,
       commentIcon,
       comment,
-      addComment
+      addComment,
+      votes,
+      commentsLength,
+      upvoteAnswer,
+      downvoteAnswer
       // selectedQuestionId
       //   onUpvoteClicked
     };

@@ -37,7 +37,7 @@ export default {
     postQuestion: Function,
   },
   setup(props) {
-    const selectedCategory = ref('food');
+    const selectedCategory = ref('Food');
     const questionBody = ref('');
 
     const cancel = () => {
@@ -48,7 +48,7 @@ export default {
    
 
     const reset = () => {
-      selectedCategory.value = 'food';
+      selectedCategory.value = 'Food';
       questionBody.value = '';
     };
 
@@ -63,7 +63,7 @@ export default {
             question:questionBody.value,
             status : "default",
             topicName: selectedCategory.value,
-            userId:"dasf"
+            userId:sessionStorage.getItem("userId")
         }),
         headers: header
     }

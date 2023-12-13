@@ -19,6 +19,8 @@ const header = {
     updateDownvotes : `/quora/feed/answer/updateDownvotes`,
     getAllAnswersByQuestionId: `/quora/feed/answer/getAnswers`,
 
+    getVotes :`/quora/feed/answer/getVotes`,
+
     fetchCommentsUrl: `/quora/feed/comment/getComments`,
     addComment:`/quora/feed/comment/addComment`,
     
@@ -29,7 +31,9 @@ const header = {
     addCategories :`/quora/profile/addCategories`,
     getUser: `/quora/profile/getProfile`,
 
-    
+
+    getMyProfile :`/quora/profile/getProfileView`
+
 
   };
 

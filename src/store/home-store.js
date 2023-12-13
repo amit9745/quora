@@ -15,8 +15,8 @@ export const useHomeStore = defineStore("home", () => {
     queryParams.set("authorized",false)
     queryParams.set("userId","dsfsdfd");
     queryParams.set("page",0);
-    queryParams.set("size",4);
-    queryParams.set("CheckAuth", true)
+    queryParams.set("size",10);
+    queryParams.set("CheckAuth", false)
 
     const res = await fetch(`${apiUrl}?${queryParams.toString()}`,{
       method: "GET", 
@@ -28,7 +28,7 @@ export const useHomeStore = defineStore("home", () => {
     
     const jsonnew = await res.json();
     home.value = jsonnew.resultData;
-    console.log(home.value)
+    // console.log(home.value)
   };
 
   return{

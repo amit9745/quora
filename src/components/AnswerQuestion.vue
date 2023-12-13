@@ -38,6 +38,7 @@
 
 <script>
  import {computed, ref} from 'vue';
+ import { apiUrls } from './apiUrls';
 //  import questionStore, { question } from '@/store/question-store.js'
 import questionStore from '@/store/question-store.js'
 export default {
@@ -96,16 +97,17 @@ const qs = questionStore();
           downvotes: 0,
           questionId: selectedQuestionId.value,
           upvotes: 0,
-          userId: "uid14"
+          userId: sessionStorage.getItem("userId")
         }),
         headers: {
           'Content-Type': 'application/json',
         },
       }
-      
-        const res = await fetch("http://10.20.3.163:8091/quora/answer/addAnswer", head)
+        const apiUrl = apiUrls.addAnswer
+        const res = await fetch(apiUrl, head)
         const parsedResponse = await res.json()
         console.log('Answer posted', parsedResponse)
+        closeDialog();
       }
 
     //   const routeMeToQuestionInfoPage = () => {
