@@ -76,7 +76,7 @@ export default defineComponent(
 .top-div {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
 }
 
 .top-left-div {
@@ -97,7 +97,7 @@ export default defineComponent(
 
 .top-right-div {
   margin-left: 18px;
-    margin-top: -37px;
+    margin-top: -23px;
 }
 
 .top-right-div h2 {

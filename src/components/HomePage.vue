@@ -10,8 +10,8 @@
 
         </div>
         <!-- <div class="right-div"> Ads</div> -->
-
-        <div class="right-div">
+<!-- {{ ad }} -->
+        <div @click="redirectToExternalLink" class="right-div">
             <div class="img-div">
                 <img :src="ad?.imageLink" alt="">
             </div>
@@ -52,12 +52,18 @@ export default defineComponent({
 
         const ad = computed(() => adStore.ad);
 
+        const redirectToExternalLink=()=>{
+          
+            // var link = 'https://www.blibli.com/';
+            window.location.assign(ad?.value.externalLink);
+        }
 
         // console.log(home.value)
         return {
             home,
             updateUpvote,
-            ad
+            ad,
+            redirectToExternalLink
         }
     }
 
@@ -69,6 +75,7 @@ export default defineComponent({
 .main {
     margin-top: 80px;
     display: flex;
+    margin-bottom: 30px;
 }
 
 .left-div {

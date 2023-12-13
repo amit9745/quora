@@ -71,14 +71,18 @@ export default defineComponent({
   margin-left: 20px;
   text-align: left;
   font-size: small;
+  margin-top: 10px;
 }
 .top-right-div h2 {
   text-align: justify;
 }
 .para {
   text-align: justify;
-  margin-left: 60px;
+  margin-left: 80px;
   font-size: small;
+  margin-top: -45px;
+    margin-bottom: 28px;
+  
 }
 .reply {
   display: flex;
